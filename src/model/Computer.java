@@ -1,4 +1,4 @@
-package Objects;
+package model;
 
 import java.time.LocalDate;
 
@@ -6,11 +6,17 @@ public class Computer {
 	
 	private int Id;
 	private String Name;
-	private LocalDate DateIntroduced;
-	private LocalDate DateDiscontinued;
+	private String DateIntroduced;
+	private String DateDiscontinued;
 	private int CompanyId;
 
-	public Computer() {
+	public Computer(int id, String name, String dateIntroduced, String dateDiscontinued, int companyId) {
+		
+		Id = id;
+		Name = name;
+		DateIntroduced = dateIntroduced;
+		DateDiscontinued = dateDiscontinued;
+		CompanyId = companyId;
 		
 	}
 
@@ -30,19 +36,19 @@ public class Computer {
 		Name = name;
 	}
 
-	public LocalDate getDateIntroduced() {
+	public String getDateIntroduced() {
 		return DateIntroduced;
 	}
 
-	public void setDateIntroduced(LocalDate dateIntroduced) {
+	public void setDateIntroduced(String dateIntroduced) {
 		DateIntroduced = dateIntroduced;
 	}
 
-	public LocalDate getDateDiscontinued() {
+	public String getDateDiscontinued() {
 		return DateDiscontinued;
 	}
 
-	public void setDateDiscontinued(LocalDate dateDiscontinued) {
+	public void setDateDiscontinued(String dateDiscontinued) {
 		DateDiscontinued = dateDiscontinued;
 	}
 
