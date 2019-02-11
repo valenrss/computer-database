@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Training: computer-database    
 ===========================  
 
@@ -344,3 +345,6 @@ Replace your existing front-end with Thymeleaf
 Split you back-end into microservices
 
 ## 5.9 Batches
+=======
+# computer-database
+>>>>>>> a76c27d4caeaf54a4adddbdb08a31c6858a2a444
