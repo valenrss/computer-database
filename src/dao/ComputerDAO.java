@@ -48,8 +48,17 @@ public class ComputerDAO extends DAO<Computer>{
 	public boolean create(Computer comp) {
 		
 		try {
-			stmt = super.connect.createStatement();
-			stmt.executeUpdate("INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES ('"+comp.getName()+"','"+comp.getDateIntroduced()+"','"+comp.getDateDiscontinued()+"','"+comp.getCompanyId()+"');");
+			
+			PreparedStatement prep1 = super.connect.prepareStatement("INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
+			
+			prep1.setString(1,comp.getName());
+			prep1.setTimestamp(2, comp.getDateIntroduced());
+			prep1.setTimestamp(3, comp.getDateDiscontinued());
+			prep1.setInt(4, comp.getCompanyId());
+			
+			prep1.executeUpdate();
+			//stmt = super.connect.createStatement();
+			//stmt.executeUpdate("INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`)"+ " VALUES ('"+comp.getName()+"','"+comp.getDateIntroduced()+"','"+comp.getDateDiscontinued()+"','"+comp.getCompanyId()+"');");
 			
 			return true;
 		} catch (SQLException e) {
@@ -59,8 +68,15 @@ public class ComputerDAO extends DAO<Computer>{
 	}
 
 	@Override
-	public boolean delete(Computer obj) {
-		// TODO Auto-generated method stub
+	public boolean delete(int id) {
+		
+		try {
+			PreparedStatement prep1 = super.connect.prepareStatement("DELETE FROM `computer` WHERE `name` = ?");
+			prep1.setInt(1,id);
+		} catch (SQLException e) {
+			System.out.println("Could not find Computer ID : "+id);
+			e.printStackTrace();
+		}
 		return false;
 	}
 

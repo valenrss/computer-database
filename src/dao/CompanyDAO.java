@@ -57,7 +57,7 @@ public class CompanyDAO extends DAO<Company> {
 	}
 
 	@Override
-	public boolean delete(Company obj) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
