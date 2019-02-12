@@ -18,9 +18,7 @@ public class ComputerDAO extends DAO<Computer>{
 
 	public ComputerDAO(Connection conn) {
 		
-		super(conn);
-		System.out.println("ComputerDAO Initialized...");
-		
+		super(conn);		
 	}
 	
 	public List<Computer> getComputerList() {
@@ -33,7 +31,7 @@ public class ComputerDAO extends DAO<Computer>{
 	        rs = stmt.executeQuery("SELECT * FROM `computer`");
 
 	        while (rs.next()) {
-	        	cpList.add(new Computer(rs.getInt("id"),rs.getString("name"),rs.getString("introduced"),rs.getString("discontinued"),rs.getInt("company_id")));
+	        	cpList.add(new Computer(rs.getInt("id"),rs.getString("name"),rs.getTimestamp("introduced"),rs.getTimestamp("discontinued"),rs.getInt("company_id")));
 	        }
 
 	        
@@ -51,7 +49,7 @@ public class ComputerDAO extends DAO<Computer>{
 		
 		try {
 			stmt = super.connect.createStatement();
-			stmt.executeUpdate("INSERT INTO `computer` (`name`, `company_id`) VALUES ('"+comp.getName()+"','"+comp.getCompanyId()+"');");
+			stmt.executeUpdate("INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES ('"+comp.getName()+"','"+comp.getDateIntroduced()+"','"+comp.getDateDiscontinued()+"','"+comp.getCompanyId()+"');");
 			
 			return true;
 		} catch (SQLException e) {
@@ -81,7 +79,7 @@ public class ComputerDAO extends DAO<Computer>{
 		        ResultSet.TYPE_SCROLL_INSENSITIVE,
 		        ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM `computer` WHERE `id` = " + id);
 		      if(result.first())
-		    	  comp = new Computer(id,result.getString("name"),result.getString("introduced"),result.getString("discontinued"),result.getInt("company_id"));         
+		    	  comp = new Computer(id,result.getString("name"),result.getTimestamp("introduced"),result.getTimestamp("discontinued"),result.getInt("company_id"));         
 		    } catch (SQLException e) {
 		      e.printStackTrace();
 		    }

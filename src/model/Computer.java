@@ -1,16 +1,17 @@
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Computer {
 	
 	private int Id;
 	private String Name;
-	private String DateIntroduced;
-	private String DateDiscontinued;
+	private Timestamp DateIntroduced;
+	private Timestamp DateDiscontinued;
 	private int CompanyId;
 
-	public Computer(int id, String name, String dateIntroduced, String dateDiscontinued, int companyId) {
+	public Computer(int id, String name, Timestamp dateIntroduced, Timestamp dateDiscontinued, int companyId) {
 		
 		Id = id;
 		Name = name;
@@ -36,19 +37,19 @@ public class Computer {
 		Name = name;
 	}
 
-	public String getDateIntroduced() {
+	public Timestamp getDateIntroduced() {
 		return DateIntroduced;
 	}
 
-	public void setDateIntroduced(String dateIntroduced) {
+	public void setDateIntroduced(Timestamp dateIntroduced) {
 		DateIntroduced = dateIntroduced;
 	}
 
-	public String getDateDiscontinued() {
+	public Timestamp getDateDiscontinued() {
 		return DateDiscontinued;
 	}
 
-	public void setDateDiscontinued(String dateDiscontinued) {
+	public void setDateDiscontinued(Timestamp dateDiscontinued) {
 		DateDiscontinued = dateDiscontinued;
 	}
 
@@ -58,6 +59,15 @@ public class Computer {
 
 	public void setCompanyId(int companyId) {
 		CompanyId = companyId;
+	}
+	
+	@Override
+	public String toString() {
+		return  "\nComputer Id : "+Id+ 
+				"\nName : "+Name+ 
+				"\nDate Introduced : "+DateIntroduced+
+				"\nDate Discontinued : "+DateDiscontinued+ 
+				"\nCompany Id : "+CompanyId+"\n";
 	}
 
 

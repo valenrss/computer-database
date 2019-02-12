@@ -18,7 +18,6 @@ public class DaoFactory {
 		dataSource.setDatabaseName("computer-database-db");
         try {
 			connect = dataSource.getConnection();
-			System.out.println("DaoFactory Initialized...");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
