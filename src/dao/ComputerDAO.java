@@ -71,19 +71,42 @@ public class ComputerDAO extends DAO<Computer>{
 	public boolean delete(int id) {
 		
 		try {
-			PreparedStatement prep1 = super.connect.prepareStatement("DELETE FROM `computer` WHERE `name` = ?");
+			int success = 0;
+			PreparedStatement prep1 = super.connect.prepareStatement("DELETE FROM `computer` WHERE `id` = ?");
 			prep1.setInt(1,id);
+			success = prep1.executeUpdate();
+			if (success == 1) {
+				return true;
+			}else {
+				return false;
+			}
 		} catch (SQLException e) {
-			System.out.println("Could not find Computer ID : "+id);
+			System.out.println("Could not execute command.");
 			e.printStackTrace();
+			return false;
 		}
-		return false;
+		
 	}
 
 	@Override
-	public boolean update(Computer obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Computer comp) {
+		try {
+			
+			PreparedStatement prep1 = super.connect.prepareStatement("UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?");
+			
+			prep1.setString(1,comp.getName());
+			prep1.setTimestamp(2, comp.getDateIntroduced());
+			prep1.setTimestamp(3, comp.getDateDiscontinued());
+			prep1.setInt(4, comp.getCompanyId());
+			prep1.setInt(5,comp.getId());
+			
+			prep1.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override

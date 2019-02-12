@@ -70,14 +70,35 @@ public class CommandInterface {
 								}
 								System.out.println("Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
 							}
-							
-							
 							break;
 						case "update" :
+							try {
+								Timestamp ts1 = Timestamp.valueOf(args[4]);
+								Timestamp ts2 = Timestamp.valueOf(args[5]);
+								Computer cpInsert = new Computer(Integer.parseInt(args[2]),args[3],ts1,ts2,Integer.parseInt(args[6]));
+								compdao.update(cpInsert);
+								System.out.println(cpInsert.toString());
+								System.out.println("Computer sucessfully updated.");
+							}catch(NumberFormatException e) {
+								System.out.println("ID must be a number.");
+								System.out.println("Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
+							}
+							catch(IllegalArgumentException e) {
+								if (args[2]!=null) {
+									System.out.println("date must be of format : yyyy-[m]m-[d]d hh:mm:ss");
+								}
+								System.out.println("Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
+							}
 							break;
 						case "delete" :
 							try {
-								compdao.delete(Integer.parseInt(args[2]));
+								boolean delok = compdao.delete(Integer.parseInt(args[2]));
+								if( delok) {
+									System.out.println("Computer ID "+args[2]+" sucessfully deleted.");
+								}else {
+									System.out.println("Could not find computer ID "+args[2]);
+								}
+								
 							}catch(NumberFormatException e){
 								System.out.println("Computer ID must be a number.");
 								System.out.println("Usage : computer update <ID>");
