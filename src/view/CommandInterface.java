@@ -1,146 +1,228 @@
 package view;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
 
-import dao.CompanyDAO;
-import dao.ComputerDAO;
+import dao.CompanyDAOImpl;
+import dao.ComputerDAOImpl;
 import dao.DaoFactory;
 import model.Company;
 import model.Computer;
 
+/**
+ * The Class CommandInterface.
+ */
 public class CommandInterface {
-	
+
+
+	private static final String UNKNOWN_INPUT = "?";
+	private static final String DEFAULT_DATE = "NULL";
+	private static final String TIME_HOURS = " 00:00:00";
+
 	private DaoFactory fact = new DaoFactory();
-	private ComputerDAO compdao = new ComputerDAO(fact.getConnect());
-	private CompanyDAO cnydao = new CompanyDAO(fact.getConnect());
+	private ComputerDAOImpl comptdao = new ComputerDAOImpl(fact.getConnect());
+	private CompanyDAOImpl cnydao = new CompanyDAOImpl(fact.getConnect());
 
 	public CommandInterface() {
-		
+		System.out.flush();
+		System.out.println(" ____     ____    ____      \n" + "/\\  _`\\  /\\  _`\\ /\\  _`\\    \n"
+				+ "\\ \\ \\/\\_\\\\ \\ \\/\\ \\ \\ \\L\\ \\  \n" + " \\ \\ \\/_/_\\ \\ \\ \\ \\ \\  _ <' \n"
+				+ "  \\ \\ \\L\\ \\\\ \\ \\_\\ \\ \\ \\L\\ \\\n" + "   \\ \\____/ \\ \\____/\\ \\____/\n"
+				+ "    \\/___/   \\/___/  \\/___/ \n" + "                            \n");
+		System.out.println("Welcome to the Computer Database Command-Line Interface 2000 Ultimate Reloaded");
+		System.out.println("Type 'help' to get started...\n");
 	}
 	
-	public boolean readCommand (String[] args) {
-		
-		if(args[0]!=null) {	
+	/**
+	 * Method to process the user commands and call specific
+	 * methods to execute the desired actions.
+	 *
+	 * @param args the args
+	 * @return boolean is the command recognized
+	 */
+	public boolean readCommand(String[] args) {
+
+		if (args[0] != null) {
 			switch (args[0]) {
-				case "list" :
-					if (args[1]!=null) {
-						switch (args[1]) {
-							case "computers" :
-								System.out.println("\nComputers list :\n");
-								List<Computer> cpList  = compdao.getComputerList();
-								for(Computer comp : cpList) {
-									System.out.println(comp.toString());
-								}
-								break;
-							case "companies" :
-								System.out.println("\nCompanies list :\n");
-								List<Company> cnyList  = cnydao.getList();
-								for(Company comp : cnyList) {
-									System.out.println(comp.toString());
-								}
-								break;
-							default :
-								System.out.println("Usage : list <computers|companies>");
-								break;
-							}
-					}else {
+			case "list":
+				if (args[1] != null) {
+					switch (args[1]) {
+					case "computers":
+						listComputers();
+						break;
+					case "companies":
+						listCompanies();
+						break;
+					default:
 						System.out.println("Usage : list <computers|companies>");
+						break;
 					}
-					break;
-				case "computer":
-					if (args[1]!=null) {
-						switch (args[1]) {
-						case "create" :						
-							try {
-								Timestamp ts1 = Timestamp.valueOf(args[3]);
-								Timestamp ts2 = Timestamp.valueOf(args[4]);
-								Computer cpInsert = new Computer(0,args[2],ts1,ts2,Integer.parseInt(args[5]));
-								compdao.create(cpInsert);
-								System.out.println(cpInsert.toString());
-								System.out.println("Computer sucessfully added.");
-							}catch(NumberFormatException e) {
-								System.out.println("Company ID must be a number.");
-								System.out.println("Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
-							}
-							catch(IllegalArgumentException e) {
-								if (args[2]!=null) {
-									System.out.println("date must be of format : yyyy-[m]m-[d]d hh:mm:ss");
-								}
-								System.out.println("Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
-							}
-							break;
-						case "update" :
-							try {
-								Timestamp ts1 = Timestamp.valueOf(args[4]);
-								Timestamp ts2 = Timestamp.valueOf(args[5]);
-								Computer cpInsert = new Computer(Integer.parseInt(args[2]),args[3],ts1,ts2,Integer.parseInt(args[6]));
-								compdao.update(cpInsert);
-								System.out.println(cpInsert.toString());
-								System.out.println("Computer sucessfully updated.");
-							}catch(NumberFormatException e) {
-								System.out.println("ID must be a number.");
-								System.out.println("Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
-							}
-							catch(IllegalArgumentException e) {
-								if (args[2]!=null) {
-									System.out.println("date must be of format : yyyy-[m]m-[d]d hh:mm:ss");
-								}
-								System.out.println("Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
-							}
-							break;
-						case "delete" :
-							try {
-								boolean delok = compdao.delete(Integer.parseInt(args[2]));
-								if( delok) {
-									System.out.println("Computer ID "+args[2]+" sucessfully deleted.");
-								}else {
-									System.out.println("Could not find computer ID "+args[2]);
-								}
-								
-							}catch(NumberFormatException e){
-								System.out.println("Computer ID must be a number.");
-								System.out.println("Usage : computer update <ID>");
-							}
-							
-							break;
-						case "detail" :
-							try {
-								List<Computer> cpList  = compdao.getComputerList();
-								Computer compIdSearch = compdao.find(Integer.parseInt(args[2]));
-								System.out.println(compIdSearch.toString());
-							}catch(NumberFormatException e) {
-								System.out.println("Computer ID must be a number.");
-								System.out.println("Usage : computer detail <ID>");
-							}catch(NullPointerException e) {
-								System.out.println("Could not find computer ID "+args[2]);
-							}
-							break;
-						default : 
-							System.out.println("Usage : computer <create|update|delete|detail>");
-							break;
-						}
-					}else {
+				} else {
+					System.out.println("Usage : list <computers|companies>");
+				}
+				break;
+			case "computer":
+				if (args[1] != null) {
+					switch (args[1]) {
+					case "create":
+						createComputer(args);
+						break;
+					case "update":
+						updateComputer(args);
+						break;
+					case "delete":
+						deleteComputer(args);
+						break;
+					case "detail":
+						detailComputer(args);
+						break;
+					default:
 						System.out.println("Usage : computer <create|update|delete|detail>");
+						break;
 					}
-					break;
-				case "help" :
-					System.out.println("list <computers|companies>              ---  Display all computers/companies");
-					System.out.println("computer <create|update|delete|detail>  ---  Update the computer table\n");
-					break;
-				default :
-					System.out.println("Please enter a command.\n");
-					break;
+				} else {
+					System.out.println("Usage : computer <create|update|delete|detail>");
+				}
+				break;
+			case "help":
+				System.out.println("list <computers|companies>              ---  Display all computers/companies");
+				System.out.println("computer <create|update|delete|detail>  ---  Update the computer table\n");
+				break;
+			default:
+				System.out.println("Please enter a command.\n");
+				break;
 			}
-			
-		return true;
-		
-		}else {
+
+			return true;
+
+		} else {
 			System.out.println("Please enter a command.\n");
 			return false;
 		}
-		
+
 	}
 
+	/**
+	 * List computers.
+	 */
+	private void listComputers() {
+		System.out.println("\nComputers list :\n");
+		List<Computer> cpList = comptdao.getComputerList();
+		for (Computer comp : cpList) {
+			System.out.println(comp.toString());
+		}
+	}
+	
+	/**
+	 * List companies.
+	 */
+	private void listCompanies() {
+		System.out.println("\nCompanies list :\n");
+		List<Company> cnyList = cnydao.getCompanyList();
+		for (Company comp : cnyList) {
+			System.out.println(comp.toString());
+		}
+	}
+	
+	/**
+	 * Creates the computer.
+	 *
+	 * @param args the args
+	 */
+	private void createComputer(String[] args) {
+		try {
+			if (args[3].equals(UNKNOWN_INPUT)) {
+				args[3] = DEFAULT_DATE;
+			}
+			if (args[4].equals(UNKNOWN_INPUT)) {
+				args[4] = DEFAULT_DATE;
+			}
+			if (args[5].equals(UNKNOWN_INPUT)) {
+				args[5] = "0";
+			}
+			System.out.println(args[3]);
+			Timestamp ts1 = Timestamp.valueOf(args[3] + TIME_HOURS);
+			Timestamp ts2 = Timestamp.valueOf(args[4] + TIME_HOURS);
+
+			Computer cpInsert = new Computer(0, args[2], ts1, ts2, Integer.parseInt(args[5]));
+			System.out.println(cpInsert.toString());
+			System.out.println("Computer sucessfully added.");
+		} catch (NumberFormatException e) {
+			System.out.println("Company ID must be a number.");
+			System.out.println(
+					"Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
+		} catch (IllegalArgumentException e) {
+			if (args[2] != null) {
+				System.out.println("date must be of format : yyyy-[m]m-[d]d");
+			}
+			System.out.println(
+					"Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
+		}
+	}
+	
+	/**
+	 * Update computer.
+	 *
+	 * @param args the args
+	 */
+	private void updateComputer(String[] args){
+		try {
+			Timestamp ts1 = Timestamp.valueOf(args[4] + TIME_HOURS);
+			Timestamp ts2 = Timestamp.valueOf(args[5] + TIME_HOURS);
+			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,
+					Integer.parseInt(args[6]));
+			comptdao.update(cpInsert);
+			System.out.println(cpInsert.toString());
+			System.out.println("Computer sucessfully updated.");
+		} catch (NumberFormatException e) {
+			System.out.println("ID must be a number.");
+			System.out.println(
+					"Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
+		} catch (IllegalArgumentException e) {
+			if (args[2] != null) {
+				System.out.println("date must be of format : yyyy-[m]m-[d]d");
+			}
+			System.out.println(
+					"Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
+		}
+	}
+	
+	/**
+	 * Delete computer.
+	 *
+	 * @param args the args
+	 */
+	private void deleteComputer(String[] args) {
+		try {
+			boolean deletesuccess = comptdao.delete(Integer.parseInt(args[2]));
+			if (deletesuccess) {
+				System.out.println("Computer ID " + args[2] + " sucessfully deleted.");
+			} else {
+				System.out.println("Could not find computer ID " + args[2]);
+			}
+
+		} catch (NumberFormatException e) {
+			System.out.println("Computer ID must be a number.");
+			System.out.println("Usage : computer update <ID>");
+		}
+
+	}
+	
+	/**
+	 * Detail computer.
+	 *
+	 * @param args the args
+	 */
+	private void detailComputer(String[] args) {
+		try {
+			List<Computer> cpList = comptdao.getComputerList();
+			Computer compIdSearch = comptdao.find(Integer.parseInt(args[2]));
+			System.out.println(compIdSearch);
+		} catch (NumberFormatException e) {
+			System.out.println("Computer ID must be a number.");
+			System.out.println("Usage : computer detail <ID>");
+		} catch (NullPointerException e) {
+			System.out.println("Could not find computer ID " + args[2]);
+		}
+	}
 }
