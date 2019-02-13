@@ -67,15 +67,22 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 		try {
 
 			PreparedStatement prep1 = super.connect.prepareStatement(
-					"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
+						"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
 
 			prep1.setString(1, comp.getName());
 			prep1.setTimestamp(2, comp.getDateIntroduced());
 			prep1.setTimestamp(3, comp.getDateDiscontinued());
 			prep1.setInt(4, comp.getCompanyId());
+			
 
 			prep1.executeUpdate();
-
+			/*
+			ResultSet rs = prep1.getResultSet();
+			
+			System.out.println("ezffjisqeyhfgyusgfuyesg");
+			
+			System.out.println("getint : "+rs.getInt(0));*/
+			
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

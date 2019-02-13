@@ -15,9 +15,9 @@ import model.Computer;
 public class CommandInterface {
 
 
+	private static final int DEFAULT_COMPUTER_ID = 0;
 	private static final String UNKNOWN_INPUT = "?";
-	private static final String DEFAULT_DATE = "NULL";
-	private static final String TIME_HOURS = " 00:00:00";
+	private static final String TIME_HOURS = " 00:00:00.0";
 
 	private DaoFactory fact = new DaoFactory();
 	private ComputerDAOImpl comptdao = new ComputerDAOImpl(fact.getConnect());
@@ -37,7 +37,7 @@ public class CommandInterface {
 	 * Method to process the user commands and call specific
 	 * methods to execute the desired actions.
 	 *
-	 * @param args the args
+	 * @param args Commands requested by user
 	 * @return boolean is the command recognized
 	 */
 	public boolean readCommand(String[] args) {
@@ -131,20 +131,24 @@ public class CommandInterface {
 	 */
 	private void createComputer(String[] args) {
 		try {
+			Timestamp ts1,ts2;
+			
 			if (args[3].equals(UNKNOWN_INPUT)) {
-				args[3] = DEFAULT_DATE;
+				ts1 = null;
+			}else {
+				ts1 = Timestamp.valueOf(args[3] + TIME_HOURS);
 			}
 			if (args[4].equals(UNKNOWN_INPUT)) {
-				args[4] = DEFAULT_DATE;
+				ts2 = null;
+			}else {
+				ts2 = Timestamp.valueOf(args[4] + TIME_HOURS);
 			}
 			if (args[5].equals(UNKNOWN_INPUT)) {
-				args[5] = "0";
+				args[5] = "1";
 			}
-			System.out.println(args[3]);
-			Timestamp ts1 = Timestamp.valueOf(args[3] + TIME_HOURS);
-			Timestamp ts2 = Timestamp.valueOf(args[4] + TIME_HOURS);
 
-			Computer cpInsert = new Computer(0, args[2], ts1, ts2, Integer.parseInt(args[5]));
+			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2, Integer.parseInt(args[5]));
+			comptdao.create(cpInsert);
 			System.out.println(cpInsert.toString());
 			System.out.println("Computer sucessfully added.");
 		} catch (NumberFormatException e) {
@@ -215,7 +219,6 @@ public class CommandInterface {
 	 */
 	private void detailComputer(String[] args) {
 		try {
-			List<Computer> cpList = comptdao.getComputerList();
 			Computer compIdSearch = comptdao.find(Integer.parseInt(args[2]));
 			System.out.println(compIdSearch);
 		} catch (NumberFormatException e) {
