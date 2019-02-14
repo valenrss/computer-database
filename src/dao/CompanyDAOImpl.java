@@ -1,13 +1,15 @@
 package dao;
 
 import model.Company;
+
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.Connection;
+
 
 /**
  * The Class CompanyDAOImpl.
@@ -28,7 +30,7 @@ public class CompanyDAOImpl extends CompanyDAO<Company> {
 	 *
 	 * @param conn the conn
 	 */
-	public CompanyDAOImpl(java.sql.Connection conn) {
+	public CompanyDAOImpl(Connection conn) {
 
 		super(conn);
 	}

@@ -21,7 +21,7 @@ public class CommandInterface {
 	private DaoFactory fact = new DaoFactory();
 	private ComputerDAOImpl comptdao = new ComputerDAOImpl(fact.getConnect());
 	private CompanyDAOImpl cnydao = new CompanyDAOImpl(fact.getConnect());
-
+	
 	public CommandInterface() {
 		System.out.flush();
 		System.out.println(" ____     ____    ____      \n" + "/\\  _`\\  /\\  _`\\ /\\  _`\\    \n"
@@ -30,6 +30,7 @@ public class CommandInterface {
 				+ "    \\/___/   \\/___/  \\/___/ \n" + "                            \n");
 		System.out.println("Welcome to the Computer Database Command-Line Interface 2000 Ultimate Reloaded");
 		System.out.println("Type 'help' to get started...\n");
+				
 	}
 
 	/**
