@@ -14,7 +14,6 @@ import model.Computer;
  */
 public class CommandInterface {
 
-
 	private static final int DEFAULT_COMPUTER_ID = 0;
 	private static final String UNKNOWN_INPUT = "?";
 	private static final String TIME_HOURS = " 00:00:00.0";
@@ -32,15 +31,15 @@ public class CommandInterface {
 		System.out.println("Welcome to the Computer Database Command-Line Interface 2000 Ultimate Reloaded");
 		System.out.println("Type 'help' to get started...\n");
 	}
-	
+
 	/**
-	 * Method to process the user commands and call specific
-	 * methods to execute the desired actions.
+	 * Method to process the user commands and call specific methods to execute the
+	 * desired actions.
 	 *
 	 * @param args Commands requested by user
 	 * @return boolean is the command recognized
 	 */
-	public boolean readCommand(String[] args) {
+	public void readCommand(String[] args) {
 
 		if (args[0] != null) {
 			switch (args[0]) {
@@ -88,16 +87,16 @@ public class CommandInterface {
 				System.out.println("list <computers|companies>              ---  Display all computers/companies");
 				System.out.println("computer <create|update|delete|detail>  ---  Update the computer table\n");
 				break;
+			case "quit":
+				System.out.println("Goodbye !");
+				break;
 			default:
 				System.out.println("Please enter a command.\n");
 				break;
 			}
 
-			return true;
-
 		} else {
 			System.out.println("Please enter a command.\n");
-			return false;
 		}
 
 	}
@@ -112,7 +111,7 @@ public class CommandInterface {
 			System.out.println(comp.toString());
 		}
 	}
-	
+
 	/**
 	 * List companies.
 	 */
@@ -123,7 +122,7 @@ public class CommandInterface {
 			System.out.println(comp.toString());
 		}
 	}
-	
+
 	/**
 	 * Creates the computer.
 	 *
@@ -131,16 +130,16 @@ public class CommandInterface {
 	 */
 	private void createComputer(String[] args) {
 		try {
-			Timestamp ts1,ts2;
-			
+			Timestamp ts1, ts2;
+
 			if (args[3].equals(UNKNOWN_INPUT)) {
 				ts1 = null;
-			}else {
+			} else {
 				ts1 = Timestamp.valueOf(args[3] + TIME_HOURS);
 			}
 			if (args[4].equals(UNKNOWN_INPUT)) {
 				ts2 = null;
-			}else {
+			} else {
 				ts2 = Timestamp.valueOf(args[4] + TIME_HOURS);
 			}
 			if (args[5].equals(UNKNOWN_INPUT)) {
@@ -153,28 +152,41 @@ public class CommandInterface {
 			System.out.println("Computer sucessfully added.");
 		} catch (NumberFormatException e) {
 			System.out.println("Company ID must be a number.");
-			System.out.println(
-					"Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
+			System.out
+					.println("Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
 		} catch (IllegalArgumentException e) {
 			if (args[2] != null) {
 				System.out.println("date must be of format : yyyy-[m]m-[d]d");
 			}
-			System.out.println(
-					"Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
+			System.out
+					.println("Usage : computer create <name> <introduction date> <discontinuation date> <company ID>");
 		}
 	}
-	
+
 	/**
 	 * Update computer.
 	 *
 	 * @param args the args
 	 */
-	private void updateComputer(String[] args){
+	private void updateComputer(String[] args) {
 		try {
-			Timestamp ts1 = Timestamp.valueOf(args[4] + TIME_HOURS);
-			Timestamp ts2 = Timestamp.valueOf(args[5] + TIME_HOURS);
-			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,
-					Integer.parseInt(args[6]));
+			Timestamp ts1, ts2;
+
+			if (args[3].equals(UNKNOWN_INPUT)) {
+				ts1 = null;
+			} else {
+				ts1 = Timestamp.valueOf(args[3] + TIME_HOURS);
+			}
+			if (args[4].equals(UNKNOWN_INPUT)) {
+				ts2 = null;
+			} else {
+				ts2 = Timestamp.valueOf(args[4] + TIME_HOURS);
+			}
+			if (args[5].equals(UNKNOWN_INPUT)) {
+				args[5] = "1";
+			}
+
+			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2, Integer.parseInt(args[6]));
 			comptdao.update(cpInsert);
 			System.out.println(cpInsert.toString());
 			System.out.println("Computer sucessfully updated.");
@@ -190,7 +202,7 @@ public class CommandInterface {
 					"Usage : computer update <computer id> <name> <introduction date> <discontinuation date> <company ID>");
 		}
 	}
-	
+
 	/**
 	 * Delete computer.
 	 *
@@ -211,7 +223,7 @@ public class CommandInterface {
 		}
 
 	}
-	
+
 	/**
 	 * Detail computer.
 	 *

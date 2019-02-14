@@ -1,4 +1,5 @@
 package controller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,15 +28,15 @@ public class Controller {
 		CommandInterface cmdint = new CommandInterface();
 		Scanner sc = new Scanner(System.in);
 
-		while (!UserCommands[0].equals("quit")) {
-
+		do {
 			UserInput = sc.nextLine();
 
 			UserCommands = inputSplitter(UserInput);
 
 			cmdint.readCommand(UserCommands);
 
-		}
+		} while (!UserInput.equals("quit"));
+
 		sc.close();
 
 	}
