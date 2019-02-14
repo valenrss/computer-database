@@ -6,17 +6,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ComputerDAOImpl.
  */
 public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
-	/** The connect. */
-	protected Connection connect = null;
-	
 	/** The stmt. */
 	private Statement stmt;
-	
+
 	/** The rs. */
 	private ResultSet rs;
 
@@ -58,7 +56,9 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.ComputerDAO#create(java.lang.Object)
 	 */
 	@Override
@@ -67,22 +67,15 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 		try {
 
 			PreparedStatement prep1 = super.connect.prepareStatement(
-						"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
+					"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
 
 			prep1.setString(1, comp.getName());
 			prep1.setTimestamp(2, comp.getDateIntroduced());
 			prep1.setTimestamp(3, comp.getDateDiscontinued());
 			prep1.setInt(4, comp.getCompanyId());
-			
 
 			prep1.executeUpdate();
-			/*
-			ResultSet rs = prep1.getResultSet();
-			
-			System.out.println("ezffjisqeyhfgyusgfuyesg");
-			
-			System.out.println("getint : "+rs.getInt(0));*/
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +83,9 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.ComputerDAO#delete(int)
 	 */
 	@Override
@@ -114,7 +109,9 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.ComputerDAO#update(java.lang.Object)
 	 */
 	@Override
@@ -139,7 +136,9 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.ComputerDAO#find(int)
 	 */
 	@Override
@@ -157,6 +156,41 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 			e.printStackTrace();
 		}
 		return comp;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.ComputerDAO#getComputerPage(int, int)
+	 */
+	@Override
+	public List<Computer> getComputerPage(int pageNo, int objCount) {
+		List<Computer> cpList = new ArrayList<>();
+
+		try {
+			int minId = pageNo * objCount;
+			int maxId = minId + objCount;
+
+			PreparedStatement prep1 = super.connect
+					.prepareStatement("SELECT * FROM `computer` WHERE id > ? AND id < ?");
+
+			prep1.setInt(1, minId);
+			prep1.setInt(2, maxId);
+
+			prep1.executeUpdate();
+
+			while (rs.next()) {
+				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
+						rs.getTimestamp("discontinued"), rs.getInt("company_id")));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Request Failed ! Error : " + e);
+			e.printStackTrace();
+		}
+
+		return cpList;
+
 	}
 
 }

@@ -9,20 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
  * The Class CompanyDAOImpl.
  */
 public class CompanyDAOImpl extends CompanyDAO<Company> {
 
-	/** The connect. */
 	protected Connection connect = null;
-	
-	/** The stmt. */
+
 	private Statement stmt;
-	
-	/** The rs. */
+
 	private ResultSet rs;
 
 	/**

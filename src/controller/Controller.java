@@ -1,7 +1,11 @@
 package controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import model.Company;
 import model.Computer;
@@ -14,11 +18,11 @@ import view.View;
  */
 public class Controller {
 
+	private static final int MAX_ARGUMENTS = 20;
 	private static final int DEFAULT_COMPUTER_ID = 0;
 	private static final String UNKNOWN_INPUT = "?";
 	private static final String TIME_HOURS = " 00:00:00.0";
 
-	
 	private View view;
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
@@ -30,6 +34,31 @@ public class Controller {
 	}
 
 	/**
+	 * The method that loops after every command until quit
+	 *
+	 * @param args the arguments
+	 */
+	public static void main(String[] args) {
+
+		String UserInput = "";
+		String[] UserCommands = { "0" };
+		Controller cmdint = new Controller();
+		Scanner sc = new Scanner(System.in);
+
+		do {
+			UserInput = sc.nextLine();
+
+			UserCommands = inputSplitter(UserInput);
+
+			cmdint.readCommand(UserCommands);
+
+		} while (!UserInput.equals("quit"));
+
+		sc.close();
+
+	}
+
+	/**
 	 * Method to process the user commands and call specific methods to execute the
 	 * desired actions.
 	 *
@@ -37,7 +66,8 @@ public class Controller {
 	 * @return boolean is the command recognized
 	 */
 	public void readCommand(String[] args) {
-
+		//TODO finish implementing page system for computers
+		//TODO wut remplacer abstract par interfaces j'avais pas vu
 		if (args[0] != null) {
 			switch (args[0]) {
 			case "list":
@@ -95,6 +125,37 @@ public class Controller {
 			view.empty();
 		}
 
+	}
+
+	/**
+	 * Method to process user input by splitting keywords and removing quotes.
+	 *
+	 * @param usrInpt String inputed by the user
+	 * @return String[] of commands
+	 */
+	public static String[] inputSplitter(String usrInpt) {
+
+		String[] usrCmd = new String[MAX_ARGUMENTS];
+		List<String> matchList = new ArrayList<String>();
+		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
+		Matcher regexMatcher = regex.matcher(usrInpt);
+
+		while (regexMatcher.find()) {
+			if (regexMatcher.group(1) != null) {
+				// Add double-quoted string without the quotes
+				matchList.add(regexMatcher.group(1));
+			} else if (regexMatcher.group(2) != null) {
+				// Add single-quoted string without the quotes
+				matchList.add(regexMatcher.group(2));
+			} else {
+				// Add unquoted word
+				matchList.add(regexMatcher.group());
+			}
+		}
+
+		usrCmd = matchList.toArray(usrCmd);
+
+		return usrCmd;
 	}
 
 	/**

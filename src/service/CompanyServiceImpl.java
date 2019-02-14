@@ -6,16 +6,28 @@ import dao.CompanyDAOImpl;
 import dao.DaoFactory;
 import model.Company;
 
+/**
+ * The Class CompanyServiceImpl.
+ */
 public class CompanyServiceImpl extends CompanyService {
-	
+
 	private DaoFactory fact;
 	private CompanyDAOImpl cnydao;
 
-	public CompanyServiceImpl(){
+	/**
+	 * Instantiates a new company service impl.
+	 */
+	public CompanyServiceImpl() {
 		fact = DaoFactory.getInstance();
 		cnydao = new CompanyDAOImpl(fact.getConnect());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.CompanyService#getAllCompanies()
+	 */
+	@Override
 	public List<Company> getAllCompanies() {
 
 		return cnydao.getCompanyList();

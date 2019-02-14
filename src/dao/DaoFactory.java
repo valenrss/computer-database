@@ -9,7 +9,6 @@ import java.sql.*;
  */
 public class DaoFactory {
 
-	/** The connect. */
 	private Connection connect;
 	private static DaoFactory factoryInstace = new DaoFactory();
 
@@ -49,11 +48,9 @@ public class DaoFactory {
 	public void setConnect(Connection connect) {
 		this.connect = connect;
 	}
-	
+
 	public static DaoFactory getInstance() {
 		return factoryInstace;
 	}
-
-
 
 }

@@ -14,15 +14,22 @@ public abstract class ComputerDAO<T> {
 		this.connect = conn;
 
 	}
-	
+
 	/**
 	 * List getter
 	 * 
-	 * @param obj
-	 * @return boolean
+	 * @return Computer List
 	 */
 	public List<Computer> getComputerList;
 	
+	/**
+	 * List get computer pages
+	 * 
+	 * @param int pageNo, int objCount
+	 * @return Computer List
+	 */
+	public abstract List<Computer> getComputerPage(int pageNo, int objCount);
+
 	/**
 	 * Creation method
 	 * 
