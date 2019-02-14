@@ -11,6 +11,7 @@ public class DaoFactory {
 
 	/** The connect. */
 	private Connection connect;
+	private static DaoFactory factoryInstace = new DaoFactory();
 
 	/**
 	 * Instantiates a new dao factory.
@@ -48,5 +49,11 @@ public class DaoFactory {
 	public void setConnect(Connection connect) {
 		this.connect = connect;
 	}
+	
+	public static DaoFactory getInstance() {
+		return factoryInstace;
+	}
+
+
 
 }
