@@ -7,14 +7,8 @@ import model.Company;
 /**
  * The Class CompanyService.
  */
-public abstract class CompanyService {
+public interface CompanyService {
 
-	/**
-	 * Instantiates a new company service.
-	 */
-	public CompanyService() {
-
-	}
 
 	/**
 	 * Gets all the companies.

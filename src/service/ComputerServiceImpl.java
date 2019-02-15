@@ -10,7 +10,7 @@ import model.Computer;
 /**
  * The Class ComputerServiceImpl.
  */
-public class ComputerServiceImpl extends ComputerService {
+public class ComputerServiceImpl implements ComputerService {
 
 	/** The fact. */
 	private DaoFactory fact;

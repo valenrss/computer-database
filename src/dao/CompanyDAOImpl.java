@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * The Class CompanyDAOImpl.
  */
-public class CompanyDAOImpl extends CompanyDAO<Company> {
+public class CompanyDAOImpl implements CompanyDAO {
 
-	protected Connection connect = null;
+	private Connection connect = null;
 
 	private Statement stmt;
 
@@ -27,7 +27,7 @@ public class CompanyDAOImpl extends CompanyDAO<Company> {
 	 */
 	public CompanyDAOImpl(Connection conn) {
 
-		super(conn);
+		connect=conn;
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class CompanyDAOImpl extends CompanyDAO<Company> {
 
 		try {
 
-			stmt = super.connect.createStatement();
+			stmt = connect.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM `company`");
 
 			while (rs.next()) {

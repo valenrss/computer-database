@@ -9,7 +9,7 @@ import model.Company;
 /**
  * The Class CompanyServiceImpl.
  */
-public class CompanyServiceImpl extends CompanyService {
+public class CompanyServiceImpl implements CompanyService {
 
 	private DaoFactory fact;
 	private CompanyDAOImpl cnydao;

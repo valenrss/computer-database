@@ -67,7 +67,6 @@ public class Controller {
 	 */
 	public void readCommand(String[] args) {
 		//TODO finish implementing page system for computers
-		//TODO wut remplacer abstract par interfaces j'avais pas vu
 		if (args[0] != null) {
 			switch (args[0]) {
 			case "list":

@@ -1,26 +1,19 @@
 package dao;
 
-import java.sql.Connection;
 import java.util.List;
 
 import model.Computer;
 
-public abstract class ComputerDAO<T> {
+public interface ComputerDAO {
 
-	protected Connection connect = null;
-
-	public ComputerDAO(Connection conn) {
-
-		this.connect = conn;
-
-	}
+	
 
 	/**
 	 * List getter
 	 * 
 	 * @return Computer List
 	 */
-	public List<Computer> getComputerList;
+	public List<Computer> getComputerList();
 	
 	/**
 	 * List get computer pages
@@ -36,7 +29,7 @@ public abstract class ComputerDAO<T> {
 	 * @param obj
 	 * @return boolean
 	 */
-	public abstract boolean create(T obj);
+	public abstract boolean create(Computer comp);
 
 	/**
 	 * Delete method
@@ -52,7 +45,7 @@ public abstract class ComputerDAO<T> {
 	 * @param obj
 	 * @return boolean
 	 */
-	public abstract boolean update(T obj);
+	public abstract boolean update(Computer comp);
 
 	/**
 	 * Find method
@@ -60,6 +53,6 @@ public abstract class ComputerDAO<T> {
 	 * @param id
 	 * @return T
 	 */
-	public abstract T find(int id);
+	public abstract Computer find(int id);
 
 }

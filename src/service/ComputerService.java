@@ -7,14 +7,8 @@ import model.Computer;
 /**
  * The Class ComputerService.
  */
-public abstract class ComputerService {
+public interface ComputerService {
 
-	/**
-	 * Instantiates a new computer service.
-	 */
-	public ComputerService() {
-
-	}
 
 	/**
 	 * Gets all the computers.

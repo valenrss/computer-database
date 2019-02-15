@@ -10,13 +10,16 @@ import java.util.List;
 /**
  * The Class ComputerDAOImpl.
  */
-public class ComputerDAOImpl extends ComputerDAO<Computer> {
+public class ComputerDAOImpl implements ComputerDAO {
 
 	/** The stmt. */
 	private Statement stmt;
 
 	/** The rs. */
 	private ResultSet rs;
+	
+	/** The connenct. */
+	private Connection connect = null;
 
 	/**
 	 * Instantiates a new computer DAO impl.
@@ -25,7 +28,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 	 */
 	public ComputerDAOImpl(Connection conn) {
 
-		super(conn);
+		connect = conn;
 	}
 
 	/**
@@ -39,7 +42,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
 		try {
 
-			stmt = super.connect.createStatement();
+			stmt = connect.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM `computer`");
 
 			while (rs.next()) {
@@ -66,7 +69,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
 		try {
 
-			PreparedStatement prep1 = super.connect.prepareStatement(
+			PreparedStatement prep1 = connect.prepareStatement(
 					"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
 
 			prep1.setString(1, comp.getName());
@@ -93,7 +96,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 
 		try {
 			int success = 0;
-			PreparedStatement prep1 = super.connect.prepareStatement("DELETE FROM `computer` WHERE `id` = ?");
+			PreparedStatement prep1 = connect.prepareStatement("DELETE FROM `computer` WHERE `id` = ?");
 			prep1.setInt(1, id);
 			success = prep1.executeUpdate();
 			if (success == 1) {
@@ -118,7 +121,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 	public boolean update(Computer comp) {
 		try {
 
-			PreparedStatement prep1 = super.connect.prepareStatement(
+			PreparedStatement prep1 = connect.prepareStatement(
 					"UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?");
 
 			prep1.setString(1, comp.getName());
@@ -146,7 +149,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 		Computer comp = null;
 
 		try {
-			ResultSet result = super.connect
+			ResultSet result = connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery("SELECT * FROM `computer` WHERE `id` = " + id);
 			if (result.first())
@@ -171,7 +174,7 @@ public class ComputerDAOImpl extends ComputerDAO<Computer> {
 			int minId = pageNo * objCount;
 			int maxId = minId + objCount;
 
-			PreparedStatement prep1 = super.connect
+			PreparedStatement prep1 = connect
 					.prepareStatement("SELECT * FROM `computer` WHERE id > ? AND id < ?");
 
 			prep1.setInt(1, minId);
