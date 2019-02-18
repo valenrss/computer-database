@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Computer {
 
@@ -127,5 +128,31 @@ public class Computer {
 		return "\nComputer Id : " + Id + "\nName : " + Name + "\nDate Introduced : " + DateIntroduced
 				+ "\nDate Discontinued : " + DateDiscontinued + "\nCompany Id : " + CompanyId + "\n";
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals()
+	 */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Computer)) {
+            return false;
+        }
+        Computer cmpt = (Computer) o;
+        return Id == cmpt.getId() &&
+                Objects.equals(Name, cmpt.getName()) &&
+                Objects.equals(DateIntroduced, cmpt.getDateIntroduced()) &&
+                Objects.equals(DateDiscontinued, cmpt.getDateDiscontinued()) &&
+                Objects.equals(CompanyId, cmpt.getCompanyId());
+    }
+
+    /* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id,Name, DateIntroduced, DateDiscontinued,CompanyId);
+    }
 
 }

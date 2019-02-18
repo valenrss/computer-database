@@ -8,13 +8,18 @@ import java.util.List;
 
 public class ComputerDAOImpl implements ComputerDAO {
 
-	private Statement stmt;
+	private static final String SQL_FIND_BY_ID = "SELECT * FROM `computer` WHERE `id` = ?";
+	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
+	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id <= ?";
+	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
+	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
+	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
 	private ResultSet rs;
 	private Connection connect = null;
 	
 	private static ComputerDAOImpl computerDAOImpl;
 
-	public ComputerDAOImpl(Connection conn) {
+	private ComputerDAOImpl(Connection conn) {
 
 		connect = conn;
 	}
@@ -30,9 +35,10 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 
-			stmt = connect.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM `computer`");
-
+			PreparedStatement prep = connect.prepareStatement(SQL_GETLIST);
+			prep.executeQuery();			
+			ResultSet rs = prep.getResultSet();
+			
 			while (rs.next()) {
 				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
 						rs.getTimestamp("discontinued"), rs.getInt("company_id")));
@@ -57,8 +63,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 
-			PreparedStatement prep1 = connect.prepareStatement(
-					"INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)");
+			PreparedStatement prep1 = connect.prepareStatement(SQL_CREATE);
 
 			prep1.setString(1, comp.getName());
 			prep1.setTimestamp(2, comp.getDateIntroduced());
@@ -84,7 +89,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 			int success = 0;
-			PreparedStatement prep1 = connect.prepareStatement("DELETE FROM `computer` WHERE `id` = ?");
+			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_ID);
 			prep1.setInt(1, id);
 			success = prep1.executeUpdate();
 			if (success == 1) {
@@ -109,8 +114,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	public boolean update(Computer comp) {
 		try {
 
-			PreparedStatement prep1 = connect.prepareStatement(
-					"UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?");
+			PreparedStatement prep1 = connect.prepareStatement(SQL_UPDATE);
 
 			prep1.setString(1, comp.getName());
 			prep1.setTimestamp(2, comp.getDateIntroduced());
@@ -137,9 +141,11 @@ public class ComputerDAOImpl implements ComputerDAO {
 		Computer comp = null;
 
 		try {
-			ResultSet result = connect
-					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("SELECT * FROM `computer` WHERE `id` = " + id);
+			PreparedStatement prep= connect.prepareStatement(SQL_FIND_BY_ID);
+			prep.setInt(1, id);
+			prep.executeQuery();
+			ResultSet result = prep.getResultSet();
+			
 			if (result.first())
 				comp = new Computer(id, result.getString("name"), result.getTimestamp("introduced"),
 						result.getTimestamp("discontinued"), result.getInt("company_id"));
@@ -152,23 +158,24 @@ public class ComputerDAOImpl implements ComputerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see dao.ComputerDAO#getComputerPage(int, int)
+	 * @see dao.ComputerDAO#getPage(int, int)
 	 */
 	@Override
 	public List<Computer> getPage(int pageNo, int objCount) {
 		List<Computer> cpList = new ArrayList<>();
 
 		try {
-			int minId = pageNo * objCount;
+			int minId = pageNo * objCount - objCount;
 			int maxId = minId + objCount;
 
-			PreparedStatement prep1 = connect
-					.prepareStatement("SELECT * FROM `computer` WHERE id > ? AND id < ?");
+			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
 
 			prep1.setInt(1, minId);
 			prep1.setInt(2, maxId);
 
-			prep1.executeUpdate();
+			prep1.executeQuery();
+			
+			rs = prep1.getResultSet();
 
 			while (rs.next()) {
 				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),

@@ -15,7 +15,7 @@ public class DaoFactory {
 	/**
 	 * Instantiates a new dao factory.
 	 */
-	public DaoFactory() {
+	private DaoFactory() {
 
 		MysqlDataSource dataSource = new MysqlDataSource();
 		dataSource.setUser("root");

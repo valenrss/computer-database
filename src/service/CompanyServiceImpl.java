@@ -16,7 +16,7 @@ public class CompanyServiceImpl implements CompanyService {
 	/**
 	 * Instantiates a new company service impl.
 	 */
-	public CompanyServiceImpl() {
+	private CompanyServiceImpl() {
 		fact = DaoFactory.getInstance();
 		cnydao = CompanyDAOImpl.getInstance(fact.getConnect());
 	}
@@ -31,6 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 		return cnydao.getList();
 	}
+	
 
 	public static CompanyServiceImpl getInstance() {
 		if (companyServiceImpl == null) {
@@ -38,5 +39,12 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return companyServiceImpl;
 	}
+
+	public List<Company> getPage(int pageNo, int objCount) {
+		
+		return cnydao.getPage(pageNo,objCount);
+	}
+
+	
 
 }

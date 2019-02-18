@@ -192,4 +192,18 @@ public class View {
 
 	}
 
+	public void pageUsage() {
+		System.out.println("Usage : page <computers|companies> <page number> <objects per page>");
+		
+	}
+
+	public void computersPageHeader(int pageNo, int objCount) {
+		System.out.println("Computers at page "+pageNo+" ("+objCount+" computers per page)");
+		
+	}
+
+	public void companyPageHeader(int pageNo, int objCount) {
+		System.out.println("Companies at page "+pageNo+" ("+objCount+" companies per page)");		
+	}
+
 }

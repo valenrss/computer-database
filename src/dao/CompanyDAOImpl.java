@@ -3,17 +3,20 @@ package dao;
 import model.Company;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class CompanyDAOImpl implements CompanyDAO {
 
+	private static final String SQL_LIST_ALL = "SELECT `id`,`name` FROM `company`";
+
+	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id <= ?";
+
 	private Connection connect = null;
-	private Statement stmt;
-	private ResultSet rs;
 	
 	private static CompanyDAOImpl companyDAOImpl;
 
@@ -22,7 +25,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 *
 	 * @param conn the conn
 	 */
-	public CompanyDAOImpl(Connection conn) {
+	private CompanyDAOImpl(Connection conn) {
 
 		connect = conn;
 	}
@@ -38,8 +41,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 		try {
 
-			stmt = connect.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM `company`");
+			PreparedStatement prep = connect.prepareStatement(SQL_LIST_ALL);
+			prep.executeQuery();
+			ResultSet rs = prep.getResultSet();
 
 			while (rs.next()) {
 				compList.add(new Company(rs.getInt("id"), rs.getString("name")));
@@ -59,6 +63,39 @@ public class CompanyDAOImpl implements CompanyDAO {
 			companyDAOImpl = new CompanyDAOImpl(conn);
 		}
 		return companyDAOImpl;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.CompanyDAO#getPage(int, int)
+	 */
+	public List<Company> getPage(int pageNo, int objCount) {
+		List<Company> cnyList = new ArrayList<>();
+
+		try {
+			int minId = pageNo * objCount - objCount;
+			int maxId = minId + objCount;
+
+			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
+
+			prep1.setInt(1, minId);
+			prep1.setInt(2, maxId);
+
+			prep1.executeQuery();
+			
+			ResultSet rs = prep1.getResultSet();
+
+			while (rs.next()) {
+				cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Request Failed ! Error : " + e);
+			e.printStackTrace();
+		}
+
+		return cnyList;
 	}
 
 }

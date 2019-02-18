@@ -86,6 +86,23 @@ public class Controller {
 					view.listUsage();
 				}
 				break;
+			case "page":
+				if (args[1] != null && args[2] != null && args[3] != null) {
+					switch (args[1]) {
+					case "computers":
+						pageComputers(args[2],args[3]);
+						break;
+					case "companies":
+						pageCompanies(args[2],args[3]);
+						break;
+					default:
+						view.pageUsage();
+						break;
+					}
+				} else {
+					view.pageUsage();
+				}
+				break;
 			case "computer":
 				if (args[1] != null) {
 					switch (args[1]) {
@@ -177,6 +194,42 @@ public class Controller {
 			view.company(comp);
 		}
 		//cnyList.stream().forEach(System.out::println);
+	}
+	
+	/**
+	 * Page computers.
+	 * @param int pageNo
+	 * @param int objCount
+	 */
+	private void pageComputers(String pageNo,String objCount) {
+		try {
+			view.computersPageHeader(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			List<Computer> cpList = cmptService.getPage(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			for (Computer comp : cpList) {
+				view.computer(comp);
+			}
+		}catch (NumberFormatException e){
+			view.pageUsage();
+		}
+		
+	}
+	
+	/**
+	 * Page computers.
+	 * @param int pageNo
+	 * @param int objCount
+	 */
+	private void pageCompanies(String pageNo,String objCount) {
+		try {
+			view.companyPageHeader(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			List<Company> cnyList = cpnyService.getPage(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			for (Company cny : cnyList) {
+				view.company(cny);
+			}
+		}catch (NumberFormatException e){
+			view.pageUsage();
+		}
+		
 	}
 
 	/**

@@ -13,7 +13,7 @@ public class ComputerServiceImpl implements ComputerService {
 	
 	private static ComputerServiceImpl computerServiceImpl;
 
-	public ComputerServiceImpl() {
+	private ComputerServiceImpl() {
 		fact = DaoFactory.getInstance();
 		comptdao = ComputerDAOImpl.getInstance(fact.getConnect());
 	}
