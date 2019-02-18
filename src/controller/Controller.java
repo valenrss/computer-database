@@ -370,12 +370,17 @@ public class Controller {
 	private void detailComputer(String[] args) {
 		try {
 			Computer compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
-			view.computer(compIdSearch);
+			if (compIdSearch != null) {
+				view.computer(compIdSearch);
+			}else {
+				view.computerDetailFail(args[2]);
+			}
+			
+		} catch (NullPointerException e) {
+			view.computerDetailFail(args[2]);
 		} catch (NumberFormatException e) {
 			view.idFormat();
 			view.computerDetailUsage();
-		} catch (NullPointerException e) {
-			view.computerDetailFail(args[2]);
 		} catch (SQLException e) {
 			view.sqlError(e);
 		}
