@@ -4,9 +4,6 @@ import java.util.List;
 
 import model.Company;
 
-/**
- * The Class CompanyService.
- */
 public interface CompanyService {
 
 

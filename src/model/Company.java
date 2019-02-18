@@ -1,14 +1,8 @@
 package model;
 
-/**
- * The Class Company.
- */
 public class Company {
 
-	/** The Id. */
 	private int Id;
-	
-	/** The Name. */
 	private String Name;
 
 	/**

@@ -3,14 +3,9 @@ package view;
 import model.Company;
 import model.Computer;
 
-/**
- * The Class View.
- */
+
 public class View {
 
-	/**
-	 * Instantiates a new view.
-	 */
 	public View() {
 		System.out.flush();
 		System.out.println(" ____     ____    ____      \n" + "/\\  _`\\  /\\  _`\\ /\\  _`\\    \n"

@@ -6,20 +6,19 @@ import dao.CompanyDAOImpl;
 import dao.DaoFactory;
 import model.Company;
 
-/**
- * The Class CompanyServiceImpl.
- */
 public class CompanyServiceImpl implements CompanyService {
 
 	private DaoFactory fact;
 	private CompanyDAOImpl cnydao;
+	
+	private static CompanyServiceImpl companyServiceImpl;
 
 	/**
 	 * Instantiates a new company service impl.
 	 */
 	public CompanyServiceImpl() {
 		fact = DaoFactory.getInstance();
-		cnydao = new CompanyDAOImpl(fact.getConnect());
+		cnydao = CompanyDAOImpl.getInstance(fact.getConnect());
 	}
 
 	/*
@@ -31,6 +30,13 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<Company> getAllCompanies() {
 
 		return cnydao.getCompanyList();
+	}
+
+	public static CompanyServiceImpl getInstance() {
+		if (companyServiceImpl == null) {
+			companyServiceImpl = new CompanyServiceImpl();
+		}
+		return companyServiceImpl;
 	}
 
 }

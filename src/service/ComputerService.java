@@ -4,9 +4,6 @@ import java.util.List;
 
 import model.Computer;
 
-/**
- * The Class ComputerService.
- */
 public interface ComputerService {
 
 

@@ -29,8 +29,8 @@ public class Controller {
 
 	public Controller() {
 		view = new View();
-		cmptService = new ComputerServiceImpl();
-		cpnyService = new CompanyServiceImpl();
+		cmptService = ComputerServiceImpl.getInstance();
+		cpnyService = CompanyServiceImpl.getInstance();
 	}
 
 	/**
@@ -123,7 +123,6 @@ public class Controller {
 		} else {
 			view.empty();
 		}
-
 	}
 
 	/**
@@ -177,6 +176,7 @@ public class Controller {
 		for (Company comp : cnyList) {
 			view.company(comp);
 		}
+		//cnyList.stream().forEach(System.out::println);
 	}
 
 	/**

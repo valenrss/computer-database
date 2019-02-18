@@ -6,24 +6,16 @@ import dao.ComputerDAOImpl;
 import dao.DaoFactory;
 import model.Computer;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ComputerServiceImpl.
- */
 public class ComputerServiceImpl implements ComputerService {
 
-	/** The fact. */
 	private DaoFactory fact;
-
-	/** The comptdao. */
 	private ComputerDAOImpl comptdao;
+	
+	private static ComputerServiceImpl computerServiceImpl;
 
-	/**
-	 * Instantiates a new computer service impl.
-	 */
 	public ComputerServiceImpl() {
 		fact = DaoFactory.getInstance();
-		comptdao = new ComputerDAOImpl(fact.getConnect());
+		comptdao = ComputerDAOImpl.getInstance(fact.getConnect());
 	}
 
 	/*
@@ -89,6 +81,13 @@ public class ComputerServiceImpl implements ComputerService {
 	public List<Computer> getComputerPage(int pageNo, int objCount) {
 
 		return comptdao.getComputerPage(pageNo, objCount);
+	}
+	
+	public static ComputerServiceImpl getInstance() {
+		if (computerServiceImpl == null) {
+			computerServiceImpl = new ComputerServiceImpl();
+		}
+		return computerServiceImpl;
 	}
 
 }

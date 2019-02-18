@@ -9,16 +9,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Class CompanyDAOImpl.
- */
 public class CompanyDAOImpl implements CompanyDAO {
 
 	private Connection connect = null;
-
 	private Statement stmt;
-
 	private ResultSet rs;
+	
+	private static CompanyDAOImpl companyDAOImpl;
 
 	/**
 	 * Instantiates a new company DAO impl.
@@ -27,7 +24,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 */
 	public CompanyDAOImpl(Connection conn) {
 
-		connect=conn;
+		connect = conn;
 	}
 
 	/**
@@ -55,6 +52,13 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 		return compList;
 
+	}
+	
+	public static CompanyDAOImpl getInstance(Connection conn) {
+		if (companyDAOImpl == null) {
+			companyDAOImpl = new CompanyDAOImpl(conn);
+		}
+		return companyDAOImpl;
 	}
 
 }

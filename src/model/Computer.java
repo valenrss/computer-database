@@ -2,24 +2,12 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- * The Class Computer.
- */
 public class Computer {
 
-	/** The Id. */
 	private int Id;
-	
-	/** The Name. */
 	private String Name;
-	
-	/** The Date introduced. */
 	private Timestamp DateIntroduced;
-	
-	/** The Date discontinued. */
 	private Timestamp DateDiscontinued;
-	
-	/** The Company id. */
 	private int CompanyId;
 
 	/**

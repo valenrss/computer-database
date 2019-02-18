@@ -6,26 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ComputerDAOImpl.
- */
 public class ComputerDAOImpl implements ComputerDAO {
 
-	/** The stmt. */
 	private Statement stmt;
-
-	/** The rs. */
 	private ResultSet rs;
-	
-	/** The connenct. */
 	private Connection connect = null;
+	
+	private static ComputerDAOImpl computerDAOImpl;
 
-	/**
-	 * Instantiates a new computer DAO impl.
-	 *
-	 * @param conn the conn
-	 */
 	public ComputerDAOImpl(Connection conn) {
 
 		connect = conn;
@@ -195,5 +183,13 @@ public class ComputerDAOImpl implements ComputerDAO {
 		return cpList;
 
 	}
+
+	public static ComputerDAOImpl getInstance(Connection conn) {
+		if (computerDAOImpl == null) {
+			computerDAOImpl = new ComputerDAOImpl(conn);
+		}
+		return computerDAOImpl;
+	}
+
 
 }
