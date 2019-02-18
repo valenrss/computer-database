@@ -35,67 +35,59 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 *
 	 * @return the company list
 	 */
-	public List<Company> getList() {
+	public List<Company> getList() throws SQLException {
 
 		List<Company> compList = new ArrayList<>();
 
-		try {
+		PreparedStatement prep = connect.prepareStatement(SQL_LIST_ALL);
+		prep.executeQuery();
+		ResultSet rs = prep.getResultSet();
 
-			PreparedStatement prep = connect.prepareStatement(SQL_LIST_ALL);
-			prep.executeQuery();
-			ResultSet rs = prep.getResultSet();
-
-			while (rs.next()) {
-				compList.add(new Company(rs.getInt("id"), rs.getString("name")));
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Request Failed ! Error : " + e);
-			e.printStackTrace();
+		while (rs.next()) {
+			compList.add(new Company(rs.getInt("id"), rs.getString("name")));
 		}
 
 		return compList;
 
 	}
 	
-	public static CompanyDAOImpl getInstance(Connection conn) {
-		if (companyDAOImpl == null) {
-			companyDAOImpl = new CompanyDAOImpl(conn);
-		}
-		return companyDAOImpl;
-	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see dao.CompanyDAO#getPage(int, int)
 	 */
-	public List<Company> getPage(int pageNo, int objCount) {
+	public List<Company> getPage(int pageNo, int objCount) throws SQLException {
 		List<Company> cnyList = new ArrayList<>();
 
-		try {
-			int minId = pageNo * objCount - objCount;
-			int maxId = minId + objCount;
+		int minId = pageNo * objCount - objCount;
+		int maxId = minId + objCount;
 
-			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
+		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
 
-			prep1.setInt(1, minId);
-			prep1.setInt(2, maxId);
+		prep1.setInt(1, minId);
+		prep1.setInt(2, maxId);
 
-			prep1.executeQuery();
-			
-			ResultSet rs = prep1.getResultSet();
+		prep1.executeQuery();
+		
+		ResultSet rs = prep1.getResultSet();
 
-			while (rs.next()) {
-				cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Request Failed ! Error : " + e);
-			e.printStackTrace();
+		while (rs.next()) {
+			cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
 		}
 
 		return cnyList;
+	}
+	/**
+	 * 
+	 * @param conn
+	 * @return instange of CompanyDAO
+	 */
+	public static CompanyDAOImpl getInstance(Connection conn) {
+		if (companyDAOImpl == null) {
+			companyDAOImpl = new CompanyDAOImpl(conn);
+		}
+		return companyDAOImpl;
 	}
 
 }

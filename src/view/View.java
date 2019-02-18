@@ -1,5 +1,7 @@
 package view;
 
+import java.sql.SQLException;
+
 import model.Company;
 import model.Computer;
 
@@ -204,6 +206,15 @@ public class View {
 
 	public void companyPageHeader(int pageNo, int objCount) {
 		System.out.println("Companies at page "+pageNo+" ("+objCount+" companies per page)");		
+	}
+
+	public void pageEmpty() {
+		System.out.println("Page is empty...");
+	}
+
+	public void sqlError(SQLException e) {
+		System.out.println("SQL Error : "+e);
+		
 	}
 
 }

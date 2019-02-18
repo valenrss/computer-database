@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class Controller {
 	 * @return boolean is the command recognized
 	 */
 	public void readCommand(String[] args) {
-		//TODO finish implementing page system for computers
+		// TODO finish implementing page system for computers
 		if (args[0] != null) {
 			switch (args[0]) {
 			case "list":
@@ -90,10 +91,10 @@ public class Controller {
 				if (args[1] != null && args[2] != null && args[3] != null) {
 					switch (args[1]) {
 					case "computers":
-						pageComputers(args[2],args[3]);
+						pageComputers(args[2], args[3]);
 						break;
 					case "companies":
-						pageCompanies(args[2],args[3]);
+						pageCompanies(args[2], args[3]);
 						break;
 					default:
 						view.pageUsage();
@@ -178,10 +179,17 @@ public class Controller {
 	 */
 	private void listComputers() {
 		view.computersListHeader();
-		List<Computer> cpList = cmptService.getAll();
-		for (Computer comp : cpList) {
-			view.computer(comp);
+		List<Computer> cpList;
+
+		try {
+			cpList = cmptService.getAll();
+			for (Computer comp : cpList) {
+				view.computer(comp);
+			}
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
+
 	}
 
 	/**
@@ -189,47 +197,64 @@ public class Controller {
 	 */
 	private void listCompanies() {
 		view.companiesListHeader();
-		List<Company> cnyList = cpnyService.getAll();
-		for (Company comp : cnyList) {
-			view.company(comp);
+		List<Company> cnyList;
+		try {
+			cnyList = cpnyService.getAll();
+			for (Company comp : cnyList) {
+				view.company(comp);
+			}
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
-		//cnyList.stream().forEach(System.out::println);
+
+		// cnyList.stream().forEach(System.out::println);
 	}
-	
+
 	/**
 	 * Page computers.
+	 * 
 	 * @param int pageNo
 	 * @param int objCount
 	 */
-	private void pageComputers(String pageNo,String objCount) {
+	private void pageComputers(String pageNo, String objCount) {
 		try {
-			view.computersPageHeader(Integer.parseInt(pageNo),Integer.parseInt(objCount));
-			List<Computer> cpList = cmptService.getPage(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			view.computersPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
+			List<Computer> cpList = cmptService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
 			for (Computer comp : cpList) {
 				view.computer(comp);
 			}
-		}catch (NumberFormatException e){
+			if (cpList.size() == 0) {
+				view.pageEmpty();
+			}
+		} catch (NumberFormatException e) {
 			view.pageUsage();
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Page computers.
+	 * 
 	 * @param int pageNo
 	 * @param int objCount
 	 */
-	private void pageCompanies(String pageNo,String objCount) {
+	private void pageCompanies(String pageNo, String objCount) {
 		try {
-			view.companyPageHeader(Integer.parseInt(pageNo),Integer.parseInt(objCount));
-			List<Company> cnyList = cpnyService.getPage(Integer.parseInt(pageNo),Integer.parseInt(objCount));
+			view.companyPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
+			List<Company> cnyList = cpnyService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
 			for (Company cny : cnyList) {
 				view.company(cny);
 			}
-		}catch (NumberFormatException e){
+			if (cnyList.size() == 0) {
+				view.pageEmpty();
+			}
+		} catch (NumberFormatException e) {
 			view.pageUsage();
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
-		
 	}
 
 	/**
@@ -269,6 +294,8 @@ public class Controller {
 			view.computerCreateUsage();
 		} catch (NullPointerException e) {
 			view.computerCreateUsage();
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
 	}
 
@@ -307,6 +334,8 @@ public class Controller {
 				view.dateFormat();
 			}
 			view.computerUpdateUsage();
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
 	}
 
@@ -327,6 +356,8 @@ public class Controller {
 		} catch (NumberFormatException e) {
 			view.idFormat();
 			view.computerDeleteUsage();
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
 
 	}
@@ -345,6 +376,8 @@ public class Controller {
 			view.computerDetailUsage();
 		} catch (NullPointerException e) {
 			view.computerDetailFail(args[2]);
+		} catch (SQLException e) {
+			view.sqlError(e);
 		}
 	}
 }

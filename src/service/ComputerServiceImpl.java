@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import dao.ComputerDAOImpl;
@@ -24,7 +25,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getAll() {
+	public List<Computer> getAll() throws SQLException  {
 
 		return comptdao.getList();
 	}
@@ -35,7 +36,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#addComputer(model.Computer)
 	 */
 	@Override
-	public void add(Computer cpInsert) {
+	public void add(Computer cpInsert) throws SQLException {
 		comptdao.create(cpInsert);
 
 	}
@@ -46,7 +47,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#updateComputer(model.Computer)
 	 */
 	@Override
-	public void update(Computer cpInsert) {
+	public void update(Computer cpInsert) throws SQLException{
 		comptdao.update(cpInsert);
 
 	}
@@ -57,7 +58,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#deleteComputer(int)
 	 */
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(int id) throws SQLException{
 
 		return comptdao.delete(id);
 	}
@@ -68,7 +69,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#detailComputer(int)
 	 */
 	@Override
-	public Computer detail(int id) {
+	public Computer detail(int id) throws SQLException {
 		return comptdao.find(id);
 	}
 
@@ -78,7 +79,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getComputerPage(int, int)
 	 */
 	@Override
-	public List<Computer> getPage(int pageNo, int objCount) {
+	public List<Computer> getPage(int pageNo, int objCount) throws SQLException {
 
 		return comptdao.getPage(pageNo, objCount);
 	}

@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.Computer;
@@ -12,48 +13,54 @@ public interface ComputerDAO {
 	 * List getter
 	 * 
 	 * @return Computer List
+	 * @throws SQLException 
 	 */
-	public List<Computer> getList();
+	public List<Computer> getList() throws SQLException;
 	
 	/**
 	 * List get computer pages
 	 * 
 	 * @param int pageNo, int objCount
 	 * @return Computer List
+	 * @throws SQLException 
 	 */
-	public abstract List<Computer> getPage(int pageNo, int objCount);
+	public abstract List<Computer> getPage(int pageNo, int objCount) throws SQLException;
 
 	/**
 	 * Creation method
 	 * 
 	 * @param obj
 	 * @return boolean
+	 * @throws SQLException 
 	 */
-	public abstract boolean create(Computer comp);
+	public abstract void create(Computer comp) throws SQLException;
 
 	/**
 	 * Delete method
 	 * 
 	 * @param id
 	 * @return boolean
+	 * @throws SQLException 
 	 */
-	public abstract boolean delete(int id);
+	public abstract boolean delete(int id) throws SQLException;
 
 	/**
 	 * Update method
 	 * 
 	 * @param obj
 	 * @return boolean
+	 * @throws SQLException 
 	 */
-	public abstract boolean update(Computer comp);
+	public abstract void update(Computer comp) throws SQLException;
 
 	/**
 	 * Find method
 	 * 
 	 * @param id
 	 * @return T
+	 * @throws SQLException 
 	 */
-	public abstract Computer find(int id);
+	public abstract Computer find(int id) throws SQLException;
 	
 
 }
