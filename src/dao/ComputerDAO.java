@@ -13,7 +13,7 @@ public interface ComputerDAO {
 	 * 
 	 * @return Computer List
 	 */
-	public List<Computer> getComputerList();
+	public List<Computer> getList();
 	
 	/**
 	 * List get computer pages
@@ -21,7 +21,7 @@ public interface ComputerDAO {
 	 * @param int pageNo, int objCount
 	 * @return Computer List
 	 */
-	public abstract List<Computer> getComputerPage(int pageNo, int objCount);
+	public abstract List<Computer> getPage(int pageNo, int objCount);
 
 	/**
 	 * Creation method

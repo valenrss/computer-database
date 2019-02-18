@@ -12,7 +12,7 @@ public interface ComputerService {
 	 *
 	 * @return all computers
 	 */
-	public abstract List<Computer> getAllComputers();
+	public abstract List<Computer> getAll();
 	
 	/**
 	 * List get computer pages
@@ -20,21 +20,21 @@ public interface ComputerService {
 	 * @param int pageNo, int objCount
 	 * @return Computer List
 	 */
-	public abstract List<Computer> getComputerPage(int pageNo, int objCount);
+	public abstract List<Computer> getPage(int pageNo, int objCount);
 
 	/**
 	 * Adds the computer.
 	 *
 	 * @param cpInsert the cp insert
 	 */
-	public abstract void addComputer(Computer cpInsert);
+	public abstract void add(Computer cpInsert);
 
 	/**
 	 * Update computer.
 	 *
 	 * @param cpInsert the cp insert
 	 */
-	public abstract void updateComputer(Computer cpInsert);
+	public abstract void update(Computer cpInsert);
 
 	/**
 	 * Delete computer.
@@ -42,7 +42,7 @@ public interface ComputerService {
 	 * @param id the id
 	 * @return true, if successful
 	 */
-	public abstract boolean deleteComputer(int id);
+	public abstract boolean delete(int id);
 
 	/**
 	 * Detail computer.
@@ -50,6 +50,6 @@ public interface ComputerService {
 	 * @param id the id
 	 * @return the computer
 	 */
-	public abstract Computer detailComputer(int id);
+	public abstract Computer detail(int id);
 
 }

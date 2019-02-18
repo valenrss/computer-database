@@ -24,9 +24,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getAllComputers() {
+	public List<Computer> getAll() {
 
-		return comptdao.getComputerList();
+		return comptdao.getList();
 	}
 
 	/*
@@ -35,7 +35,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#addComputer(model.Computer)
 	 */
 	@Override
-	public void addComputer(Computer cpInsert) {
+	public void add(Computer cpInsert) {
 		comptdao.create(cpInsert);
 
 	}
@@ -46,7 +46,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#updateComputer(model.Computer)
 	 */
 	@Override
-	public void updateComputer(Computer cpInsert) {
+	public void update(Computer cpInsert) {
 		comptdao.update(cpInsert);
 
 	}
@@ -57,7 +57,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#deleteComputer(int)
 	 */
 	@Override
-	public boolean deleteComputer(int id) {
+	public boolean delete(int id) {
 
 		return comptdao.delete(id);
 	}
@@ -68,7 +68,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#detailComputer(int)
 	 */
 	@Override
-	public Computer detailComputer(int id) {
+	public Computer detail(int id) {
 		return comptdao.find(id);
 	}
 
@@ -78,9 +78,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getComputerPage(int, int)
 	 */
 	@Override
-	public List<Computer> getComputerPage(int pageNo, int objCount) {
+	public List<Computer> getPage(int pageNo, int objCount) {
 
-		return comptdao.getComputerPage(pageNo, objCount);
+		return comptdao.getPage(pageNo, objCount);
 	}
 	
 	public static ComputerServiceImpl getInstance() {

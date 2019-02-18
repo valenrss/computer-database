@@ -27,9 +27,9 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getAllCompanies()
 	 */
 	@Override
-	public List<Company> getAllCompanies() {
+	public List<Company> getAll() {
 
-		return cnydao.getCompanyList();
+		return cnydao.getList();
 	}
 
 	public static CompanyServiceImpl getInstance() {

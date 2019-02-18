@@ -161,7 +161,7 @@ public class Controller {
 	 */
 	private void listComputers() {
 		view.computersListHeader();
-		List<Computer> cpList = cmptService.getAllComputers();
+		List<Computer> cpList = cmptService.getAll();
 		for (Computer comp : cpList) {
 			view.computer(comp);
 		}
@@ -172,7 +172,7 @@ public class Controller {
 	 */
 	private void listCompanies() {
 		view.companiesListHeader();
-		List<Company> cnyList = cpnyService.getAllCompanies();
+		List<Company> cnyList = cpnyService.getAll();
 		for (Company comp : cnyList) {
 			view.company(comp);
 		}
@@ -203,7 +203,7 @@ public class Controller {
 			}
 
 			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2, Integer.parseInt(args[5]));
-			cmptService.addComputer(cpInsert);
+			cmptService.add(cpInsert);
 			view.computer(cpInsert);
 			view.computerAddSuccess();
 		} catch (NumberFormatException e) {
@@ -243,7 +243,7 @@ public class Controller {
 			}
 
 			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2, Integer.parseInt(args[6]));
-			cmptService.updateComputer(cpInsert);
+			cmptService.update(cpInsert);
 			view.computer(cpInsert);
 			view.computerUpdateSuccess();
 		} catch (NumberFormatException e) {
@@ -264,7 +264,7 @@ public class Controller {
 	 */
 	private void deleteComputer(String[] args) {
 		try {
-			boolean deletesuccess = cmptService.deleteComputer(Integer.parseInt(args[2]));
+			boolean deletesuccess = cmptService.delete(Integer.parseInt(args[2]));
 			if (deletesuccess) {
 				view.computerDeleteSuccess(args[2]);
 			} else {
@@ -285,7 +285,7 @@ public class Controller {
 	 */
 	private void detailComputer(String[] args) {
 		try {
-			Computer compIdSearch = cmptService.detailComputer(Integer.parseInt(args[2]));
+			Computer compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
 			view.computer(compIdSearch);
 		} catch (NumberFormatException e) {
 			view.idFormat();

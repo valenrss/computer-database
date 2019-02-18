@@ -6,6 +6,6 @@ import model.Company;
 
 public interface CompanyDAO {
 
-	public List<Company> getCompanyList();
+	public List<Company> getList();
 
 }

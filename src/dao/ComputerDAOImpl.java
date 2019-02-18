@@ -24,7 +24,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	 *
 	 * @return the computer list
 	 */
-	public List<Computer> getComputerList() {
+	public List<Computer> getList() {
 
 		List<Computer> cpList = new ArrayList<>();
 
@@ -155,7 +155,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	 * @see dao.ComputerDAO#getComputerPage(int, int)
 	 */
 	@Override
-	public List<Computer> getComputerPage(int pageNo, int objCount) {
+	public List<Computer> getPage(int pageNo, int objCount) {
 		List<Computer> cpList = new ArrayList<>();
 
 		try {

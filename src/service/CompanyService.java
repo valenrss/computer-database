@@ -12,6 +12,6 @@ public interface CompanyService {
 	 *
 	 * @return all companies
 	 */
-	public abstract List<Company> getAllCompanies();
+	public abstract List<Company> getAll();
 
 }

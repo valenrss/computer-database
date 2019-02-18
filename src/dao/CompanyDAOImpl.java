@@ -32,7 +32,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 *
 	 * @return the company list
 	 */
-	public List<Company> getCompanyList() {
+	public List<Company> getList() {
 
 		List<Company> compList = new ArrayList<>();
 
