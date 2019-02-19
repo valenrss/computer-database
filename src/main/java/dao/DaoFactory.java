@@ -1,8 +1,9 @@
 package dao;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import java.sql.*;
+
+import com.mysql.cj.jdbc.MysqlDataSource;
 
 /**
  * A factory for creating Dao objects.
