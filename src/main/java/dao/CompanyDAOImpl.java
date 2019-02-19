@@ -14,7 +14,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	private static final String SQL_LIST_ALL = "SELECT `id`,`name` FROM `company`";
 
-	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id <= ?";
+	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id < ?";
 
 	private Connection connect = null;
 	

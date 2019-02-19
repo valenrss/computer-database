@@ -177,7 +177,7 @@ public class Controller {
 	/**
 	 * List computers.
 	 */
-	private void listComputers() {
+	public void listComputers() {
 		view.computersListHeader();
 		List<Computer> cpList;
 
@@ -195,7 +195,7 @@ public class Controller {
 	/**
 	 * List companies.
 	 */
-	private void listCompanies() {
+	public void listCompanies() {
 		view.companiesListHeader();
 		List<Company> cnyList;
 		try {
@@ -216,7 +216,7 @@ public class Controller {
 	 * @param int pageNo
 	 * @param int objCount
 	 */
-	private void pageComputers(String pageNo, String objCount) {
+	public void pageComputers(String pageNo, String objCount) {
 		try {
 			view.computersPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
 			List<Computer> cpList = cmptService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
@@ -240,7 +240,7 @@ public class Controller {
 	 * @param int pageNo
 	 * @param int objCount
 	 */
-	private void pageCompanies(String pageNo, String objCount) {
+	public void pageCompanies(String pageNo, String objCount) {
 		try {
 			view.companyPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
 			List<Company> cnyList = cpnyService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
@@ -262,7 +262,7 @@ public class Controller {
 	 *
 	 * @param args the args
 	 */
-	private void createComputer(String[] args) {
+	public void createComputer(String[] args) {
 		try {
 			Timestamp ts1, ts2;
 
@@ -304,7 +304,7 @@ public class Controller {
 	 *
 	 * @param args the args
 	 */
-	private void updateComputer(String[] args) {
+	public void updateComputer(String[] args) {
 		try {
 			Timestamp ts1, ts2;
 
@@ -344,7 +344,7 @@ public class Controller {
 	 *
 	 * @param args the args
 	 */
-	private void deleteComputer(String[] args) {
+	public void deleteComputer(String[] args) {
 		try {
 			boolean deletesuccess = cmptService.delete(Integer.parseInt(args[2]));
 			if (deletesuccess) {
@@ -367,7 +367,7 @@ public class Controller {
 	 *
 	 * @param args the args
 	 */
-	private void detailComputer(String[] args) {
+	public void detailComputer(String[] args) {
 		try {
 			Computer compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
 			if (compIdSearch != null) {

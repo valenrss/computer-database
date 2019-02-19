@@ -32,7 +32,7 @@ public class ControllerTests {
 		
 		String[] string = {"computer","create","Dell Detravaille","?","?","3"};
 		
-		Controller.main(string);
+		controller.createComputer(string);
 	}
 	
 	@After

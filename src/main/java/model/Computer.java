@@ -140,8 +140,7 @@ public class Computer {
             return false;
         }
         Computer cmpt = (Computer) o;
-        return Id == cmpt.getId() &&
-                Objects.equals(Name, cmpt.getName()) &&
+        return  Objects.equals(Name, cmpt.getName()) &&
                 Objects.equals(DateIntroduced, cmpt.getDateIntroduced()) &&
                 Objects.equals(DateDiscontinued, cmpt.getDateDiscontinued()) &&
                 Objects.equals(CompanyId, cmpt.getCompanyId());
@@ -152,7 +151,7 @@ public class Computer {
 	 */
     @Override
     public int hashCode() {
-        return Objects.hash(Id,Name, DateIntroduced, DateDiscontinued,CompanyId);
+        return Objects.hash(Name, DateIntroduced, DateDiscontinued,CompanyId);
     }
 
 }
