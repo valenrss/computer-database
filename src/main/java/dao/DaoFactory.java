@@ -1,33 +1,34 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import java.sql.*;
-
-import com.mysql.cj.jdbc.MysqlDataSource;
+import com.mysql.cj.jdbc.Driver;
 
 /**
  * A factory for creating Dao objects.
  */
 public class DaoFactory {
 
+	private static final String PASSWORD = "password";
+	private static final String USERNAME = "root";
+	private static final String URL = "jdbc:mysql://localhost:3306/computer-database-db";
+
 	private Connection connect;
-	private static DaoFactory factoryInstace = new DaoFactory();
+	private static DaoFactory factoryInstace;
 
 	/**
 	 * Instantiates a new dao factory.
 	 */
 	private DaoFactory() {
 
-		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setUser("root");
-		dataSource.setPassword("password");
-		dataSource.setServerName("localhost");
-		dataSource.setPortNumber(3306);
-		dataSource.setDatabaseName("computer-database-db");
 		try {
-			connect = dataSource.getConnection();
+			Driver monDriver = new com.mysql.jdbc.Driver(); 
+			DriverManager.registerDriver(monDriver);
+			connect = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 		} catch (SQLException e) {
-			System.out.println("Could not initialize DaoFactory !");
+			System.out.println("Could not initialize DaoFactory : "+e);
 		}
 
 	}
@@ -51,7 +52,11 @@ public class DaoFactory {
 	}
 
 	public static DaoFactory getInstance() {
+		if (factoryInstace == null) {
+			factoryInstace = new DaoFactory();
+		}
 		return factoryInstace;
 	}
+	
 
 }
