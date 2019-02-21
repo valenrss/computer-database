@@ -17,6 +17,13 @@
 		<servlet-name>AddComputerServlet</servlet-name>
 		<servlet-class>servlet.AddComputerServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>DeleteComputerServlet</display-name>
+		<servlet-name>DeleteComputerServlet</servlet-name>
+		<servlet-class>servlet.DeleteComputerServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ComputerServlet</servlet-name>
 		<url-pattern>/Dashboard</url-pattern>
@@ -24,6 +31,10 @@
 	<servlet-mapping>
 		<servlet-name>AddComputerServlet</servlet-name>
 		<url-pattern>/AddComputer</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteComputerServlet</servlet-name>
+		<url-pattern>/DeleteComputer</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>/Dashboard</welcome-file>

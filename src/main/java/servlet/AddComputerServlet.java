@@ -67,6 +67,8 @@ public class AddComputerServlet extends HttpServlet {
 		 String tss2 = request.getParameter("discontinued");
 		 int cmpnyID = Integer.parseInt(request.getParameter("companyId"));
 		 
+		 
+		 
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		 
 		 Date d1,d2;
