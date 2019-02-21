@@ -1,16 +1,45 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class Computer {
 
 	private int Id;
 	private String Name;
-	private Timestamp DateIntroduced;
-	private Timestamp DateDiscontinued;
+	private Date DateIntroduced;
+	private Date DateDiscontinued;
 	private int CompanyId;
 
+	/*
+	 * Instantiates a new computer.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param dateIntroduced the date introduced
+	 * @param dateDiscontinued the date discontinued
+	 * @param companyId the company id
+	 
+	public Computer(int id, String name, Timestamp dateIntroduced, Timestamp dateDiscontinued, int companyId) {
+
+		Id = id;
+		Name = name;
+		try {
+			DateIntroduced = new Date(dateIntroduced.getTime());
+		}catch (NullPointerException e) {
+			DateIntroduced = null;
+		}
+		try {
+			DateDiscontinued = new Date(dateDiscontinued.getTime());
+		}catch (NullPointerException e) {
+			DateDiscontinued = null;
+		}
+
+		CompanyId = companyId;
+
+	}*/
+	
 	/**
 	 * Instantiates a new computer.
 	 *
@@ -20,7 +49,7 @@ public class Computer {
 	 * @param dateDiscontinued the date discontinued
 	 * @param companyId the company id
 	 */
-	public Computer(int id, String name, Timestamp dateIntroduced, Timestamp dateDiscontinued, int companyId) {
+	public Computer(int id, String name, Date dateIntroduced, Date dateDiscontinued, int companyId) {
 
 		Id = id;
 		Name = name;
@@ -71,7 +100,7 @@ public class Computer {
 	 *
 	 * @return the date introduced
 	 */
-	public Timestamp getDateIntroduced() {
+	public Date getDateIntroduced() {
 		return DateIntroduced;
 	}
 
@@ -89,7 +118,7 @@ public class Computer {
 	 *
 	 * @return the date discontinued
 	 */
-	public Timestamp getDateDiscontinued() {
+	public Date getDateDiscontinued() {
 		return DateDiscontinued;
 	}
 

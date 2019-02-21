@@ -36,9 +36,14 @@ public class ComputerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			//int pagesCount = (int)request.getAttribute("page");
 			cmptService = ComputerServiceImpl.getInstance();
-			List<Computer> lstcmp = cmptService.getAll();
-			request.setAttribute("computers", lstcmp);
+			//List<Computer> pageC = cmptService.getPage(1, 20);
+			List<Computer> allC = cmptService.getAll();
+			//pagesCount = allC.size()/20;
+			request.setAttribute("computers", allC);
+			request.setAttribute("cpNumber", allC.size());
+			//request.setAttribute("pgCount", pagesCount);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +56,9 @@ public class ComputerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		//Add a computer
+
 		doGet(request, response);
 	}
 

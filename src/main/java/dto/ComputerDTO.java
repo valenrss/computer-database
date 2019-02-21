@@ -8,7 +8,13 @@ public class ComputerDTO {
 	private String DateDiscontinued;
 	private String CompanyId;
 
-	public ComputerDTO() {
+	public ComputerDTO(String id, String name, String dateIntroduced,String dateDiscontinued, String companyId) {
+		
+		Id = id;
+		Name = name;
+		DateIntroduced = dateIntroduced;
+		DateDiscontinued = dateDiscontinued;
+		CompanyId = companyId;
 		
 	}
 
