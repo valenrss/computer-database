@@ -25,6 +25,15 @@ public interface ComputerDAO {
 	 * @throws SQLException 
 	 */
 	public abstract List<Computer> getPage(int pageNo, int objCount) throws SQLException;
+	
+	/**
+	 * List get computer pages
+	 * 
+	 * @param int pageNo, int objCount , String name
+	 * @return Computer List
+	 * @throws SQLException 
+	 */
+	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException;
 
 	/**
 	 * Creation method

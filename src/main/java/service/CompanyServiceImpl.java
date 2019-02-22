@@ -45,7 +45,7 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		return cnydao.getPage(pageNo,objCount);
 	}
-
+	
 	
 
 }

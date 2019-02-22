@@ -24,7 +24,7 @@
 			<h1 id="homeTitle"><c:out value="${cpNumber}"></c:out> Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
-					<form id="searchForm" action="#" method="GET" class="form-inline">
+					<form id="searchForm" action="/Computer-Database/SearchComputer" method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="search"
 							class="form-control" placeholder="Search name" /> <input
@@ -85,26 +85,23 @@
 		</div>
 	</section>
 
-	<form id="deleteForm" action="#" method="POST">
+	<form id="changePage" action="/Computer-Database/Dashboard" method="GET">
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li><a href="#" aria-label="Previous"> <span
-						aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li><a href="?page=1">1</a></li>
-				<li><a href="?page=2">2</a></li>
-				<li><a href="#">3<input type="hidden" name="pageId" value="3"></a></li>
-				<li><a href="#">4<input type="hidden" name="pageId" value="4"></a></li>
-				<li><a href="#">5<input type="hidden" name="pageId" value="5"></a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<li <c:if test="${pageId < 2}">disabled="disabled" </c:if>><a  aria-label="Previous"><button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
+			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 2}">${pageId - 2}</button></a></li>
+			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 1}">${pageId - 1}</button></a></li>
+				<li><a><button type="submit" class="btn btn-default" name="pageId" value="${pageId + 0}">${pageId + 0}</button></a></li>
+				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button  type="submit"  name="pageId" value="${pageId + 1}">${pageId + 1}</button></a></li>
+				<li <c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button type="submit" name="pageId" value="${pageId + 2}">${pageId + 2}</button></a></li>
+				<li <c:if test="${pageId - 2 >= pagesCount}">disabled="disabled" </c:if>><a aria-label="Next"><button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">
-				<button type="button" class="btn btn-default">10</button>
-				<button type="button" class="btn btn-default">50</button>
-				<button type="button" class="btn btn-default">100</button>
+				<button type="submit" class="btn btn-default" name="objPerPage" value="10">10</button>
+				<button type="submit" class="btn btn-default" name="objPerPage" value="50">50</button>
+				<button type="submit" class="btn btn-default" name="objPerPage" value="100">100</button>
 			</div>
 		</div>
 	</footer>

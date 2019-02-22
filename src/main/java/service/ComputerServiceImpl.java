@@ -29,6 +29,17 @@ public class ComputerServiceImpl implements ComputerService {
 
 		return comptdao.getList();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.ComputerService#getAllComputers()
+	 */
+	@Override
+	public List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException {
+
+		return comptdao.getPageByName(pageNo, objCount, name);
+	}
 
 	/*
 	 * (non-Javadoc)

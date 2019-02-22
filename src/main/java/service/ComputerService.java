@@ -16,6 +16,8 @@ public interface ComputerService {
 	 */
 	public abstract List<Computer> getAll() throws SQLException;
 	
+	
+	
 	/**
 	 * List get computer pages
 	 * 
@@ -58,5 +60,14 @@ public interface ComputerService {
 	 * @throws SQLException 
 	 */
 	public abstract Computer detail(int id) throws SQLException;
+
+
+	/**
+	 * Gets the computers by name.
+	 *
+	 * @return researched comptuers
+	 * @throws SQLException 
+	 */
+	List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException;
 
 }

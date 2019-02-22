@@ -21,6 +21,9 @@ public class ComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private ComputerServiceImpl cmptService;
+	private int currentPage = 1;
+	private int objPerPage = 10;
+	private int pagesCount;
 	//private CompanyServiceImpl cpnyService;
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,19 +39,36 @@ public class ComputerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			//int pagesCount = (int)request.getAttribute("page");
+			try {
+				currentPage = Integer.valueOf(request.getParameter("pageId"));
+			}catch (NumberFormatException e) {
+				//currentPage = 1;
+			}
+			try {
+				objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
+			}catch (NumberFormatException e) {
+				//objPerPage = 10;
+			}
+			
+			
 			cmptService = ComputerServiceImpl.getInstance();
-			//List<Computer> pageC = cmptService.getPage(1, 20);
+			List<Computer> pageC = cmptService.getPage(currentPage,objPerPage );
 			List<Computer> allC = cmptService.getAll();
-			//pagesCount = allC.size()/20;
-			request.setAttribute("computers", allC);
+			pagesCount = allC.size()/objPerPage;
+			
+			if (currentPage  > pagesCount+ 2) {
+				currentPage = pagesCount + 2;
+			}
+			
+			request.setAttribute("computers", pageC);
 			request.setAttribute("cpNumber", allC.size());
-			//request.setAttribute("pgCount", pagesCount);
+			request.setAttribute("pageId", currentPage);
+			request.setAttribute("pagesCount",pagesCount);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}
 

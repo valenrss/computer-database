@@ -11,6 +11,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_FIND_BY_ID = "SELECT * FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
+	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE '%?%'"; 	
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
@@ -170,6 +171,36 @@ public class ComputerDAOImpl implements ComputerDAO {
 			computerDAOImpl = new ComputerDAOImpl(conn);
 		}
 		return computerDAOImpl;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.ComputerDAO#getPageByName(int, int, String)
+	 */
+	@Override
+	public List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException {
+		
+		List<Computer> cpList = new ArrayList<>();
+
+		//int minId = pageNo * objCount - objCount;
+		//int maxId = minId + objCount;
+
+		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
+
+		prep1.setString(1,name);
+
+		prep1.executeQuery();
+
+		rs = prep1.getResultSet();
+
+		while (rs.next()) {
+			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
+					rs.getTimestamp("discontinued"), rs.getInt("company_id")));
+		}
+
+		return cpList;
+
 	}
 
 }
