@@ -105,10 +105,22 @@ public class ComputerDAOImpl implements ComputerDAO {
 	@Override
 	public void update(Computer comp) throws SQLException {
 		PreparedStatement prep1 = connect.prepareStatement(SQL_UPDATE);
+		
+		
+		
 
 		prep1.setString(1, comp.getName());
-		prep1.setDate(2, (Date) comp.getDateIntroduced());
-		prep1.setDate(3, (Date) comp.getDateDiscontinued());
+		try {
+			prep1.setDate(2, new java.sql.Date(comp.getDateIntroduced().getTime()));
+		}catch (NullPointerException e) {
+			prep1.setDate(2, null);
+		}
+		try {
+			prep1.setDate(3, new java.sql.Date(comp.getDateDiscontinued().getTime()));
+		}catch (NullPointerException e) {
+			prep1.setDate(3,null);
+		}
+		
 		prep1.setInt(4, comp.getCompanyId());
 		prep1.setInt(5, comp.getId());
 

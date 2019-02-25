@@ -74,7 +74,7 @@
 					<c:forEach items="${computers}" var="c">
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb" class="cb" value="${c.id}"></td>
-							<td><a href="EditComputer" onclick=""><c:out value="${c.name}" /></a></td>
+							<td><a href="EditComputer?<c:out value="${c.id}" />" onclick=""><c:out value="${c.name}" /></a></td>
 							<td><c:out value="${c.dateIntroduced}" /></td>
 							<td><c:out value="${c.dateDiscontinued}" /></td>
 							<td><c:out value="${companies[c.companyId - 1].name}" /></td>

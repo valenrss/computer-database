@@ -1,11 +1,22 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Company;
+import model.Computer;
+import service.CompanyServiceImpl;
+import service.ComputerServiceImpl;
 
 
 /**
@@ -14,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "EditComputerServlet", urlPatterns = {"/editComputer"})
 public class EditComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private ComputerServiceImpl cmptService;
+	private CompanyServiceImpl cpnyService;
 
        
     /**
@@ -21,7 +35,8 @@ public class EditComputerServlet extends HttpServlet {
      */
     public EditComputerServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        cmptService = ComputerServiceImpl.getInstance();
+        cpnyService = CompanyServiceImpl.getInstance();
     }
 
 	/**
@@ -29,9 +44,27 @@ public class EditComputerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cpEditId = Integer.parseInt(request.getParameter("c.id"));
+		int cpEditId = Integer.parseInt(request.getQueryString());
 		
-		System.out.println("editing pc : "+cpEditId);
+		try {
+			List<Company> cpnyList = cpnyService.getAll();
+			List<Computer> allC = cmptService.getAll();
+			request.setAttribute("companies", cpnyList);
+			
+			request.setAttribute("cpEditId", cpEditId);
+			request.setAttribute("cpEdit", allC.get(cpEditId - 1));
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		this.getServletContext().getRequestDispatcher("/views/editComputer.jsp").forward(request, response);
+
+		//System.out.println("editing pc : "+cpEditId);
 		
 	}
 
@@ -39,8 +72,41 @@ public class EditComputerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		 String computerName = request.getParameter("name");
+		 String tss1 = request.getParameter("dateintroduced");
+		 String tss2 = request.getParameter("datediscontinued");
+		 int cmpnyID = Integer.parseInt(request.getParameter("companyid"));
+		 int computerId = Integer.parseInt(request.getParameter("companyid"));
+		 
+		 
+		 
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		 
+		 Date d1,d2;
+		 
+		 try {
+			d1 = dateFormat.parse(tss1);
+		} catch (ParseException e1) {
+			d1 = null;
+		}
+		 try {
+			d2 = dateFormat.parse(tss2);
+		} catch (ParseException e1) {
+			d2 = null;
+		}
+		 
+		 try {
+			cmptService.update(new Computer(computerId,computerName,d1,d2,cmpnyID));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);
+
 	}
 
 }
