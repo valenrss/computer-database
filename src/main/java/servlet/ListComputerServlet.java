@@ -10,17 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Company;
 import model.Computer;
+import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
 
 /**
  * Servlet implementation class ComputerServlet
  */
-@WebServlet(name = "ComputerServlet", urlPatterns = {"/ComputerServlet"})
-public class ComputerServlet extends HttpServlet {
+@WebServlet(name = "ListComputerServlet", urlPatterns = {"/listComputerServlet"})
+public class ListComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private ComputerServiceImpl cmptService;
+	private CompanyServiceImpl cpnyService;
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
@@ -28,9 +31,10 @@ public class ComputerServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ComputerServlet() {
+    public ListComputerServlet() {
         super();
         cmptService = ComputerServiceImpl.getInstance();
+        cpnyService = CompanyServiceImpl.getInstance();
     }
 
 	/**
@@ -54,16 +58,24 @@ public class ComputerServlet extends HttpServlet {
 			cmptService = ComputerServiceImpl.getInstance();
 			List<Computer> pageC = cmptService.getPage(currentPage,objPerPage );
 			List<Computer> allC = cmptService.getAll();
-			pagesCount = allC.size()/objPerPage;
+			pagesCount = allC.size()/objPerPage;		
+			List<Company> cpnyList = cpnyService.getAll();
+			
 			
 			if (currentPage  > pagesCount+ 2) {
 				currentPage = pagesCount + 2;
+				pageC = cmptService.getPage(currentPage,objPerPage );
+			}
+			if (currentPage < 1) {
+				currentPage = 1;
+				pageC = cmptService.getPage(currentPage,objPerPage );
 			}
 			
 			request.setAttribute("computers", pageC);
 			request.setAttribute("cpNumber", allC.size());
 			request.setAttribute("pageId", currentPage);
 			request.setAttribute("pagesCount",pagesCount);
+			request.setAttribute("companies", cpnyList);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

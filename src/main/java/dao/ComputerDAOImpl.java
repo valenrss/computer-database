@@ -11,7 +11,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_FIND_BY_ID = "SELECT * FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
-	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE '%?%'"; 	
+	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE ?"; 	
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
@@ -188,7 +188,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
 
-		prep1.setString(1,name);
+		prep1.setString(1,"%"+name+"%");
 
 		prep1.executeQuery();
 

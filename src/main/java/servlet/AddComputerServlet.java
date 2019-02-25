@@ -91,7 +91,10 @@ public class AddComputerServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		doGet(request, response);
+
+		
+		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);
+
 	}
 
 }

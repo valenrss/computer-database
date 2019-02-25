@@ -40,7 +40,7 @@
 			</div>
 		</div>
 
-		<form id="deleteForm" action="#" method="POST">
+		<form id="deleteForm" action="/Computer-Database/DeleteComputer" method="POST">
 			<input type="hidden" name="selection" value="">
 		</form>
 
@@ -73,11 +73,11 @@
 
 					<c:forEach items="${computers}" var="c">
 						<tr>
-							<td class="editMode"><input type="checkbox" name="cb" class="cb" value="<c:out value="${c.id}"/>>"></td>
-							<td><a href="editComputer.html" onclick=""><c:out value="${c.name}" /></a></td>
+							<td class="editMode"><input type="checkbox" name="cb" class="cb" value="${c.id}"></td>
+							<td><a href="EditComputer" onclick=""><c:out value="${c.name}" /></a></td>
 							<td><c:out value="${c.dateIntroduced}" /></td>
 							<td><c:out value="${c.dateDiscontinued}" /></td>
-							<td><c:out value="${c.companyId}" /></td>
+							<td><c:out value="${companies[c.companyId - 1].name}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -89,13 +89,13 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li <c:if test="${pageId < 2}">disabled="disabled" </c:if>><a  aria-label="Previous"><button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
+				<li><a  aria-label="Previous"><button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
 			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 2}">${pageId - 2}</button></a></li>
 			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 1}">${pageId - 1}</button></a></li>
 				<li><a><button type="submit" class="btn btn-default" name="pageId" value="${pageId + 0}">${pageId + 0}</button></a></li>
 				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button  type="submit"  name="pageId" value="${pageId + 1}">${pageId + 1}</button></a></li>
 				<li <c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button type="submit" name="pageId" value="${pageId + 2}">${pageId + 2}</button></a></li>
-				<li <c:if test="${pageId - 2 >= pagesCount}">disabled="disabled" </c:if>><a aria-label="Next"><button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
+				<li><a aria-label="Next"><button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">

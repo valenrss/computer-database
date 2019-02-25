@@ -1,31 +1,27 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.ComputerServiceImpl;
 
 /**
- * Servlet implementation class DeleteComputerServlet
+ * Servlet implementation class EditComputerServlet
  */
-@WebServlet(name = "DeleteComputerServlet", urlPatterns = {"/deleteComputer"})
-public class DeleteComputerServlet extends HttpServlet {
+@WebServlet(name = "EditComputerServlet", urlPatterns = {"/editComputer"})
+public class EditComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private ComputerServiceImpl cmptService;
+
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteComputerServlet() {
+    public EditComputerServlet() {
         super();
-        cmptService = ComputerServiceImpl.getInstance();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,9 +29,9 @@ public class DeleteComputerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int cpEditId = Integer.parseInt(request.getParameter("c.id"));
 		
-		
-		
+		System.out.println("editing pc : "+cpEditId);
 		
 	}
 
@@ -43,22 +39,8 @@ public class DeleteComputerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String deleteSelection = request.getParameter("selection");
-		String[] tableDelete = deleteSelection.split(",");
-		
-		for (String id : tableDelete) {
-			try {
-				cmptService.delete(Integer.parseInt(id));
-			} catch (NumberFormatException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		
-		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
