@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ComputerDAOImpl implements ComputerDAO {
 
-	private static final String SQL_FIND_BY_ID = "SELECT * FROM `computer` WHERE `id` = ?";
+	private static final String SQL_FIND_BY_ID = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
 	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE ?"; 	
@@ -195,9 +195,6 @@ public class ComputerDAOImpl implements ComputerDAO {
 		
 		List<Computer> cpList = new ArrayList<>();
 
-		//int minId = pageNo * objCount - objCount;
-		//int maxId = minId + objCount;
-
 		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
 
 		prep1.setString(1,"%"+name+"%");
@@ -214,5 +211,6 @@ public class ComputerDAOImpl implements ComputerDAO {
 		return cpList;
 
 	}
+	
 
 }

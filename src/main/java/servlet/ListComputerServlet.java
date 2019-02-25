@@ -78,9 +78,8 @@ public class ListComputerServlet extends HttpServlet {
 			request.setAttribute("companies", cpnyList);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}
 

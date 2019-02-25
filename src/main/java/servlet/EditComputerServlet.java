@@ -48,11 +48,10 @@ public class EditComputerServlet extends HttpServlet {
 		
 		try {
 			List<Company> cpnyList = cpnyService.getAll();
-			List<Computer> allC = cmptService.getAll();
 			request.setAttribute("companies", cpnyList);
 			
 			request.setAttribute("cpEditId", cpEditId);
-			request.setAttribute("cpEdit", allC.get(cpEditId - 1));
+			request.setAttribute("cpEdit", cmptService.detail(cpEditId));
 			
 		} catch (SQLException e) {
 			
