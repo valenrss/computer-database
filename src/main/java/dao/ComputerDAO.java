@@ -7,31 +7,29 @@ import model.Computer;
 
 public interface ComputerDAO {
 
-	
-
 	/**
 	 * List getter
 	 * 
 	 * @return Computer List
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public List<Computer> getList() throws SQLException;
-	
+
 	/**
 	 * List get computer pages
 	 * 
 	 * @param int pageNo, int objCount
 	 * @return Computer List
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract List<Computer> getPage(int pageNo, int objCount) throws SQLException;
-	
+
 	/**
 	 * List get computer pages
 	 * 
 	 * @param int pageNo, int objCount , String name
 	 * @return Computer List
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException;
 
@@ -40,7 +38,7 @@ public interface ComputerDAO {
 	 * 
 	 * @param obj
 	 * @return boolean
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract void create(Computer comp) throws SQLException;
 
@@ -49,7 +47,7 @@ public interface ComputerDAO {
 	 * 
 	 * @param id
 	 * @return boolean
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract boolean delete(int id) throws SQLException;
 
@@ -58,7 +56,7 @@ public interface ComputerDAO {
 	 * 
 	 * @param obj
 	 * @return boolean
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract void update(Computer comp) throws SQLException;
 
@@ -67,9 +65,8 @@ public interface ComputerDAO {
 	 * 
 	 * @param id
 	 * @return T
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public abstract Computer find(int id) throws SQLException;
-	
 
 }

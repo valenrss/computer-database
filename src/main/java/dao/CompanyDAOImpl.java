@@ -9,17 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CompanyDAOImpl implements CompanyDAO {
 
 	private static final String SQL_GET_BY_ID = "SELECT `id`,`name` FROM `company` WHERE id = ?";
-
 	private static final String SQL_LIST_ALL = "SELECT `id`,`name` FROM `company`";
-
 	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id < ?";
 
 	private Connection connect = null;
-	
 	private static CompanyDAOImpl companyDAOImpl;
 
 	/**
@@ -53,7 +49,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 		return compList;
 
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -73,7 +68,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 		prep1.setInt(2, maxId);
 
 		prep1.executeQuery();
-		
+
 		ResultSet rs = prep1.getResultSet();
 
 		while (rs.next()) {
@@ -82,34 +77,31 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 		return cnyList;
 	}
-	
+
 	@Override
 	public Company getById(int id) throws SQLException {
-		
+
 		Company cmp;
-		
-		if (id != 0 ) {
+
+		if (id != 0) {
 			PreparedStatement prep2 = connect.prepareStatement(SQL_GET_BY_ID);
-			prep2.setString(1, id+"");
+			prep2.setString(1, id + "");
 			prep2.executeQuery();
 			ResultSet rs = prep2.getResultSet();
-			
+
 			if (rs.next()) {
 				cmp = new Company(rs.getInt("id"), rs.getString("name"));
 				return cmp;
-			}else {
+			} else {
 				return new Company(0, "-");
 			}
 
 		} else {
 			return new Company(0, "-");
 		}
-		
-		
-		
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param conn
@@ -121,8 +113,5 @@ public class CompanyDAOImpl implements CompanyDAO {
 		}
 		return companyDAOImpl;
 	}
-
-
-	
 
 }

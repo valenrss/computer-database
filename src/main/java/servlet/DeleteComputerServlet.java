@@ -14,39 +14,39 @@ import service.ComputerServiceImpl;
 /**
  * Servlet implementation class DeleteComputerServlet
  */
-@WebServlet(name = "DeleteComputerServlet", urlPatterns = {"/deleteComputer"})
+@WebServlet(name = "DeleteComputerServlet", urlPatterns = { "/deleteComputer" })
 public class DeleteComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private ComputerServiceImpl cmptService;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteComputerServlet() {
-        super();
-        cmptService = ComputerServiceImpl.getInstance();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		
-		
+	public DeleteComputerServlet() {
+		super();
+		cmptService = ComputerServiceImpl.getInstance();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String deleteSelection = request.getParameter("selection");
 		String[] tableDelete = deleteSelection.split(",");
-		
+
 		for (String id : tableDelete) {
 			try {
 				cmptService.delete(Integer.parseInt(id));
@@ -54,9 +54,9 @@ public class DeleteComputerServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);
 
 	}

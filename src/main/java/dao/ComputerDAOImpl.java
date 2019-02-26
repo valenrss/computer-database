@@ -12,7 +12,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_FIND_BY_ID = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
-	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE ?"; 	
+	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE ?";
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
@@ -38,12 +38,11 @@ public class ComputerDAOImpl implements ComputerDAO {
 		PreparedStatement prep = connect.prepareStatement(SQL_GETLIST);
 		prep.executeQuery();
 		ResultSet rs = prep.getResultSet();
-		
-		
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id"))));
+					rs.getTimestamp("discontinued"),
+					CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
@@ -61,19 +60,18 @@ public class ComputerDAOImpl implements ComputerDAO {
 		PreparedStatement prep1 = connect.prepareStatement(SQL_CREATE);
 
 		prep1.setString(1, comp.getName());
-		
+
 		try {
 			prep1.setDate(2, new java.sql.Date(comp.getDateIntroduced().getTime()));
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			prep1.setDate(2, null);
 		}
 		try {
 			prep1.setDate(3, new java.sql.Date(comp.getDateDiscontinued().getTime()));
-		}catch (NullPointerException e) {
-			prep1.setDate(3,null);
+		} catch (NullPointerException e) {
+			prep1.setDate(3, null);
 		}
-		
-		
+
 		prep1.setInt(4, comp.getCompany().getId());
 
 		prep1.executeUpdate();
@@ -108,22 +106,19 @@ public class ComputerDAOImpl implements ComputerDAO {
 	@Override
 	public void update(Computer comp) throws SQLException {
 		PreparedStatement prep1 = connect.prepareStatement(SQL_UPDATE);
-		
-		
-		
 
 		prep1.setString(1, comp.getName());
 		try {
 			prep1.setDate(2, new java.sql.Date(comp.getDateIntroduced().getTime()));
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			prep1.setDate(2, null);
 		}
 		try {
 			prep1.setDate(3, new java.sql.Date(comp.getDateDiscontinued().getTime()));
-		}catch (NullPointerException e) {
-			prep1.setDate(3,null);
+		} catch (NullPointerException e) {
+			prep1.setDate(3, null);
 		}
-		
+
 		prep1.setInt(4, comp.getCompany().getId());
 		prep1.setInt(5, comp.getId());
 
@@ -147,7 +142,8 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		if (result.first())
 			comp = new Computer(id, result.getString("name"), result.getTimestamp("introduced"),
-					result.getTimestamp("discontinued"), CompanyServiceImpl.getInstance().getById(result.getInt("company_id")));
+					result.getTimestamp("discontinued"),
+					CompanyServiceImpl.getInstance().getById(result.getInt("company_id")));
 		return comp;
 	}
 
@@ -174,7 +170,8 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), CompanyServiceImpl.getInstance().getById(rs.getInt("company_id"))));
+					rs.getTimestamp("discontinued"),
+					CompanyServiceImpl.getInstance().getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
@@ -195,12 +192,12 @@ public class ComputerDAOImpl implements ComputerDAO {
 	 */
 	@Override
 	public List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException {
-		
+
 		List<Computer> cpList = new ArrayList<>();
 
 		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
 
-		prep1.setString(1,"%"+name+"%");
+		prep1.setString(1, "%" + name + "%");
 
 		prep1.executeQuery();
 
@@ -208,12 +205,12 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id"))));
+					rs.getTimestamp("discontinued"),
+					CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
 
 	}
-	
 
 }

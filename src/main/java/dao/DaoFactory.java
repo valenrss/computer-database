@@ -24,11 +24,11 @@ public class DaoFactory {
 	private DaoFactory() {
 
 		try {
-			Driver monDriver = new com.mysql.jdbc.Driver(); 
+			Driver monDriver = new com.mysql.jdbc.Driver();
 			DriverManager.registerDriver(monDriver);
-			connect = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		} catch (SQLException e) {
-			System.out.println("Could not initialize DaoFactory : "+e);
+			System.out.println("Could not initialize DaoFactory : " + e);
 		}
 
 	}
@@ -57,6 +57,5 @@ public class DaoFactory {
 		}
 		return factoryInstace;
 	}
-	
 
 }

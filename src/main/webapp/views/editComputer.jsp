@@ -1,4 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,20 +35,29 @@
                             </div>
                             <div class="form-group">
                                 <label for="introduced">Introduced date</label>
-                                <input type="date" class="form-control" id="introduced" name = "dateintroduced" value="${cpEdit.dateIntroduced}">
+                                <input type="date" class="form-control" id="introduced" name = "dateintroduced" value="${fn:substringBefore(cpEdit.dateIntroduced," 00:00:00.0")}">
                             </div>
                             <div class="form-group">
                                 <label for="discontinued">Discontinued date</label>
-                                <input type="date" class="form-control" id="discontinued" name = "datediscontinued" value="${cpEdit.dateDiscontinued}">
+                                <input type="date" class="form-control" id="discontinued" name = "datediscontinued" value="${fn:substringBefore(cpEdit.dateDiscontinued," 00:00:00.0")}">
                             </div>
                             <div class="form-group">
                                 <label for="companyId">Company</label>
-                                <select class="form-control" id="companyId" name="companyid" >
-                                    <c:forEach items="${companies}" var="c">
-                                    	<option value="${c.id}" selected="${cpEdit.company.id}"><c:out value="${c.name}" /></option>
-                                    </c:forEach>
-                                </select>
-                            </div>            
+								<select class="form-control" id="companyId" name="companyid">
+									<c:forEach items="${companies}" var="c">
+										<c:choose>
+											<c:when test="${c.id == cpEdit.company.id}">
+												<option value="${c.id = cpEdit.company.id}"
+													selected="selected"><c:out
+														value="${c.name = cpEdit.company.name}" /></option>
+											</c:when>
+											<c:otherwise>
+												<option value="${c.id}"><c:out value="${c.name}" /></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</select>
+							</div>            
                         </fieldset>
                         <div class="actions pull-right">
                             <input type="submit" value="Edit" class="btn btn-primary">

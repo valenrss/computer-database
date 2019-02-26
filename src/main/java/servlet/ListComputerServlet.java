@@ -18,65 +18,68 @@ import service.ComputerServiceImpl;
 /**
  * Servlet implementation class ComputerServlet
  */
-@WebServlet(name = "ListComputerServlet", urlPatterns = {"/listComputerServlet"})
+@WebServlet(name = "ListComputerServlet", urlPatterns = { "/listComputerServlet" })
 public class ListComputerServlet extends HttpServlet {
+	
+	private static final int FIRST_PAGE = 1;
+	private static final int PAGE_OFFSET = 2;
 	private static final long serialVersionUID = 1L;
-       
+
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
-	//private CompanyServiceImpl cpnyService;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListComputerServlet() {
-        super();
-        cmptService = ComputerServiceImpl.getInstance();
-        cpnyService = CompanyServiceImpl.getInstance();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public ListComputerServlet() {
+		super();
+		cmptService = ComputerServiceImpl.getInstance();
+		cpnyService = CompanyServiceImpl.getInstance();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		try {
 			try {
 				currentPage = Integer.valueOf(request.getParameter("pageId"));
-			}catch (NumberFormatException e) {
-				//currentPage = 1;
+			} catch (NumberFormatException e) {
+				// currentPage = 1;
 			}
 			try {
 				objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
-			}catch (NumberFormatException e) {
-				//objPerPage = 10;
+			} catch (NumberFormatException e) {
+				// objPerPage = 10;
 			}
-			
-			
+
 			cmptService = ComputerServiceImpl.getInstance();
-			List<Computer> pageC = cmptService.getPage(currentPage,objPerPage );
+			List<Computer> pageC = cmptService.getPage(currentPage, objPerPage);
 			List<Computer> allC = cmptService.getAll();
-			pagesCount = allC.size()/objPerPage;		
+			pagesCount = allC.size() / objPerPage;
 			List<Company> cpnyList = cpnyService.getAll();
-			
-			
-			if (currentPage  > pagesCount+ 2) {
-				currentPage = pagesCount + 2;
-				pageC = cmptService.getPage(currentPage,objPerPage );
+
+			if (currentPage > pagesCount + PAGE_OFFSET) {
+				currentPage = pagesCount + PAGE_OFFSET;
+				pageC = cmptService.getPage(currentPage, objPerPage);
 			}
-			if (currentPage < 1) {
-				currentPage = 1;
-				pageC = cmptService.getPage(currentPage,objPerPage );
+			if (currentPage < FIRST_PAGE) {
+				currentPage = FIRST_PAGE;
+				pageC = cmptService.getPage(currentPage, objPerPage);
 			}
-			
+
 			request.setAttribute("computers", pageC);
 			request.setAttribute("cpNumber", allC.size());
 			request.setAttribute("pageId", currentPage);
-			request.setAttribute("pagesCount",pagesCount);
+			request.setAttribute("pagesCount", pagesCount);
 			request.setAttribute("companies", cpnyList);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -84,11 +87,13 @@ public class ListComputerServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Add a computer
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Add a computer
 
 		doGet(request, response);
 	}

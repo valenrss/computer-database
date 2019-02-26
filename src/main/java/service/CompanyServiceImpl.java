@@ -11,7 +11,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	private DaoFactory fact;
 	private CompanyDAOImpl cnydao;
-	
+
 	private static CompanyServiceImpl companyServiceImpl;
 
 	/**
@@ -32,7 +32,27 @@ public class CompanyServiceImpl implements CompanyService {
 
 		return cnydao.getList();
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.CompanyService#getPage()
+	 */
+	@Override
+	public List<Company> getPage(int pageNo, int objCount) throws SQLException {
+
+		return cnydao.getPage(pageNo, objCount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.CompanyService#getById()
+	 */
+	@Override
+	public Company getById(int id) throws SQLException {
+		return cnydao.getById(id);
+	}
 
 	public static CompanyServiceImpl getInstance() {
 		if (companyServiceImpl == null) {
@@ -40,16 +60,5 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return companyServiceImpl;
 	}
-
-	public List<Company> getPage(int pageNo, int objCount) throws SQLException{
-		
-		return cnydao.getPage(pageNo,objCount);
-	}
-	
-	public Company getById(int id) throws SQLException {
-		return cnydao.getById(id);
-	}
-	
-	
 
 }
