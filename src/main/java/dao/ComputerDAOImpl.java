@@ -1,6 +1,7 @@
 package dao;
 
 import model.Computer;
+import service.CompanyServiceImpl;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -146,7 +147,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		if (result.first())
 			comp = new Computer(id, result.getString("name"), result.getTimestamp("introduced"),
-					result.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id")));
+					result.getTimestamp("discontinued"), CompanyServiceImpl.getInstance().getById(result.getInt("company_id")));
 		return comp;
 	}
 
@@ -173,7 +174,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
+					rs.getTimestamp("discontinued"), CompanyServiceImpl.getInstance().getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
