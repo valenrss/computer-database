@@ -46,6 +46,10 @@ public class CompanyServiceImpl implements CompanyService {
 		return cnydao.getPage(pageNo,objCount);
 	}
 	
+	public Company getById(int id) throws SQLException {
+		return cnydao.getById(id);
+	}
+	
 	
 
 }

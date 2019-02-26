@@ -85,7 +85,7 @@ public class AddComputerServlet extends HttpServlet {
 		}
 		 
 		 try {
-			cmptService.add(new Computer(DEFAULT_COMPUTER_ID,computerName,d1,d2,cmpnyID));
+			cmptService.add(new Computer(DEFAULT_COMPUTER_ID,computerName,d1,d2,cpnyService.getById(cmpnyID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

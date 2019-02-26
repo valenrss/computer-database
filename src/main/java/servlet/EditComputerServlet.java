@@ -76,7 +76,7 @@ public class EditComputerServlet extends HttpServlet {
 		 String tss1 = request.getParameter("dateintroduced");
 		 String tss2 = request.getParameter("datediscontinued");
 		 int cmpnyID = Integer.parseInt(request.getParameter("companyid"));
-		 int computerId = Integer.parseInt(request.getParameter("companyid"));
+		 int computerId = Integer.parseInt(request.getParameter("cpEditId"));
 		 
 		 
 		 
@@ -96,7 +96,7 @@ public class EditComputerServlet extends HttpServlet {
 		}
 		 
 		 try {
-			cmptService.update(new Computer(computerId,computerName,d1,d2,cmpnyID));
+			cmptService.update(new Computer(computerId,computerName,d1,d2,cpnyService.getById(cmpnyID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

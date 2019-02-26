@@ -37,10 +37,12 @@ public class ComputerDAOImpl implements ComputerDAO {
 		PreparedStatement prep = connect.prepareStatement(SQL_GETLIST);
 		prep.executeQuery();
 		ResultSet rs = prep.getResultSet();
+		
+		
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), rs.getInt("company_id")));
+					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
@@ -71,7 +73,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 		}
 		
 		
-		prep1.setInt(4, comp.getCompanyId());
+		prep1.setInt(4, comp.getCompany().getId());
 
 		prep1.executeUpdate();
 
@@ -121,7 +123,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			prep1.setDate(3,null);
 		}
 		
-		prep1.setInt(4, comp.getCompanyId());
+		prep1.setInt(4, comp.getCompany().getId());
 		prep1.setInt(5, comp.getId());
 
 		prep1.executeUpdate();
@@ -144,7 +146,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		if (result.first())
 			comp = new Computer(id, result.getString("name"), result.getTimestamp("introduced"),
-					result.getTimestamp("discontinued"), result.getInt("company_id"));
+					result.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id")));
 		return comp;
 	}
 
@@ -171,7 +173,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), rs.getInt("company_id")));
+					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;
@@ -205,7 +207,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		while (rs.next()) {
 			cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
-					rs.getTimestamp("discontinued"), rs.getInt("company_id")));
+					rs.getTimestamp("discontinued"), CompanyDAOImpl.getInstance(connect) .getById(rs.getInt("company_id"))));
 		}
 
 		return cpList;

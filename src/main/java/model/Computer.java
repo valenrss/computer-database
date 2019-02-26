@@ -10,7 +10,7 @@ public class Computer {
 	private String Name;
 	private Date DateIntroduced;
 	private Date DateDiscontinued;
-	private int CompanyId;
+	private Company Company;
 
 	/*
 	 * Instantiates a new computer.
@@ -49,13 +49,13 @@ public class Computer {
 	 * @param dateDiscontinued the date discontinued
 	 * @param companyId the company id
 	 */
-	public Computer(int id, String name, Date dateIntroduced, Date dateDiscontinued, int companyId) {
+	public Computer(int id, String name, Date dateIntroduced, Date dateDiscontinued, Company company) {
 
 		Id = id;
 		Name = name;
 		DateIntroduced = dateIntroduced;
 		DateDiscontinued = dateDiscontinued;
-		CompanyId = companyId;
+		Company = company;
 
 	}
 
@@ -136,8 +136,8 @@ public class Computer {
 	 *
 	 * @return the company id
 	 */
-	public int getCompanyId() {
-		return CompanyId;
+	public Company getCompany() {
+		return Company;
 	}
 
 	/**
@@ -145,8 +145,8 @@ public class Computer {
 	 *
 	 * @param companyId the new company id
 	 */
-	public void setCompanyId(int companyId) {
-		CompanyId = companyId;
+	public void setCompany(Company company) {
+		Company = company;
 	}
 
 	/* (non-Javadoc)
@@ -155,7 +155,7 @@ public class Computer {
 	@Override
 	public String toString() {
 		return "\nComputer Id : " + Id + "\nName : " + Name + "\nDate Introduced : " + DateIntroduced
-				+ "\nDate Discontinued : " + DateDiscontinued + "\nCompany Id : " + CompanyId + "\n";
+				+ "\nDate Discontinued : " + DateDiscontinued + "\nCompany Id : " + Company.getId() + "\n";
 	}
 	
 	/* (non-Javadoc)
@@ -172,7 +172,7 @@ public class Computer {
         return  Objects.equals(Name, cmpt.getName()) &&
                 Objects.equals(DateIntroduced, cmpt.getDateIntroduced()) &&
                 Objects.equals(DateDiscontinued, cmpt.getDateDiscontinued()) &&
-                Objects.equals(CompanyId, cmpt.getCompanyId());
+                Objects.equals(Company, cmpt.getCompany());
     }
 
     /* (non-Javadoc)
@@ -180,7 +180,7 @@ public class Computer {
 	 */
     @Override
     public int hashCode() {
-        return Objects.hash(Name, DateIntroduced, DateDiscontinued,CompanyId);
+        return Objects.hash(Name, DateIntroduced, DateDiscontinued,Company.getId());
     }
 
 }

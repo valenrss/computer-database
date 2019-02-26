@@ -280,7 +280,7 @@ public class Controller {
 				args[5] = "1";
 			}
 
-			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2, Integer.parseInt(args[5]));
+			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2, cpnyService.getById(Integer.parseInt(args[5])));
 			cmptService.add(cpInsert);
 			view.computer(cpInsert);
 			view.computerAddSuccess();
@@ -322,7 +322,7 @@ public class Controller {
 				args[5] = "1";
 			}
 
-			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2, Integer.parseInt(args[6]));
+			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,  cpnyService.getById(Integer.parseInt(args[6])));
 			cmptService.update(cpInsert);
 			view.computer(cpInsert);
 			view.computerUpdateSuccess();

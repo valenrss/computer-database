@@ -25,7 +25,7 @@
                     <h1>Edit Computer</h1>
 
                     <form action="/Computer-Database/EditComputer" method="POST">
-                        <input type="hidden" value="${cpEditId}" id="id" name = "id"/> 
+                        <input type="hidden" value="${cpEditId}" id="id" name = "cpEditId"/> 
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name</label>
