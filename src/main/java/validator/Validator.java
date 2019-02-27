@@ -7,10 +7,6 @@ public class Validator {
 	
 	private static Validator validatorInstance;
 
-	public Validator() {
-		
-	}
-	
 	public void checkDate(Date dateIntroduced,Date dateDiscontinued) throws DateOrderException {
 		
 		if (dateIntroduced.after(dateDiscontinued)) {

@@ -5,8 +5,10 @@ public class CompanyDTO {
 	private String ID;
 	private String Name;
 
-	public CompanyDTO() {
+	public CompanyDTO(String id, String name) {
 		
+		ID = id;
+		Name = name;
 	}
 
 	public String getName() {

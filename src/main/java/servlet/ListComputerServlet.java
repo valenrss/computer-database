@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Company;
-import model.Computer;
+import dto.CompanyDTO;
+import dto.ComputerDTO;
+import dto.Mapper;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
 
@@ -30,6 +31,7 @@ public class ListComputerServlet extends HttpServlet {
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
+	private Mapper mapper;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,6 +40,7 @@ public class ListComputerServlet extends HttpServlet {
 		super();
 		cmptService = ComputerServiceImpl.getInstance();
 		cpnyService = CompanyServiceImpl.getInstance();
+		mapper = Mapper.getInstance();
 	}
 
 	/**
@@ -60,18 +63,18 @@ public class ListComputerServlet extends HttpServlet {
 			}
 
 			cmptService = ComputerServiceImpl.getInstance();
-			List<Computer> pageC = cmptService.getPage(currentPage, objPerPage);
-			List<Computer> allC = cmptService.getAll();
+			List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
+			List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getAll());
 			pagesCount = allC.size() / objPerPage;
-			List<Company> cpnyList = cpnyService.getAll();
+			List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
 
 			if (currentPage > pagesCount + PAGE_OFFSET) {
 				currentPage = pagesCount + PAGE_OFFSET;
-				pageC = cmptService.getPage(currentPage, objPerPage);
+				pageC =  mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
 			}
 			if (currentPage < FIRST_PAGE) {
 				currentPage = FIRST_PAGE;
-				pageC = cmptService.getPage(currentPage, objPerPage);
+				pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
 			}
 
 			request.setAttribute("computers", pageC);
