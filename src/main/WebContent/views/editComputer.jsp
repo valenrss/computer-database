@@ -31,7 +31,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name</label>
-                                <input type="text" class="form-control" id="computerName" name = "name" value="${cpEdit.name}">
+                                <input type="text" class="form-control" id="computerName" name = "name" value="${cpEdit.name}" required>
                             </div>
                             <div class="form-group">
                                 <label for="introduced">Introduced date</label>
