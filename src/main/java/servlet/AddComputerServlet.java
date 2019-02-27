@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exception.DateOrderException;
 import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
+import validator.Validator;
 
 /**
  * Servlet implementation class AddComputerServlet
@@ -87,10 +89,13 @@ public class AddComputerServlet extends HttpServlet {
 		}
 
 		try {
+			Validator.getInstance().checkDate(d1, d2);
 			cmptService.add(new Computer(DEFAULT_COMPUTER_ID, computerName, d1, d2, cpnyService.getById(cmpnyID)));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			//TODO gerer excepption avec page d'erreur
 			e.printStackTrace();
+		} catch (DateOrderException e) {
+			
 		}
 
 		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);

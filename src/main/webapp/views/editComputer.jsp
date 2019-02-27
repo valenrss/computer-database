@@ -35,11 +35,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="introduced">Introduced date</label>
-                                <input type="date" class="form-control" id="introduced" name = "dateintroduced" value="${fn:substringBefore(cpEdit.dateIntroduced," 00:00:00.0")}">
+                                <input type="date" class="form-control" id="introduced" name = "dateintroduced" value='${fn:substringBefore(cpEdit.dateIntroduced," 00:00:00.0")}'>
                             </div>
                             <div class="form-group">
                                 <label for="discontinued">Discontinued date</label>
-                                <input type="date" class="form-control" id="discontinued" name = "datediscontinued" value="${fn:substringBefore(cpEdit.dateDiscontinued," 00:00:00.0")}">
+                                <input type="date" class="form-control" id="discontinued" name = "datediscontinued" value='${fn:substringBefore(cpEdit.dateDiscontinued," 00:00:00.0")}'>
                             </div>
                             <div class="form-group">
                                 <label for="companyId">Company</label>
