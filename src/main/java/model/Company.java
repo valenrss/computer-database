@@ -72,4 +72,9 @@ public class Company {
 		Name = name;
 	}
 
+	public int compareTo(Company company) {
+		
+		return Integer.valueOf(Id).compareTo(company.getId());
+	}
+
 }

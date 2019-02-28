@@ -45,22 +45,29 @@
 		</form>
 
 		<div class="container" style="margin-top: 10px;">
+			<form id="changePage" action="/Computer-Database/Dashboard" method="GET">
+		
 			<table class="table table-striped table-bordered">
 				<thead>
+					
 					<tr>
 						<!-- Variable declarations for passing labels as parameters -->
 						<!-- Table header for Computer Name -->
 
-						<th class="editMode" style="width: 60px; height: 22px;"><input type="checkbox" id="selectall" /> <span style="vertical-align: top;"> - <a href="#" id="deleteSelected" onclick="$.fn.deleteSelected();"> <i class="fa fa-trash-o fa-lg"></i></a>
+						<th class="editMode" style="width: 60px; height: 22px;"><input
+							type="checkbox" id="selectall" /> <span
+							style="vertical-align: top;"> - <a href="#"
+								id="deleteSelected" onclick="$.fn.deleteSelected();"> <i
+									class="fa fa-trash-o fa-lg"></i></a>
 						</span></th>
-						<th>Computer name</th>							
-						<th>Introduced date</th>
-						<!-- Table header for Discontinued Date -->
-						<th>Discontinued date</th>
-						<!-- Table header for Company -->
-						<th>Company</th>
+						
+						<th>Computer name<button type="submit" class="btn btn-default" name="sortOption" value="name">sort</button></th>
+						<th>Introduction Date<button type="submit" class="btn btn-default" name="sortOption" value="introdate">sort</button></th>
+						<th>Discontinuation Date<button type="submit" class="btn btn-default" name="sortOption" value="discondate">sort</button></th>
+						<th>Company<button type="submit" class="btn btn-default" name="sortOption" value="company">sort</button></th>
 
 					</tr>
+					
 				</thead>
 				<!-- Browse attribute -->
 
@@ -68,8 +75,10 @@
 
 					<c:forEach items="${computers}" var="c">
 						<tr>
-							<td class="editMode"><input type="checkbox" name="cb" class="cb" value="${c.id}"></td>
-							<td><a href="EditComputer?<c:out value="${c.id}" />" onclick=""><c:out value="${c.name}" /></a></td>
+							<td class="editMode"><input type="checkbox" name="cb"
+								class="cb" value="${c.id}"></td>
+							<td><a href="EditComputer?<c:out value="${c.id}" />"
+								onclick=""><c:out value="${c.name}" /></a></td>
 							<td><c:out value="${c.dateIntroduced}" /></td>
 							<td><c:out value="${c.dateDiscontinued}" /></td>
 							<td><c:out value="${c.companyName}" /></td>
@@ -77,6 +86,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</form>	
 		</div>
 	</section>
 

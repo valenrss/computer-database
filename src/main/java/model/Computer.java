@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-public class Computer {
+public class Computer  {
 
 	private int Id;
 	private String Name;
@@ -161,5 +161,8 @@ public class Computer {
 	public int hashCode() {
 		return Objects.hash(Name, DateIntroduced, DateDiscontinued, Company.getId());
 	}
+
+	
+	
 
 }

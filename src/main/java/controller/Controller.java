@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -181,13 +180,9 @@ public class Controller {
 		view.computersListHeader();
 		List<Computer> cpList;
 
-		try {
-			cpList = cmptService.getAll();
-			for (Computer comp : cpList) {
-				view.computer(comp);
-			}
-		} catch (SQLException e) {
-			view.sqlError(e);
+		cpList = cmptService.getAll();
+		for (Computer comp : cpList) {
+			view.computer(comp);
 		}
 
 	}
@@ -198,13 +193,10 @@ public class Controller {
 	public void listCompanies() {
 		view.companiesListHeader();
 		List<Company> cnyList;
-		try {
-			cnyList = cpnyService.getAll();
-			for (Company comp : cnyList) {
-				view.company(comp);
-			}
-		} catch (SQLException e) {
-			view.sqlError(e);
+
+		cnyList = cpnyService.getAll();
+		for (Company comp : cnyList) {
+			view.company(comp);
 		}
 
 		// cnyList.stream().forEach(System.out::println);
@@ -228,8 +220,6 @@ public class Controller {
 			}
 		} catch (NumberFormatException e) {
 			view.pageUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 
 	}
@@ -252,8 +242,6 @@ public class Controller {
 			}
 		} catch (NumberFormatException e) {
 			view.pageUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 	}
 
@@ -280,7 +268,8 @@ public class Controller {
 				args[5] = "1";
 			}
 
-			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2, cpnyService.getById(Integer.parseInt(args[5])));
+			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2,
+					cpnyService.getById(Integer.parseInt(args[5])));
 			cmptService.add(cpInsert);
 			view.computer(cpInsert);
 			view.computerAddSuccess();
@@ -294,8 +283,6 @@ public class Controller {
 			view.computerCreateUsage();
 		} catch (NullPointerException e) {
 			view.computerCreateUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 	}
 
@@ -322,7 +309,8 @@ public class Controller {
 				args[5] = "1";
 			}
 
-			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,  cpnyService.getById(Integer.parseInt(args[6])));
+			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,
+					cpnyService.getById(Integer.parseInt(args[6])));
 			cmptService.update(cpInsert);
 			view.computer(cpInsert);
 			view.computerUpdateSuccess();
@@ -334,8 +322,6 @@ public class Controller {
 				view.dateFormat();
 			}
 			view.computerUpdateUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 	}
 
@@ -356,8 +342,6 @@ public class Controller {
 		} catch (NumberFormatException e) {
 			view.idFormat();
 			view.computerDeleteUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 
 	}
@@ -372,17 +356,15 @@ public class Controller {
 			Computer compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
 			if (compIdSearch != null) {
 				view.computer(compIdSearch);
-			}else {
+			} else {
 				view.computerDetailFail(args[2]);
 			}
-			
+
 		} catch (NullPointerException e) {
 			view.computerDetailFail(args[2]);
 		} catch (NumberFormatException e) {
 			view.idFormat();
 			view.computerDetailUsage();
-		} catch (SQLException e) {
-			view.sqlError(e);
 		}
 	}
 }

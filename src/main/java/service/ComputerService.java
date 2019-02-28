@@ -1,9 +1,9 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import model.Computer;
+import model.SortOptions;
 
 public interface ComputerService {
 
@@ -11,16 +11,15 @@ public interface ComputerService {
 	 * Gets all the computers.
 	 *
 	 * @return all computers
-	 * @throws SQLException
 	 */
 	public abstract List<Computer> getAll();
 
 	/**
-	 * List get computer pages
-	 * 
-	 * @param int pageNo, int objCount
+	 * List get computer pages.
+	 *
+	 * @param pageNo the page no
+	 * @param objCount the obj count
 	 * @return Computer List
-	 * @throws SQLException
 	 */
 	public abstract List<Computer> getPage(int pageNo, int objCount);
 
@@ -28,7 +27,6 @@ public interface ComputerService {
 	 * Adds the computer.
 	 *
 	 * @param cpInsert the cp insert
-	 * @throws SQLException
 	 */
 	public abstract void add(Computer cpInsert);
 
@@ -36,7 +34,6 @@ public interface ComputerService {
 	 * Update computer.
 	 *
 	 * @param cpInsert the cp insert
-	 * @throws SQLException
 	 */
 	public abstract void update(Computer cpInsert);
 
@@ -45,7 +42,6 @@ public interface ComputerService {
 	 *
 	 * @param id the id
 	 * @return true, if successful
-	 * @throws SQLException
 	 */
 	public abstract boolean delete(int id);
 
@@ -54,15 +50,25 @@ public interface ComputerService {
 	 *
 	 * @param id the id
 	 * @return the computer
-	 * @throws SQLException
 	 */
 	public abstract Computer detail(int id);
+	
+	/**
+	 * Compare by.
+	 *
+	 * @param cList the c list
+	 * @param option the option
+	 * @return the list
+	 */
+	public List<Computer> compareBy(List<Computer> cList, SortOptions option);
 
 	/**
 	 * Gets the computers by name.
 	 *
+	 * @param pageNo the page no
+	 * @param objCount the obj count
+	 * @param name the name
 	 * @return researched comptuers
-	 * @throws SQLException
 	 */
 	List<Computer> getPageByName(int pageNo, int objCount, String name);
 

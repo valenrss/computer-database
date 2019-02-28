@@ -5,6 +5,7 @@ import java.util.List;
 import dao.ComputerDAOImpl;
 import dao.DaoFactory;
 import model.Computer;
+import model.SortOptions;
 
 public class ComputerServiceImpl implements ComputerService {
 
@@ -94,11 +95,42 @@ public class ComputerServiceImpl implements ComputerService {
 		return comptdao.getPage(pageNo, objCount);
 	}
 
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.ComputerService#compareBy
+	 */
+	@Override
+	public List<Computer> compareBy(List<Computer> cList, SortOptions option) {
+		
+		
+		switch (option) {
+		case NAME:
+			cList.sort((Computer p1, Computer p2) -> p1.getName().compareTo(p2.getName()));
+			return cList;
+		case DATEINTRODUCED:
+			cList.sort((Computer p1, Computer p2) -> p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
+			return cList;
+		case DATEDISCONTINUED:
+			cList.sort((Computer p1, Computer p2) -> p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
+			return cList;
+		case COMPANY:
+			cList.sort((Computer p1, Computer p2) -> p1.getCompany().compareTo(p2.getCompany()));
+			return cList;
+		default:
+			cList.sort((Computer p1, Computer p2) -> Integer.valueOf(p1.getId()).compareTo(p2.getId()));
+			return cList;
+		}
+		
+	}
+	
+	
 	public static ComputerServiceImpl getInstance() {
 		if (computerServiceImpl == null) {
 			computerServiceImpl = new ComputerServiceImpl();
 		}
 		return computerServiceImpl;
 	}
-
+	
 }

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import dto.CompanyDTO;
 import dto.ComputerDTO;
 import dto.Mapper;
+import model.Computer;
+import model.SortOptions;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
 
@@ -31,6 +33,7 @@ public class ListComputerServlet extends HttpServlet {
 	private int objPerPage = 10;
 	private int pagesCount;
 	private Mapper mapper;
+	private String sortOption;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -58,9 +61,42 @@ public class ListComputerServlet extends HttpServlet {
 			objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
 		} catch (NumberFormatException e) {
 			// objPerPage = 10;
+		}try {
+			
+			sortOption = request.getParameter("sortOption");
+			
+		}catch (NullPointerException e) {
+			
 		}
-
-		List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
+		
+		List<Computer> pageComputer = cmptService.getPage(currentPage, objPerPage);
+		List<Computer> pageComputerSorted;
+		
+		
+		if (sortOption != null) {
+			switch (sortOption) {
+			case "name":
+				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.NAME);
+				break;
+			case "introdate":
+				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.DATEINTRODUCED);
+				break;
+			case "discondate":
+				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.DATEDISCONTINUED);
+				break;
+			case "company":
+				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.COMPANY);
+				break;
+			default:
+				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.ID);
+				break;
+			}
+		}else {
+			pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.ID);
+		}
+		
+		
+		List<ComputerDTO> pageC = mapper.mapListComputer(pageComputerSorted);
 		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getAll());
 		pagesCount = allC.size() / objPerPage;
 		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
