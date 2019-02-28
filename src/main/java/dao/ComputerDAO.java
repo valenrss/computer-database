@@ -13,7 +13,7 @@ public interface ComputerDAO {
 	 * @return Computer List
 	 * @throws SQLException
 	 */
-	public List<Computer> getList() throws SQLException;
+	public List<Computer> getList();
 
 	/**
 	 * List get computer pages
@@ -22,7 +22,7 @@ public interface ComputerDAO {
 	 * @return Computer List
 	 * @throws SQLException
 	 */
-	public abstract List<Computer> getPage(int pageNo, int objCount) throws SQLException;
+	public abstract List<Computer> getPage(int pageNo, int objCount);
 
 	/**
 	 * List get computer pages
@@ -31,7 +31,7 @@ public interface ComputerDAO {
 	 * @return Computer List
 	 * @throws SQLException
 	 */
-	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException;
+	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name);
 
 	/**
 	 * Creation method
@@ -40,7 +40,7 @@ public interface ComputerDAO {
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public abstract void create(Computer comp) throws SQLException;
+	public abstract void create(Computer comp);
 
 	/**
 	 * Delete method
@@ -49,7 +49,7 @@ public interface ComputerDAO {
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public abstract boolean delete(int id) throws SQLException;
+	public abstract boolean delete(int id);
 
 	/**
 	 * Update method
@@ -58,7 +58,7 @@ public interface ComputerDAO {
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public abstract void update(Computer comp) throws SQLException;
+	public abstract void update(Computer comp);
 
 	/**
 	 * Find method
@@ -67,6 +67,6 @@ public interface ComputerDAO {
 	 * @return T
 	 * @throws SQLException
 	 */
-	public abstract Computer find(int id) throws SQLException;
+	public abstract Computer find(int id);
 
 }

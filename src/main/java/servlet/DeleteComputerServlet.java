@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,9 +49,9 @@ public class DeleteComputerServlet extends HttpServlet {
 		for (String id : tableDelete) {
 			try {
 				cmptService.delete(Integer.parseInt(id));
-			} catch (NumberFormatException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				request.setAttribute("errorMessage", e);
+				this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
 			}
 
 		}

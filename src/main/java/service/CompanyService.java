@@ -7,25 +7,24 @@ import model.Company;
 
 public interface CompanyService {
 
-
 	/**
 	 * Gets all the companies.
 	 *
 	 * @return all companies
 	 * @throws SQLException the SQL exception
 	 */
-	public abstract List<Company> getAll() throws SQLException;
-	
+	public abstract List<Company> getAll();
+
 	/**
 	 * Gets the page.
 	 *
-	 * @param pageNo the page no
+	 * @param pageNo   the page no
 	 * @param objCount the obj count
 	 * @return the page
 	 * @throws SQLException the SQL exception
 	 */
-	public List<Company> getPage(int pageNo, int objCount) throws SQLException;
-	
+	public List<Company> getPage(int pageNo, int objCount);
+
 	/**
 	 * Gets the by id.
 	 *
@@ -33,6 +32,6 @@ public interface CompanyService {
 	 * @return the by id
 	 * @throws SQLException the SQL exception
 	 */
-	public Company getById(int id) throws SQLException;
+	public Company getById(int id);
 
 }

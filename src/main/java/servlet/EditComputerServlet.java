@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
 import model.Computer;
@@ -29,6 +29,7 @@ public class EditComputerServlet extends HttpServlet {
 
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
+	private Validator validator;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -37,6 +38,7 @@ public class EditComputerServlet extends HttpServlet {
 		super();
 		cmptService = ComputerServiceImpl.getInstance();
 		cpnyService = CompanyServiceImpl.getInstance();
+		validator = Validator.getInstance();
 	}
 
 	/**
@@ -48,17 +50,11 @@ public class EditComputerServlet extends HttpServlet {
 
 		int cpEditId = Integer.parseInt(request.getQueryString());
 
-		try {
-			List<Company> cpnyList = cpnyService.getAll();
-			request.setAttribute("companies", cpnyList);
+		List<Company> cpnyList = cpnyService.getAll();
+		request.setAttribute("companies", cpnyList);
 
-			request.setAttribute("cpEditId", cpEditId);
-			request.setAttribute("cpEdit", cmptService.detail(cpEditId));
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
+		request.setAttribute("cpEditId", cpEditId);
+		request.setAttribute("cpEdit", cmptService.detail(cpEditId));
 
 		this.getServletContext().getRequestDispatcher("/views/editComputer.jsp").forward(request, response);
 
@@ -95,13 +91,17 @@ public class EditComputerServlet extends HttpServlet {
 		}
 
 		try {
-			Validator.getInstance().checkDate(d1, d2);
+			validator.checkDate(d1, d2);
+			validator.checkName(computerName);
 			cmptService.update(new Computer(computerId, computerName, d1, d2, cpnyService.getById(cmpnyID)));
-		} catch (SQLException e) {
-			//TODO gerer excepption avec page d'erreur
-			e.printStackTrace();
 		} catch (DateOrderException e) {
-			
+			request.setAttribute("errorMessage", e);
+			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
+
+		} catch (ComputerNameEmptyException e) {
+			request.setAttribute("errorMessage", e);
+			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
+
 		}
 
 		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
 public class CompanyDAOImpl implements CompanyDAO {
 
 	private static final String SQL_GET_BY_ID = "SELECT `id`,`name` FROM `company` WHERE id = ?";
@@ -17,6 +19,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	private Connection connect = null;
 	private static CompanyDAOImpl companyDAOImpl;
+	private Logger logger;
 
 	/**
 	 * Instantiates a new company DAO impl.
@@ -34,16 +37,21 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 * @return the company list
 	 */
 	@Override
-	public List<Company> getList() throws SQLException {
+	public List<Company> getList() {
 
 		List<Company> compList = new ArrayList<>();
 
-		PreparedStatement prep = connect.prepareStatement(SQL_LIST_ALL);
-		prep.executeQuery();
-		ResultSet rs = prep.getResultSet();
+		PreparedStatement prep;
+		try {
+			prep = connect.prepareStatement(SQL_LIST_ALL);
+			prep.executeQuery();
+			ResultSet rs = prep.getResultSet();
 
-		while (rs.next()) {
-			compList.add(new Company(rs.getInt("id"), rs.getString("name")));
+			while (rs.next()) {
+				compList.add(new Company(rs.getInt("id"), rs.getString("name")));
+			}
+		} catch (SQLException e) {
+			logger.debug(e.toString());
 		}
 
 		return compList;
@@ -56,47 +64,56 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 * @see dao.CompanyDAO#getPage(int, int)
 	 */
 	@Override
-	public List<Company> getPage(int pageNo, int objCount) throws SQLException {
+	public List<Company> getPage(int pageNo, int objCount) {
 		List<Company> cnyList = new ArrayList<>();
 
 		int minId = pageNo * objCount - objCount;
 		int maxId = minId + objCount;
 
-		PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
+		try {
+			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
 
-		prep1.setInt(1, minId);
-		prep1.setInt(2, maxId);
+			prep1.setInt(1, minId);
+			prep1.setInt(2, maxId);
 
-		prep1.executeQuery();
+			prep1.executeQuery();
 
-		ResultSet rs = prep1.getResultSet();
+			ResultSet rs = prep1.getResultSet();
 
-		while (rs.next()) {
-			cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
+			while (rs.next()) {
+				cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
+			}
+		} catch (SQLException e) {
+			logger.debug(e.toString());
 		}
 
 		return cnyList;
 	}
 
 	@Override
-	public Company getById(int id) throws SQLException {
+	public Company getById(int id) {
 
 		Company cmp;
 
-		if (id != 0) {
-			PreparedStatement prep2 = connect.prepareStatement(SQL_GET_BY_ID);
-			prep2.setString(1, id + "");
-			prep2.executeQuery();
-			ResultSet rs = prep2.getResultSet();
+		try {
+			if (id != 0) {
+				PreparedStatement prep2 = connect.prepareStatement(SQL_GET_BY_ID);
+				prep2.setString(1, id + "");
+				prep2.executeQuery();
+				ResultSet rs = prep2.getResultSet();
 
-			if (rs.next()) {
-				cmp = new Company(rs.getInt("id"), rs.getString("name"));
-				return cmp;
+				if (rs.next()) {
+					cmp = new Company(rs.getInt("id"), rs.getString("name"));
+					return cmp;
+				} else {
+					return new Company(0, "-");
+				}
+
 			} else {
 				return new Company(0, "-");
 			}
-
-		} else {
+		} catch (SQLException e) {
+			logger.debug(e.toString());
 			return new Company(0, "-");
 		}
 

@@ -10,6 +10,12 @@ public class Mapper {
 
 	private static Mapper mapperInstance;
 
+	/**
+	 * Map computer.
+	 *
+	 * @param comp the comp
+	 * @return the computer DTO
+	 */
 	public ComputerDTO mapComputer(Computer comp) {
 		ComputerDTO compDTO = new ComputerDTO(Integer.toString(comp.getId()), comp.getName(),
 				comp.getDateIntroduced().toString(), comp.getDateDiscontinued().toString(),
@@ -18,6 +24,12 @@ public class Mapper {
 		return compDTO;
 	}
 
+	/**
+	 * Map list computer.
+	 *
+	 * @param compL the comp L
+	 * @return the list
+	 */
 	public List<ComputerDTO> mapListComputer(List<Computer> compL) {
 
 		List<ComputerDTO> compDTOList = new ArrayList<>();
@@ -67,11 +79,23 @@ public class Mapper {
 
 		return compDTOList;
 	}
-	/*
-	 * public CompanyDTO mapCompany(Company cny) { return new
-	 * CompanyDTO(Integer.toString(cny.getId()),cny.getName()); }
-	 */
 
+	/**
+	 * Map company.
+	 *
+	 * @param cny the cny
+	 * @return the company DTO
+	 */
+	public CompanyDTO mapCompany(Company cny) {
+		return new CompanyDTO(Integer.toString(cny.getId()), cny.getName());
+	}
+
+	/**
+	 * Map list company.
+	 *
+	 * @param cnyList the cny list
+	 * @return the list
+	 */
 	public List<CompanyDTO> mapListCompany(List<Company> cnyList) {
 
 		List<CompanyDTO> cnyDTOList = new ArrayList<>();
@@ -83,6 +107,11 @@ public class Mapper {
 		return cnyDTOList;
 	}
 
+	/**
+	 * Gets the single instance of Mapper.
+	 *
+	 * @return single instance of Mapper
+	 */
 	public static Mapper getInstance() {
 		if (mapperInstance == null) {
 			mapperInstance = new Mapper();

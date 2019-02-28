@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
 import model.Computer;
@@ -30,6 +30,7 @@ public class AddComputerServlet extends HttpServlet {
 
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
+	private Validator validator;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,6 +40,7 @@ public class AddComputerServlet extends HttpServlet {
 		super();
 		cmptService = ComputerServiceImpl.getInstance();
 		cpnyService = CompanyServiceImpl.getInstance();
+		validator = Validator.getInstance();
 	}
 
 	/**
@@ -48,14 +50,8 @@ public class AddComputerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		try {
-			List<Company> cpnyList = cpnyService.getAll();
-			request.setAttribute("companies", cpnyList);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Company> cpnyList = cpnyService.getAll();
+		request.setAttribute("companies", cpnyList);
 
 		this.getServletContext().getRequestDispatcher("/views/addComputer.jsp").forward(request, response);
 
@@ -89,13 +85,15 @@ public class AddComputerServlet extends HttpServlet {
 		}
 
 		try {
-			Validator.getInstance().checkDate(d1, d2);
+			validator.checkDate(d1, d2);
+			validator.checkName(computerName);
 			cmptService.add(new Computer(DEFAULT_COMPUTER_ID, computerName, d1, d2, cpnyService.getById(cmpnyID)));
-		} catch (SQLException e) {
-			//TODO gerer excepption avec page d'erreur
-			e.printStackTrace();
 		} catch (DateOrderException e) {
-			
+			request.setAttribute("errorMessage", e);
+			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
+		} catch (ComputerNameEmptyException e) {
+			request.setAttribute("errorMessage", e);
+			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
 		}
 
 		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);

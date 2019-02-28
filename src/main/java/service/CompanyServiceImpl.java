@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dao.CompanyDAOImpl;
@@ -28,7 +27,7 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getAllCompanies()
 	 */
 	@Override
-	public List<Company> getAll() throws SQLException {
+	public List<Company> getAll() {
 
 		return cnydao.getList();
 	}
@@ -39,7 +38,7 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getPage()
 	 */
 	@Override
-	public List<Company> getPage(int pageNo, int objCount) throws SQLException {
+	public List<Company> getPage(int pageNo, int objCount) {
 
 		return cnydao.getPage(pageNo, objCount);
 	}
@@ -50,7 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getById()
 	 */
 	@Override
-	public Company getById(int id) throws SQLException {
+	public Company getById(int id) {
 		return cnydao.getById(id);
 	}
 

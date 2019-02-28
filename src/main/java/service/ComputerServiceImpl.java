@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dao.ComputerDAOImpl;
@@ -11,7 +10,7 @@ public class ComputerServiceImpl implements ComputerService {
 
 	private DaoFactory fact;
 	private ComputerDAOImpl comptdao;
-	
+
 	private static ComputerServiceImpl computerServiceImpl;
 
 	private ComputerServiceImpl() {
@@ -25,18 +24,18 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getAll() throws SQLException  {
+	public List<Computer> getAll() {
 
 		return comptdao.getList();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getPageByName(int pageNo, int objCount, String name) throws SQLException {
+	public List<Computer> getPageByName(int pageNo, int objCount, String name) {
 
 		return comptdao.getPageByName(pageNo, objCount, name);
 	}
@@ -47,7 +46,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#addComputer(model.Computer)
 	 */
 	@Override
-	public void add(Computer cpInsert) throws SQLException {
+	public void add(Computer cpInsert) {
 		comptdao.create(cpInsert);
 
 	}
@@ -58,7 +57,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#updateComputer(model.Computer)
 	 */
 	@Override
-	public void update(Computer cpInsert) throws SQLException{
+	public void update(Computer cpInsert) {
 		comptdao.update(cpInsert);
 
 	}
@@ -69,7 +68,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#deleteComputer(int)
 	 */
 	@Override
-	public boolean delete(int id) throws SQLException{
+	public boolean delete(int id) {
 
 		return comptdao.delete(id);
 	}
@@ -80,7 +79,7 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#detailComputer(int)
 	 */
 	@Override
-	public Computer detail(int id) throws SQLException {
+	public Computer detail(int id) {
 		return comptdao.find(id);
 	}
 
@@ -90,11 +89,11 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getComputerPage(int, int)
 	 */
 	@Override
-	public List<Computer> getPage(int pageNo, int objCount) throws SQLException {
+	public List<Computer> getPage(int pageNo, int objCount) {
 
 		return comptdao.getPage(pageNo, objCount);
 	}
-	
+
 	public static ComputerServiceImpl getInstance() {
 		if (computerServiceImpl == null) {
 			computerServiceImpl = new ComputerServiceImpl();
