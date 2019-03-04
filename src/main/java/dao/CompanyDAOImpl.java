@@ -51,7 +51,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 				compList.add(new Company(rs.getInt("id"), rs.getString("name")));
 			}
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			//logger.debug(e.toString());
 		}
 
 		return compList;

@@ -107,13 +107,13 @@ public class ComputerServiceImpl implements ComputerService {
 		
 		switch (option) {
 		case NAME:
-			cList.sort((Computer p1, Computer p2) -> p1.getName().compareTo(p2.getName()));
+			cList.sort((Computer p1, Computer p2) -> p1.getName() != null ?  p1.getName().compareTo(p2.getName()) : -1);
 			return cList;
 		case DATEINTRODUCED:
-			cList.sort((Computer p1, Computer p2) -> p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
+			cList.sort((Computer p1, Computer p2) -> (p1.getDateIntroduced() == null || p2.getDateIntroduced() == null) ? -1 : p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
 			return cList;
 		case DATEDISCONTINUED:
-			cList.sort((Computer p1, Computer p2) -> p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
+			cList.sort((Computer p1, Computer p2) -> (p1.getDateDiscontinued() == null || p2.getDateDiscontinued() == null) ? -1 :  p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
 			return cList;
 		case COMPANY:
 			cList.sort((Computer p1, Computer p2) -> p1.getCompany().compareTo(p2.getCompany()));

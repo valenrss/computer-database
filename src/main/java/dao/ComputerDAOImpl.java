@@ -14,7 +14,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_FIND_BY_ID = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
-	private static final String SQL_PAGE_NAME = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE name LIKE ?";
+	private static final String SQL_PAGE_NAME = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ?";
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
@@ -52,7 +52,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 			return cpList;
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			//logger.debug(e.toString());
 			return cpList;
 
 		}
@@ -216,7 +216,8 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return cpList;
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			//logger.debug(e.toString());
+			System.out.println(e);
 			return cpList;
 		}
 
@@ -244,6 +245,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
 
 			prep1.setString(1, "%" + name + "%");
+			prep1.setString(2, "%" + name + "%");
 
 			prep1.executeQuery();
 
@@ -258,7 +260,8 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return cpList;
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			//logger.debug(e.toString());
+			System.out.println(e);
 			return cpList;
 		}
 

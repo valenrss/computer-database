@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn" %>
 <!DOCTYPE html>
@@ -6,11 +6,13 @@
 <head>
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/font-awesome.css" rel="stylesheet" media="screen">
 <link href="css/main.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -27,15 +29,16 @@
 					<form id="searchForm" action="/Computer-Database/SearchComputer" method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="Search name" /> <input
-							type="submit" id="searchsubmit" value="Filter by name"
-							class="btn btn-primary" />
+							class="form-control" placeholder="Search by name, company" /> 
+							<input type="submit" id="searchsubmit" class="btn btn-primary" value = "Search" />
 					</form>
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer" href="/Computer-Database/AddComputer">Add
-						Computer</a> <a class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">Edit</a>
+						Computer</a> 
+					<a class="btn btn-default" id="editComputer" href="#"
+						onclick="$.fn.toggleEditMode();">Edit List</a>
+					<a class="btn btn-danger" id="deleteCompany" href="/Computer-Database/DeleteCompany">Delete Company</a>
 				</div>
 			</div>
 		</div>
@@ -61,10 +64,10 @@
 									class="fa fa-trash-o fa-lg"></i></a>
 						</span></th>
 						
-						<th>Computer name<button type="submit" class="btn btn-default" name="sortOption" value="name">sort</button></th>
-						<th>Introduction Date<button type="submit" class="btn btn-default" name="sortOption" value="introdate">sort</button></th>
-						<th>Discontinuation Date<button type="submit" class="btn btn-default" name="sortOption" value="discondate">sort</button></th>
-						<th>Company<button type="submit" class="btn btn-default" name="sortOption" value="company">sort</button></th>
+						<th>Computer name<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="name">▼</button></th>
+						<th>Introduction Date<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="introdate">▼</button></th>
+						<th>Discontinuation Date<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="discondate">▼</button></th>
+						<th>Company<button type="submit" class="btn btn-default" style="float: right;" name="sortOption" value="company">▼</button></th>
 
 					</tr>
 					
@@ -94,13 +97,13 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li><a  aria-label="Previous"><button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
-			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 2}">${pageId - 2}</button></a></li>
-			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a><button type="submit"  name="pageId" value="${pageId - 1}">${pageId - 1}</button></a></li>
-				<li><a><button type="submit" class="btn btn-default" name="pageId" value="${pageId + 0}">${pageId + 0}</button></a></li>
+				<li><a  aria-label="Previous">										  				<button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
+			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a>				<button type="submit"  name="pageId" value="${pageId - 2}">${pageId - 2}</button></a></li>
+			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a>				<button type="submit"  name="pageId" value="${pageId - 1}">${pageId - 1}</button></a></li>
+				<li><a>																 				<button type="submit" class="btn btn-default" name="pageId" value="${pageId + 0}">${pageId + 0}</button></a></li>
 				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button  type="submit"  name="pageId" value="${pageId + 1}">${pageId + 1}</button></a></li>
 				<li <c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button type="submit" name="pageId" value="${pageId + 2}">${pageId + 2}</button></a></li>
-				<li><a aria-label="Next"><button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
+				<li><a aria-label="Next">															<button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">

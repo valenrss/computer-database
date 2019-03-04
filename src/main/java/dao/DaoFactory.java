@@ -1,57 +1,52 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.mysql.cj.jdbc.Driver;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * A factory for creating Dao objects.
  */
 public class DaoFactory {
 
-	private static final String PASSWORD = "password";
-	private static final String USERNAME = "root";
-	private static final String URL = "jdbc:mysql://localhost:3306/computer-database-db";
 
-	private Connection connect;
 	private static DaoFactory factoryInstace;
-
-	/**
-	 * Instantiates a new dao factory.
-	 */
-	private DaoFactory() {
-
-		try {
-
-			Driver monDriver = new com.mysql.jdbc.Driver();
-			DriverManager.registerDriver(monDriver);
-			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
-		} catch (SQLException e) {
-			System.out.println("Could not initialize DaoFactory : " + e);
-		}
-
-	}
-
+	
+	private static String configFile = "/config.properties";
+	private static HikariConfig cfg;
+	private static HikariDataSource ds;
+    
 	/**
 	 * Gets the connect.
 	 *
 	 * @return the connect
 	 */
+	
+	private DaoFactory() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cfg = new HikariConfig(configFile);
+		ds = new HikariDataSource(cfg);
+	}
+	
+
 	public Connection getConnect() {
-		return connect;
+
+			try {
+				return ds.getConnection();
+			} catch (SQLException e) {
+				return null;
+			}
+		
 	}
 
-	/**
-	 * Sets the connect.
-	 *
-	 * @param connect the new connect
-	 */
-	public void setConnect(Connection connect) {
-		this.connect = connect;
-	}
 
 	public static DaoFactory getInstance() {
 		if (factoryInstace == null) {
