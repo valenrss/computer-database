@@ -1,5 +1,6 @@
 package dao;
 
+import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
 
@@ -8,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComputerDAOImpl implements ComputerDAO {
 
+	private static final String SQL_DELETE_COMPUTER_WHERE_COMPANY_ID = "DELETE FROM `computer` WHERE `company_id` = ?";
+	private static final String SQL_DELETE_FROM_COMPANY_WHERE_ID = "DELETE FROM `company` WHERE `id` = ?";
 	private static final String SQL_FIND_BY_ID = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
@@ -20,7 +24,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
 	private ResultSet rs;
 	private Connection connect = null;
-	private Logger logger;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static ComputerDAOImpl computerDAOImpl;
 
@@ -52,7 +56,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 			return cpList;
 		} catch (SQLException e) {
-			//logger.debug(e.toString());
+			logger.error(e.getMessage());
 			return cpList;
 
 		}
@@ -88,7 +92,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			prep1.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -114,10 +118,39 @@ public class ComputerDAOImpl implements ComputerDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 			return false;
 		}
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.ComputerDAO#deleteByCompany(Company company)
+	 */
+	@Override
+	public boolean deleteByCompany(Company company) {
+		try {
+			int success = 0;
+			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_FROM_COMPANY_WHERE_ID);
+			PreparedStatement prep2 = connect.prepareStatement(SQL_DELETE_COMPUTER_WHERE_COMPANY_ID);
+			connect.setAutoCommit(false);
+			prep1.setInt(1, company.getId());
+			prep2.setInt(1, company.getId());
+			success = prep2.executeUpdate() + prep1.executeUpdate();
+			if (success > 0) {
+				connect.commit();
+				connect.setAutoCommit(true); // only 1 connect
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 	/*
@@ -150,7 +183,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			prep1.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -178,7 +211,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return comp;
 
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 			return comp;
 		}
 
@@ -216,8 +249,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return cpList;
 
 		} catch (SQLException e) {
-			//logger.debug(e.toString());
-			System.out.println(e);
+			logger.error(e.getMessage());
 			return cpList;
 		}
 
@@ -260,8 +292,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return cpList;
 
 		} catch (SQLException e) {
-			//logger.debug(e.toString());
-			System.out.println(e);
+			logger.error(e.getMessage());
 			return cpList;
 		}
 

@@ -58,8 +58,6 @@ public class EditComputerServlet extends HttpServlet {
 
 		this.getServletContext().getRequestDispatcher("/views/editComputer.jsp").forward(request, response);
 
-		// System.out.println("editing pc : "+cpEditId);
-
 	}
 
 	/**

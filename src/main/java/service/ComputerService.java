@@ -2,9 +2,13 @@ package service;
 
 import java.util.List;
 
+import model.Company;
 import model.Computer;
 import model.SortOptions;
 
+/**
+ * The Interface ComputerService.
+ */
 public interface ComputerService {
 
 	/**
@@ -71,5 +75,13 @@ public interface ComputerService {
 	 * @return researched comptuers
 	 */
 	List<Computer> getPageByName(int pageNo, int objCount, String name);
+
+	/**
+	 * Delete by company.
+	 *
+	 * @param company the company
+	 * @return true, if successful
+	 */
+	boolean deleteByCompany(Company company);
 
 }

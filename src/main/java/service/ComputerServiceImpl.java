@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.ComputerDAOImpl;
 import dao.DaoFactory;
+import model.Company;
 import model.Computer;
 import model.SortOptions;
 
@@ -94,6 +95,18 @@ public class ComputerServiceImpl implements ComputerService {
 
 		return comptdao.getPage(pageNo, objCount);
 	}
+	
+	/**
+	 * Delete by company.
+	 *
+	 * @param company the company
+	 * @return true, if successful
+	 */
+	@Override
+	public boolean deleteByCompany(Company company) {
+		return comptdao.deleteByCompany(company);
+		
+	}
 
 
 	/*
@@ -110,10 +123,10 @@ public class ComputerServiceImpl implements ComputerService {
 			cList.sort((Computer p1, Computer p2) -> p1.getName() != null ?  p1.getName().compareTo(p2.getName()) : -1);
 			return cList;
 		case DATEINTRODUCED:
-			cList.sort((Computer p1, Computer p2) -> (p1.getDateIntroduced() == null || p2.getDateIntroduced() == null) ? -1 : p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
+			cList.sort((Computer p1, Computer p2) -> (p1.getDateIntroduced() == null || p2.getDateIntroduced() == null) ? -700 : p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
 			return cList;
 		case DATEDISCONTINUED:
-			cList.sort((Computer p1, Computer p2) -> (p1.getDateDiscontinued() == null || p2.getDateDiscontinued() == null) ? -1 :  p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
+			cList.sort((Computer p1, Computer p2) -> (p1.getDateDiscontinued() == null || p2.getDateDiscontinued() == null) ? -700 :  p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
 			return cList;
 		case COMPANY:
 			cList.sort((Computer p1, Computer p2) -> p1.getCompany().compareTo(p2.getCompany()));

@@ -126,6 +126,20 @@ public class Controller {
 					view.computerUsage();
 				}
 				break;
+			case "company":
+				if (args[1] != null) {
+					switch (args[1]) {
+					case "delete":
+						deleteCompany(args);
+						break;
+					default:
+						view.companyUsage();
+						break;
+					}
+				} else {
+					view.companyUsage();
+				}
+				break;
 			case "help":
 				view.help();
 				break;
@@ -141,6 +155,8 @@ public class Controller {
 			view.empty();
 		}
 	}
+
+	
 
 	/**
 	 * Method to process user input by splitting keywords and removing quotes.
@@ -331,6 +347,7 @@ public class Controller {
 	 * @param args the args
 	 */
 	public void deleteComputer(String[] args) {
+		
 		try {
 			boolean deletesuccess = cmptService.delete(Integer.parseInt(args[2]));
 			if (deletesuccess) {
@@ -344,6 +361,29 @@ public class Controller {
 			view.computerDeleteUsage();
 		}
 
+	}
+	
+	/**
+	 * Delete company AND all related computers.
+	 *
+	 * @param args the args
+	 */
+	private void deleteCompany(String[] args) {
+		
+		try {
+			Company cmpny = cpnyService.getById(Integer.valueOf(args[2]));
+			boolean deletesuccess = cmptService.deleteByCompany(cmpny);
+			if (deletesuccess) {
+				view.companyDeleteSuccess(args[2]);
+			} else {
+				view.companyDeleteFail(args[2]);
+			}
+
+		} catch (NumberFormatException e) {
+			view.idFormat();
+			view.companyDeleteUsage();
+		}
+		
 	}
 
 	/**

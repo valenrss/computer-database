@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,6 +20,7 @@ public class DaoFactory {
 	private static String configFile = "/config.properties";
 	private static HikariConfig cfg;
 	private static HikariDataSource ds;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
     
 	/**
 	 * Gets the connect.
@@ -29,8 +32,7 @@ public class DaoFactory {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		cfg = new HikariConfig(configFile);
 		ds = new HikariDataSource(cfg);
@@ -42,6 +44,7 @@ public class DaoFactory {
 			try {
 				return ds.getConnection();
 			} catch (SQLException e) {
+				logger.error(e.getMessage());
 				return null;
 			}
 		

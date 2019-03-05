@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CompanyDAOImpl implements CompanyDAO {
 
@@ -19,12 +20,12 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	private Connection connect = null;
 	private static CompanyDAOImpl companyDAOImpl;
-	private Logger logger;
+	private Logger logger  = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Instantiates a new company DAO impl.
 	 *
-	 * @param conn the conn
+	 * @param conn the Connection
 	 */
 	private CompanyDAOImpl(Connection conn) {
 
@@ -51,7 +52,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 				compList.add(new Company(rs.getInt("id"), rs.getString("name")));
 			}
 		} catch (SQLException e) {
-			//logger.debug(e.toString());
+			logger.error(e.getMessage());
 		}
 
 		return compList;
@@ -84,7 +85,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 				cnyList.add(new Company(rs.getInt("id"), rs.getString("name")));
 			}
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 		}
 
 		return cnyList;
@@ -113,7 +114,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 				return new Company(0, "-");
 			}
 		} catch (SQLException e) {
-			logger.debug(e.toString());
+			logger.error(e.getMessage());
 			return new Company(0, "-");
 		}
 

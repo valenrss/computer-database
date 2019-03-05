@@ -14,7 +14,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/Computer-Database/Dashboard"> Computer Database </a>
+			<a class="navbar-brand" href="/Computer-Database/Dashboard"><i class = "fa fa-database"></i> Computer Database </a>
         </div>
     </header>
     <section id="main">
@@ -61,7 +61,7 @@
                         </fieldset>
                         <div class="actions pull-right">
                             <input type="submit" value="Edit" class="btn btn-primary">
-                            or
+                              
                             <a href="/Computer-Database/Dashboard" class="btn btn-default">Cancel</a>
                         </div>
                     </form>

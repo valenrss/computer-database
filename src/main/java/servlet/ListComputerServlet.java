@@ -53,7 +53,7 @@ public class ListComputerServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			currentPage = Integer.valueOf(request.getParameter("pageId"));
+			currentPage = Integer.valueOf(request.getParameter("pageId")); // TODO Faire autrement
 		} catch (NumberFormatException e) {
 			// currentPage = 1;
 		}
@@ -61,12 +61,11 @@ public class ListComputerServlet extends HttpServlet {
 			objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
 		} catch (NumberFormatException e) {
 			// objPerPage = 10;
-		}try {
-			
+		}
+		try {
 			sortOption = request.getParameter("sortOption");
-			
-		}catch (NullPointerException e) {
-			
+		} catch (NullPointerException e) {
+
 		}
 		
 		List<Computer> pageComputer = cmptService.getPage(currentPage, objPerPage);
@@ -125,8 +124,6 @@ public class ListComputerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Add a computer
 
 		doGet(request, response);
 	}

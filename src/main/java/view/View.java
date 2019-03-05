@@ -217,4 +217,24 @@ public class View {
 		
 	}
 
+	public void companyUsage() {
+		System.out.println("Usage : company delete <company ID>");
+		
+	}
+	
+	public void companyDeleteUsage() {
+		System.out.println("Usage : company delete <company ID>");
+		
+	}
+
+	public void companyDeleteSuccess(String string) {
+		System.out.println("Company ID " + string + " and all related computers sucessfully deleted.");
+		
+	}
+
+	public void companyDeleteFail(String string) {
+		System.out.println("Could not find company ID " + string);
+		
+	}
+
 }
