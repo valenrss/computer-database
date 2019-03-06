@@ -18,7 +18,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_FIND_BY_ID = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE `id` = ?";
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
-	private static final String SQL_PAGE_NAME = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ?";
+	private static final String SQL_PAGE_NAME = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ?"; // AND computer.id >= ? AND computer.id < ?
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
@@ -271,14 +271,19 @@ public class ComputerDAOImpl implements ComputerDAO {
 	public List<Computer> getPageByName(int pageNo, int objCount, String name) {
 
 		List<Computer> cpList = new ArrayList<>();
-
+	/*	
+		int minId = pageNo * objCount - objCount;
+		int maxId = minId + objCount;
+*/
 		try {
 
 			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE_NAME);
 
 			prep1.setString(1, "%" + name + "%");
 			prep1.setString(2, "%" + name + "%");
-
+			/*prep1.setInt(3, minId);
+			prep1.setInt(4,maxId);
+*/
 			prep1.executeQuery();
 
 			rs = prep1.getResultSet();
@@ -288,6 +293,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 						rs.getTimestamp("discontinued"),
 						CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
 			}
+			logger.debug(cpList.toString());
 
 			return cpList;
 

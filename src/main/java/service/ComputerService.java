@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Company;
 import model.Computer;
-import model.SortOptions;
 
 /**
  * The Interface ComputerService.
@@ -57,14 +56,6 @@ public interface ComputerService {
 	 */
 	public abstract Computer detail(int id);
 	
-	/**
-	 * Compare by.
-	 *
-	 * @param cList the c list
-	 * @param option the option
-	 * @return the list
-	 */
-	public List<Computer> compareBy(List<Computer> cList, SortOptions option);
 
 	/**
 	 * Gets the computers by name.

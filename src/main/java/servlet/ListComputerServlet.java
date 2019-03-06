@@ -8,12 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.CompanyDTO;
 import dto.ComputerDTO;
 import dto.Mapper;
-import model.Computer;
-import model.SortOptions;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
 
@@ -33,7 +32,7 @@ public class ListComputerServlet extends HttpServlet {
 	private int objPerPage = 10;
 	private int pagesCount;
 	private Mapper mapper;
-	private String sortOption;
+	private String sortOption = "id";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -51,7 +50,9 @@ public class ListComputerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		 //HttpSession session = request.getSession();
+		 
 		try {
 			currentPage = Integer.valueOf(request.getParameter("pageId")); // TODO Faire autrement
 		} catch (NumberFormatException e) {
@@ -68,37 +69,10 @@ public class ListComputerServlet extends HttpServlet {
 
 		}
 		
-		List<Computer> pageComputer = cmptService.getPage(currentPage, objPerPage);
-		List<Computer> pageComputerSorted;
-		
-		
-		if (sortOption != null) {
-			switch (sortOption) {
-			case "name":
-				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.NAME);
-				break;
-			case "introdate":
-				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.DATEINTRODUCED);
-				break;
-			case "discondate":
-				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.DATEDISCONTINUED);
-				break;
-			case "company":
-				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.COMPANY);
-				break;
-			default:
-				pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.ID);
-				break;
-			}
-		}else {
-			pageComputerSorted = cmptService.compareBy(pageComputer, SortOptions.ID);
-		}
-		
-		
-		List<ComputerDTO> pageC = mapper.mapListComputer(pageComputerSorted);
+		List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
 		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getAll());
 		pagesCount = allC.size() / objPerPage;
-		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
+		
 
 		if (currentPage > pagesCount + PAGE_OFFSET) {
 			currentPage = pagesCount + PAGE_OFFSET;
@@ -108,12 +82,38 @@ public class ListComputerServlet extends HttpServlet {
 			currentPage = FIRST_PAGE;
 			pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
 		}
+		
+		
+		if (sortOption != null) {
+			switch (sortOption) {
+			case "name":
+				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getName().compareTo(p2.getName()));
+				break;
+			case "introdate":
+				pageC.sort((ComputerDTO p1, ComputerDTO p2) ->  p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
+				break;
+			case "discondate":
+				pageC.sort((ComputerDTO p1, ComputerDTO p2) ->  p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
+				break;
+			case "company":
+				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getCompanyName().compareTo(p2.getCompanyName()));
+				break;
+			default:
+				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getId().compareTo(p2.getId()));
+				break;
+			}
+		}else {
+			pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getId().compareTo(p2.getId()));
+		}
+		
+		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
 
 		request.setAttribute("computers", pageC);
 		request.setAttribute("cpNumber", allC.size());
 		request.setAttribute("pageId", currentPage);
 		request.setAttribute("pagesCount", pagesCount);
 		request.setAttribute("companies", cpnyList);
+		request.setAttribute("sortOption", sortOption);
 
 		this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}

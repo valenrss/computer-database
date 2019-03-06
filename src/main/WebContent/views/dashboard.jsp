@@ -30,7 +30,7 @@
 
 						<input type="search" id="searchbox" name="search"
 							class="form-control" placeholder="Search by name, company" /> 
-							<a type="submit" id="searchsubmit" class="btn btn-primary"> <i class="fa fa-search"></i></a>
+							<button type="submit" id="searchsubmit" class="btn btn-primary"> <i class="fa fa-search"></i></button>
 					</form>
 				</div>
 				<div class="pull-right">

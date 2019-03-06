@@ -30,7 +30,7 @@ public class SearchComputerServlet extends HttpServlet {
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
-	private String nameSearch;
+	private String nameSearch = "*";
 	private Mapper mapper;
 
 	/**
@@ -64,12 +64,11 @@ public class SearchComputerServlet extends HttpServlet {
 		try {
 			nameSearch = request.getParameter("search");
 		} catch (NullPointerException e) {
-			nameSearch = "*";
+			//nameSearch = "*";
 		}
 
-		List<ComputerDTO> pageS = mapper
-				.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch));
-		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getAll());
+		List<ComputerDTO> pageS = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch));
+		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getPageByName(FIRST_PAGE, pageS.size(), nameSearch));
 		pagesCount = allC.size() / objPerPage;
 		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
 
@@ -83,7 +82,7 @@ public class SearchComputerServlet extends HttpServlet {
 		}
 
 		request.setAttribute("computers", pageS);
-		request.setAttribute("cpNumber", pageS.size());
+		request.setAttribute("cpNumber", allC.size());
 		request.setAttribute("pageId", currentPage);
 		request.setAttribute("pagesCount", pagesCount);
 		request.setAttribute("companies", cpnyList);

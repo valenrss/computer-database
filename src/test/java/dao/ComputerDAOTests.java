@@ -1,9 +1,7 @@
 package dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -26,30 +24,21 @@ public class ComputerDAOTests {
 
 	@Test
 	public void createComputer() {
-		try {
-			Computer comp = new Computer(0, "Delll Laptop", ts, td, new Company(1,"Apple inc."));
-			cpmpt.create(comp);
-			assertEquals(comp,cpmpt.getList().get(cpmpt.getList().size()-1));
-			
-		} catch (SQLException e) {
-			fail();
-		}
+		Computer comp = new Computer(0, "Delll Laptop", ts, td, new Company(1,"Apple inc."));
+		cpmpt.create(comp);
+		assertEquals(comp,cpmpt.getList().get(cpmpt.getList().size()-1));
 	}
 	
 	@Test
 	public void deleteComputer() {
 		
 		
-		try {
-			Computer lastPC = cpmpt.getList().get(cpmpt.getList().size()-1);
-			int lastPCid = lastPC.getId();
-			
-			cpmpt.delete(lastPCid);
-			
-			assertEquals(false,cpmpt.getList().contains(lastPC));
-		} catch (SQLException e) {
-			fail();
-		}
+		Computer lastPC = cpmpt.getList().get(cpmpt.getList().size()-1);
+		int lastPCid = lastPC.getId();
+		
+		cpmpt.delete(lastPCid);
+		
+		assertEquals(false,cpmpt.getList().contains(lastPC));
 		
 		
 	}
@@ -57,33 +46,20 @@ public class ComputerDAOTests {
 	@Test
 	public void updateComputer() {
 		
-		try {
-			Computer comp = new Computer(0, "IBM Laptop", ts, td, new Company(3,"IBM"));
-			cpmpt.update(comp);
-			assertEquals(true,cpmpt.getList().contains(comp));
-			
-		} catch (SQLException e) {
-			fail();
-		}
+		Computer comp = new Computer(0, "IBM Laptop", ts, td, new Company(3,"IBM"));
+		cpmpt.update(comp);
+		assertEquals(true,cpmpt.getList().contains(comp));
 		
 	}
 	
 	@Test
 	public void findComputer() {
-		try {
-			assertEquals(4,cpmpt.find(4).getId());
-		} catch (SQLException e) {
-			fail();
-		}
+		assertEquals(4,cpmpt.find(4).getId());
 	}
 	
 	@Test
 	public void getPage() {
-		try {
-			assertEquals(5,cpmpt.getPage(3,5).size());
-			} catch (SQLException e) {
-			fail();
-		}
+		assertEquals(5,cpmpt.getPage(3,5).size());
 		
 	}
 
