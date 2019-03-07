@@ -4,19 +4,23 @@ import java.util.List;
 
 import dao.ComputerDAOImpl;
 import dao.DaoFactory;
+import exception.ComputerNameEmptyException;
+import exception.DateOrderException;
 import model.Company;
 import model.Computer;
+import validator.Validator;
 
 public class ComputerServiceImpl implements ComputerService {
 
 	private DaoFactory fact;
 	private ComputerDAOImpl comptdao;
-
+	private Validator validator;
 	private static ComputerServiceImpl computerServiceImpl;
 
 	private ComputerServiceImpl() {
 		fact = DaoFactory.getInstance();
 		comptdao = ComputerDAOImpl.getInstance(fact.getConnect());
+		validator = Validator.getInstance();
 	}
 
 	/*
@@ -36,9 +40,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getPageByName(int pageNo, int objCount, String name) {
+	public List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption) {
 
-		return comptdao.getPageByName(pageNo, objCount, name);
+		return comptdao.getPageByName(pageNo, objCount, name, orderOption);
 	}
 
 	/*
@@ -47,7 +51,11 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#addComputer(model.Computer)
 	 */
 	@Override
-	public void add(Computer cpInsert) {
+	public void add(Computer cpInsert) throws DateOrderException, ComputerNameEmptyException{
+		
+		validator.checkDate(cpInsert.getDateIntroduced(), cpInsert.getDateDiscontinued());
+		validator.checkName(cpInsert.getName());
+		
 		comptdao.create(cpInsert);
 
 	}
@@ -58,7 +66,11 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#updateComputer(model.Computer)
 	 */
 	@Override
-	public void update(Computer cpInsert) {
+	public void update(Computer cpInsert) throws DateOrderException, ComputerNameEmptyException{
+		
+		validator.checkDate(cpInsert.getDateIntroduced(), cpInsert.getDateDiscontinued());
+		validator.checkName(cpInsert.getName());
+		
 		comptdao.update(cpInsert);
 
 	}

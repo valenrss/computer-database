@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exception.ComputerNameEmptyException;
+import exception.DateOrderException;
 import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
@@ -286,7 +288,11 @@ public class Controller {
 
 			Computer cpInsert = new Computer(DEFAULT_COMPUTER_ID, args[2], ts1, ts2,
 					cpnyService.getById(Integer.parseInt(args[5])));
-			cmptService.add(cpInsert);
+			try {
+				cmptService.add(cpInsert);
+			} catch (DateOrderException | ComputerNameEmptyException e) {
+				System.out.println(e.getMessage());
+			}
 			view.computer(cpInsert);
 			view.computerAddSuccess();
 		} catch (NumberFormatException e) {
@@ -327,7 +333,11 @@ public class Controller {
 
 			Computer cpInsert = new Computer(Integer.parseInt(args[2]), args[3], ts1, ts2,
 					cpnyService.getById(Integer.parseInt(args[6])));
-			cmptService.update(cpInsert);
+			try {
+				cmptService.update(cpInsert);
+			} catch (DateOrderException | ComputerNameEmptyException e) {
+				System.out.println(e.getMessage());
+			}
 			view.computer(cpInsert);
 			view.computerUpdateSuccess();
 		} catch (NumberFormatException e) {

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dto.CompanyDTO;
 import dto.ComputerDTO;
 import dto.Mapper;
@@ -33,6 +36,10 @@ public class ListComputerServlet extends HttpServlet {
 	private int pagesCount;
 	private Mapper mapper;
 	private String sortOption = "id";
+	private String nameSearch = "";
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private String orderOption = "id";
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -54,66 +61,79 @@ public class ListComputerServlet extends HttpServlet {
 		 //HttpSession session = request.getSession();
 		 
 		try {
-			currentPage = Integer.valueOf(request.getParameter("pageId")); // TODO Faire autrement
+			currentPage = Integer.valueOf(request.getParameter("pageId"));
 		} catch (NumberFormatException e) {
-			// currentPage = 1;
+			logger.info("kept same page "+ currentPage);
 		}
 		try {
 			objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
 		} catch (NumberFormatException e) {
-			// objPerPage = 10;
+			logger.info("kept same computer display count "+objPerPage);
 		}
 		try {
 			sortOption = request.getParameter("sortOption");
 		} catch (NullPointerException e) {
-
+			logger.info("kept same sorting option "+sortOption);
 		}
-		
-		List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
-		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getAll());
-		pagesCount = allC.size() / objPerPage;
-		
-
-		if (currentPage > pagesCount + PAGE_OFFSET) {
-			currentPage = pagesCount + PAGE_OFFSET;
-			pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
+		try {
+			nameSearch = request.getParameter("search");
+		} catch (NullPointerException e) {
+			logger.info("kept same search option "+nameSearch);
 		}
-		if (currentPage < FIRST_PAGE) {
-			currentPage = FIRST_PAGE;
-			pageC = mapper.mapListComputer(cmptService.getPage(currentPage, objPerPage));
+		logger.info("namesearch = "+nameSearch);
+		if (nameSearch == null) {
+			nameSearch = "";
 		}
-		
 		
 		if (sortOption != null) {
 			switch (sortOption) {
 			case "name":
-				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getName().compareTo(p2.getName()));
+				orderOption = "name";
 				break;
 			case "introdate":
-				pageC.sort((ComputerDTO p1, ComputerDTO p2) ->  p1.getDateIntroduced().compareTo(p2.getDateIntroduced()));
+				orderOption = "introduced";
 				break;
 			case "discondate":
-				pageC.sort((ComputerDTO p1, ComputerDTO p2) ->  p1.getDateDiscontinued().compareTo(p2.getDateDiscontinued()));
+				orderOption = "discontinued";
 				break;
 			case "company":
-				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getCompanyName().compareTo(p2.getCompanyName()));
+				orderOption = "company_id";
 				break;
 			default:
-				pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getId().compareTo(p2.getId()));
+				orderOption = "id";
 				break;
 			}
 		}else {
-			pageC.sort((ComputerDTO p1, ComputerDTO p2) -> p1.getId().compareTo(p2.getId()));
+			orderOption = "id";
 		}
 		
-		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
+		List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
+		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getPageByName(FIRST_PAGE, cmptService.getAll().size(), nameSearch,orderOption));
+		pagesCount = allC.size() / objPerPage -1;
+		
+		
 
-		request.setAttribute("computers", pageC);
-		request.setAttribute("cpNumber", allC.size());
-		request.setAttribute("pageId", currentPage);
-		request.setAttribute("pagesCount", pagesCount);
-		request.setAttribute("companies", cpnyList);
-		request.setAttribute("sortOption", sortOption);
+		if (currentPage > pagesCount + PAGE_OFFSET) {
+			currentPage = pagesCount + PAGE_OFFSET;
+			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
+		}
+		if (currentPage < FIRST_PAGE) {
+			currentPage = FIRST_PAGE;
+			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
+		}
+		
+		
+		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
+		
+		HttpSession session = request.getSession() ;
+
+		session.setAttribute("computers", pageC);
+		session.setAttribute("cpNumber", allC.size());
+		session.setAttribute("pageId", currentPage);
+		session.setAttribute("pagesCount", pagesCount);
+		session.setAttribute("companies", cpnyList);
+		session.setAttribute("sortOption", sortOption);
+		session.setAttribute("search", nameSearch);
 
 		this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}

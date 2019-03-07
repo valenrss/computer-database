@@ -18,7 +18,6 @@ import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
-import validator.Validator;
 
 /**
  * Servlet implementation class AddComputerServlet
@@ -30,17 +29,12 @@ public class AddComputerServlet extends HttpServlet {
 
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
-	private Validator validator;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	
 
 	public AddComputerServlet() {
 		super();
 		cmptService = ComputerServiceImpl.getInstance();
 		cpnyService = CompanyServiceImpl.getInstance();
-		validator = Validator.getInstance();
 	}
 
 	/**
@@ -85,8 +79,6 @@ public class AddComputerServlet extends HttpServlet {
 		}
 
 		try {
-			validator.checkDate(d1, d2);
-			validator.checkName(computerName);
 			cmptService.add(new Computer(DEFAULT_COMPUTER_ID, computerName, d1, d2, cpnyService.getById(cmpnyID)));
 		} catch (DateOrderException e) {
 			request.setAttribute("errorMessage", e);

@@ -26,12 +26,13 @@
 			<h1 id="homeTitle"><i class = "fa fa-desktop "></i><c:out value="     ${cpNumber}"></c:out> Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
-					<form id="searchForm" action="/Computer-Database/SearchComputer" method="GET" class="form-inline">
+					<form id="searchForm" action="/Computer-Database/Dashboard" method="GET" class="form-inline"> 
 
 						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="Search by name, company" /> 
+							class="form-control" placeholder="Search by name, company" value = "${search}" /> 
 							<button type="submit" id="searchsubmit" class="btn btn-primary"> <i class="fa fa-search"></i></button>
-					</form>
+							<!--  <a id="searchsubmit" class="btn btn-primary" href="/Computer-Database/Dashboard?search=${search}"><i class="fa fa-search"></i></a>  -->
+					 </form> 
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer" href="/Computer-Database/AddComputer"><i class="fa fa-plus"></i>     Add
@@ -48,13 +49,13 @@
 		</form>
 
 		<div class="container" style="margin-top: 10px;">
-			<form id="changePage" action="/Computer-Database/Dashboard" method="GET">
+			
 		
 			<table class="table table-striped table-bordered">
 				<thead>
 					
 					<tr>
-						<!-- Variable declarations for passing labels as parameters -->
+						<!-- Variable declarations for passing labels as parameters  -->
 						<!-- Table header for Computer Name -->
 
 						<th class="editMode" style="width: 60px; height: 22px;"><input
@@ -62,10 +63,10 @@
 							style="vertical-align: top;"><a href="#" id="deleteSelected" onclick="$.fn.deleteSelected();"><i class="fa fa-trash-o fa-lg"></i></a>
 						</span></th>
 						
-						<th>Computer name<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="name">▼</button></th>
-						<th>Introduction Date<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="introdate">▼</button></th>
-						<th>Discontinuation Date<button type="submit" style="float: right;" class="btn btn-default" name="sortOption" value="discondate">▼</button></th>
-						<th>Company<button type="submit" class="btn btn-default" style="float: right;" name="sortOption" value="company">▼</button></th>
+						<th>Computer name<a style="float: right;" class="btn btn-default" href="/Computer-Database/Dashboard?sortOption=name">▼</a></th>
+						<th>Introduction Date<a style="float: right;" class="btn btn-default" href="/Computer-Database/Dashboard?sortOption=introdate">▼</a></th>
+						<th>Discontinuation Date<a  style="float: right;" class="btn btn-default" href="/Computer-Database/Dashboard?sortOption=discondate">▼</a></th>
+						<th>Company<a  class="btn btn-default" style="float: right;" href="/Computer-Database/Dashboard?sortOption=company">▼</a></th>
 
 					</tr>
 					
@@ -87,31 +88,31 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</form>	
+			
 		</div>
 	</section>
 
-	<form id="changePage" action="/Computer-Database/Dashboard" method="GET">
+	
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li><a  aria-label="Previous">										  				<button  type="submit"  name="pageId" value="${pageId - 1}" aria-hidden="true">&laquo;</button></a></li>
-			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a>				<button type="submit"  name="pageId" value="${pageId - 2}">${pageId - 2}</button></a></li>
-			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a>				<button type="submit"  name="pageId" value="${pageId - 1}">${pageId - 1}</button></a></li>
-				<li><a>																 				<button type="submit" class="btn btn-default" name="pageId" value="${pageId + 0}">${pageId + 0}</button></a></li>
-				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button  type="submit"  name="pageId" value="${pageId + 1}">${pageId + 1}</button></a></li>
-				<li <c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a><button type="submit" name="pageId" value="${pageId + 2}">${pageId + 2}</button></a></li>
-				<li><a aria-label="Next">															<button type="submit" name="pageId" value="${pageId + 1}" aria-hidden="true">&raquo;</button></a></li>
+				<li><a  aria-label="Previous" href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}">&laquo;</a></li>
+			    <li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}">${pageId - 2}</a></li>
+			    <li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}">${pageId - 1}</a></li>
+				<li><a href="/Computer-Database/Dashboard?pageId=${pageId}&search=${search}&sortOption=${sortOption}">${pageId}</a></li>
+				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}">${pageId + 1}</a></li>
+				<li <c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}">${pageId + 2}</a></li>
+				<li><a aria-label="Next" href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}">&raquo;</a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">
-				<button type="submit" class="btn btn-default" name="objPerPage" value="10">10</button>
-				<button type="submit" class="btn btn-default" name="objPerPage" value="50">50</button>
-				<button type="submit" class="btn btn-default" name="objPerPage" value="100">100</button>
+				<a type="submit" class="btn btn-default" href="/Computer-Database/Dashboard?objPerPage=10&search=${search}">10</a>
+				<a type="submit" class="btn btn-default" href="/Computer-Database/Dashboard?objPerPage=50&search=${search}">50</a>
+				<a type="submit" class="btn btn-default" href="/Computer-Database/Dashboard?objPerPage=100&search=${search}">100</a>
 			</div>
 		</div>
 	</footer>
-	</form>
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/dashboard.js"></script>

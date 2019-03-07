@@ -20,7 +20,7 @@ public class DaoFactory {
 	private static String configFile = "/config.properties";
 	private static HikariConfig cfg;
 	private static HikariDataSource ds;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static Logger logger = LoggerFactory.getLogger(DaoFactory.class);
     
 	/**
 	 * Gets the connect.

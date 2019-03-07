@@ -32,7 +32,7 @@ public interface ComputerDAO {
 	 * @param name the name
 	 * @return Computer List
 	 */
-	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name);
+	public abstract List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption);
 
 	/**
 	 * Creation method.

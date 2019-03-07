@@ -18,7 +18,6 @@ import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
-import validator.Validator;
 
 /**
  * Servlet implementation class EditComputerServlet
@@ -29,7 +28,7 @@ public class EditComputerServlet extends HttpServlet {
 
 	private ComputerServiceImpl cmptService;
 	private CompanyServiceImpl cpnyService;
-	private Validator validator;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,7 +37,7 @@ public class EditComputerServlet extends HttpServlet {
 		super();
 		cmptService = ComputerServiceImpl.getInstance();
 		cpnyService = CompanyServiceImpl.getInstance();
-		validator = Validator.getInstance();
+		
 	}
 
 	/**
@@ -89,18 +88,12 @@ public class EditComputerServlet extends HttpServlet {
 		}
 
 		try {
-			validator.checkDate(d1, d2);
-			validator.checkName(computerName);
 			cmptService.update(new Computer(computerId, computerName, d1, d2, cpnyService.getById(cmpnyID)));
-		} catch (DateOrderException e) {
-			request.setAttribute("errorMessage", e);
+		} catch (DateOrderException  | ComputerNameEmptyException formException) {
+			request.setAttribute("errorMessage", formException.getMessage());
 			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
-
-		} catch (ComputerNameEmptyException e) {
-			request.setAttribute("errorMessage", e);
-			this.getServletContext().getRequestDispatcher("/views/500.jsp").forward(request, response);
-
-		}
+		} 
+			
 
 		this.getServletContext().getRequestDispatcher("/Dashboard").forward(request, response);
 

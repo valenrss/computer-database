@@ -18,9 +18,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 	private static final String SQL_LIST_ALL = "SELECT `id`,`name` FROM `company`";
 	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id < ?";
 
-	private Connection connect = null;
+	private static Connection connect = null;
 	private static CompanyDAOImpl companyDAOImpl;
-	private Logger logger  = LoggerFactory.getLogger(this.getClass());
+	private static Logger logger  = LoggerFactory.getLogger(CompanyDAOImpl.class);
 
 	/**
 	 * Instantiates a new company DAO impl.

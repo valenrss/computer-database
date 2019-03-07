@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import exception.ComputerNameEmptyException;
+import exception.DateOrderException;
 import model.Company;
 import model.Computer;
 
@@ -30,15 +32,19 @@ public interface ComputerService {
 	 * Adds the computer.
 	 *
 	 * @param cpInsert the cp insert
+	 * @throws ComputerNameEmptyException 
+	 * @throws DateOrderException 
 	 */
-	public abstract void add(Computer cpInsert);
+	public abstract void add(Computer cpInsert) throws DateOrderException, ComputerNameEmptyException;
 
 	/**
 	 * Update computer.
 	 *
 	 * @param cpInsert the cp insert
+	 * @throws ComputerNameEmptyException 
+	 * @throws DateOrderException 
 	 */
-	public abstract void update(Computer cpInsert);
+	public abstract void update(Computer cpInsert) throws DateOrderException, ComputerNameEmptyException;
 
 	/**
 	 * Delete computer.
@@ -65,7 +71,7 @@ public interface ComputerService {
 	 * @param name the name
 	 * @return researched comptuers
 	 */
-	List<Computer> getPageByName(int pageNo, int objCount, String name);
+	List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption);
 
 	/**
 	 * Delete by company.
