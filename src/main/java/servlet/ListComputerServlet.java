@@ -38,8 +38,6 @@ public class ListComputerServlet extends HttpServlet {
 	private String sortOption = "id";
 	private String nameSearch = "";
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private String orderOption = "id";
-
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,75 +55,52 @@ public class ListComputerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		 //HttpSession session = request.getSession();
-		 
+
+		// HttpSession session = request.getSession();
+
 		try {
 			currentPage = Integer.valueOf(request.getParameter("pageId"));
 		} catch (NumberFormatException e) {
-			logger.info("kept same page "+ currentPage);
+			logger.info("kept same page " + currentPage);
 		}
 		try {
 			objPerPage = Integer.valueOf(request.getParameter("objPerPage"));
 		} catch (NumberFormatException e) {
-			logger.info("kept same computer display count "+objPerPage);
+			logger.info("kept same computer display count " + objPerPage);
 		}
 		try {
 			sortOption = request.getParameter("sortOption");
 		} catch (NullPointerException e) {
-			logger.info("kept same sorting option "+sortOption);
+			logger.info("kept same sorting option " + sortOption);
 		}
 		try {
 			nameSearch = request.getParameter("search");
 		} catch (NullPointerException e) {
-			logger.info("kept same search option "+nameSearch);
+			logger.info("kept same search option " + nameSearch);
 		}
-		logger.info("namesearch = "+nameSearch);
+		logger.info("namesearch = " + nameSearch);
 		if (nameSearch == null) {
 			nameSearch = "";
 		}
-		
-		if (sortOption != null) {
-			switch (sortOption) {
-			case "name":
-				orderOption = "name";
-				break;
-			case "introdate":
-				orderOption = "introduced";
-				break;
-			case "discondate":
-				orderOption = "discontinued";
-				break;
-			case "company":
-				orderOption = "company_id";
-				break;
-			default:
-				orderOption = "id";
-				break;
-			}
-		}else {
-			orderOption = "id";
-		}
-		
-		List<ComputerDTO> pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
-		List<ComputerDTO> allC = mapper.mapListComputer(cmptService.getPageByName(FIRST_PAGE, cmptService.getAll().size(), nameSearch,orderOption));
-		pagesCount = allC.size() / objPerPage -1;
-		
-		
+
+		List<ComputerDTO> pageC = mapper
+				.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch, sortOption));
+		List<ComputerDTO> allC = mapper.mapListComputer(
+				cmptService.getPageByName(FIRST_PAGE, cmptService.getAll().size(), nameSearch, sortOption));
+		pagesCount = allC.size() / objPerPage - 1;
 
 		if (currentPage > pagesCount + PAGE_OFFSET) {
 			currentPage = pagesCount + PAGE_OFFSET;
-			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
+			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch, sortOption));
 		}
 		if (currentPage < FIRST_PAGE) {
 			currentPage = FIRST_PAGE;
-			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch,orderOption));
+			pageC = mapper.mapListComputer(cmptService.getPageByName(currentPage, objPerPage, nameSearch, sortOption));
 		}
-		
-		
+
 		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
-		
-		HttpSession session = request.getSession() ;
+
+		HttpSession session = request.getSession();
 
 		session.setAttribute("computers", pageC);
 		session.setAttribute("cpNumber", allC.size());

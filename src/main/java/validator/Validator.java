@@ -11,7 +11,7 @@ public class Validator {
 
 	public void checkDate(Date dateIntroduced, Date dateDiscontinued) throws DateOrderException {
 
-		if (dateIntroduced.after(dateDiscontinued)) {
+		if (dateIntroduced != null && dateDiscontinued != null && dateIntroduced.after(dateDiscontinued)) {
 			throw new DateOrderException(
 					"Date " + dateIntroduced.toString() + " must be after " + dateDiscontinued.toString());
 		}
