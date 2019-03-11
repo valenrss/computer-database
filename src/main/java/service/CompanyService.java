@@ -1,10 +1,14 @@
 package service;
 
 import java.sql.SQLException;
+
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import model.Company;
 
+@Service
 public interface CompanyService {
 
 	/**

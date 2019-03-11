@@ -3,12 +3,14 @@ package dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import model.Company;
 import model.Computer;
 
+@Component
 public class Mapper {
 
-	private static Mapper mapperInstance;
 
 	/**
 	 * Map computer.
@@ -105,18 +107,6 @@ public class Mapper {
 		}
 
 		return cnyDTOList;
-	}
-
-	/**
-	 * Gets the single instance of Mapper.
-	 *
-	 * @return single instance of Mapper
-	 */
-	public static Mapper getInstance() {
-		if (mapperInstance == null) {
-			mapperInstance = new Mapper();
-		}
-		return mapperInstance;
 	}
 
 }

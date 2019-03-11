@@ -2,10 +2,12 @@ package view;
 
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
 import model.Company;
 import model.Computer;
 
-
+@Repository
 public class View {
 
 	public View() {

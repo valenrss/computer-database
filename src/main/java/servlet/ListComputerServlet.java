@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dto.CompanyDTO;
 import dto.ComputerDTO;
@@ -29,11 +30,14 @@ public class ListComputerServlet extends HttpServlet {
 	private static final int PAGE_OFFSET = 2;
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	private ComputerServiceImpl cmptService;
+	@Autowired
 	private CompanyServiceImpl cpnyService;
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
+	@Autowired
 	private Mapper mapper;
 	private String sortOption = "id";
 	private String nameSearch = "";
@@ -44,9 +48,6 @@ public class ListComputerServlet extends HttpServlet {
 	 */
 	public ListComputerServlet() {
 		super();
-		cmptService = ComputerServiceImpl.getInstance();
-		cpnyService = CompanyServiceImpl.getInstance();
-		mapper = Mapper.getInstance();
 	}
 
 	/**

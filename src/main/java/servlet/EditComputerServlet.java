@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -26,7 +28,9 @@ import service.ComputerServiceImpl;
 public class EditComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	private ComputerServiceImpl cmptService;
+	@Autowired
 	private CompanyServiceImpl cpnyService;
 	
 
@@ -35,8 +39,6 @@ public class EditComputerServlet extends HttpServlet {
 	 */
 	public EditComputerServlet() {
 		super();
-		cmptService = ComputerServiceImpl.getInstance();
-		cpnyService = CompanyServiceImpl.getInstance();
 		
 	}
 

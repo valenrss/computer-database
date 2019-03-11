@@ -2,23 +2,23 @@ package service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import dao.CompanyDAOImpl;
-import dao.DaoFactory;
 import model.Company;
 
+@Service
 public class CompanyServiceImpl implements CompanyService {
-
-	private DaoFactory fact;
+	
+	@Autowired
 	private CompanyDAOImpl cnydao;
-
-	private static CompanyServiceImpl companyServiceImpl;
 
 	/**
 	 * Instantiates a new company service impl.
 	 */
 	private CompanyServiceImpl() {
-		fact = DaoFactory.getInstance();
-		cnydao = CompanyDAOImpl.getInstance(fact.getConnect());
+	
 	}
 
 	/*
@@ -51,13 +51,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public Company getById(int id) {
 		return cnydao.getById(id);
-	}
-
-	public static CompanyServiceImpl getInstance() {
-		if (companyServiceImpl == null) {
-			companyServiceImpl = new CompanyServiceImpl();
-		}
-		return companyServiceImpl;
 	}
 
 }

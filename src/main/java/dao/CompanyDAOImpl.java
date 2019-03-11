@@ -2,7 +2,6 @@ package dao;
 
 import model.Company;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,25 +10,24 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
-public class CompanyDAOImpl implements CompanyDAO {
+@Repository
+public class CompanyDAOImpl extends Dao implements CompanyDAO {
 
 	private static final String SQL_GET_BY_ID = "SELECT `id`,`name` FROM `company` WHERE id = ?";
 	private static final String SQL_LIST_ALL = "SELECT `id`,`name` FROM `company`";
 	private static final String SQL_PAGE = "SELECT `id`,`name` FROM `company` WHERE id >= ? AND id < ?";
 
-	private static Connection connect = null;
-	private static CompanyDAOImpl companyDAOImpl;
 	private static Logger logger  = LoggerFactory.getLogger(CompanyDAOImpl.class);
+	
 
 	/**
 	 * Instantiates a new company DAO impl.
 	 *
 	 * @param conn the Connection
 	 */
-	private CompanyDAOImpl(Connection conn) {
-
-		connect = conn;
+	private CompanyDAOImpl() {
 	}
 
 	/**
@@ -44,7 +42,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 		PreparedStatement prep;
 		try {
-			prep = connect.prepareStatement(SQL_LIST_ALL);
+			prep = connect().prepareStatement(SQL_LIST_ALL);
 			prep.executeQuery();
 			ResultSet rs = prep.getResultSet();
 
@@ -72,7 +70,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 		int maxId = minId + objCount;
 
 		try {
-			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
+			PreparedStatement prep1 = connect().prepareStatement(SQL_PAGE);
 
 			prep1.setInt(1, minId);
 			prep1.setInt(2, maxId);
@@ -98,7 +96,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 		try {
 			if (id != 0) {
-				PreparedStatement prep2 = connect.prepareStatement(SQL_GET_BY_ID);
+				PreparedStatement prep2 = connect().prepareStatement(SQL_GET_BY_ID);
 				prep2.setString(1, id + "");
 				prep2.executeQuery();
 				ResultSet rs = prep2.getResultSet();
@@ -118,18 +116,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 			return new Company(0, "-");
 		}
 
-	}
-
-	/**
-	 * 
-	 * @param conn
-	 * @return instange of CompanyDAO
-	 */
-	public static CompanyDAOImpl getInstance(Connection conn) {
-		if (companyDAOImpl == null) {
-			companyDAOImpl = new CompanyDAOImpl(conn);
-		}
-		return companyDAOImpl;
 	}
 
 }

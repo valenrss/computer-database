@@ -3,9 +3,12 @@ package controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
 
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
@@ -18,6 +21,7 @@ import view.View;
 /**
  * The Class CommandInterface.
  */
+@Component
 public class Controller {
 
 	private static final int MAX_ARGUMENTS = 20;
@@ -25,39 +29,17 @@ public class Controller {
 	private static final String UNKNOWN_INPUT = "?";
 	private static final String TIME_HOURS = " 00:00:00.0";
 
+	@Autowired
 	private View view;
+	
+	@Autowired
 	private ComputerServiceImpl cmptService;
+	
+	@Autowired
 	private CompanyServiceImpl cpnyService;
 
 	public Controller() {
-		view = new View();
-		cmptService = ComputerServiceImpl.getInstance();
-		cpnyService = CompanyServiceImpl.getInstance();
-	}
-
-	/**
-	 * The method that loops after every command until quit
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-
-		String UserInput = "";
-		String[] UserCommands = { "0" };
-		Controller cmdint = new Controller();
-		Scanner sc = new Scanner(System.in);
-
-		do {
-			UserInput = sc.nextLine();
-
-			UserCommands = inputSplitter(UserInput);
-
-			cmdint.readCommand(UserCommands);
-
-		} while (!UserInput.equals("quit"));
-
-		sc.close();
-
+		
 	}
 
 	/**
@@ -68,7 +50,6 @@ public class Controller {
 	 * @return boolean is the command recognized
 	 */
 	public void readCommand(String[] args) {
-		// TODO finish implementing page system for computers
 		if (args[0] != null) {
 			switch (args[0]) {
 			case "list":
@@ -166,7 +147,7 @@ public class Controller {
 	 * @param usrInpt String inputed by the user
 	 * @return String[] of commands
 	 */
-	public static String[] inputSplitter(String usrInpt) {
+	public String[] inputSplitter(String usrInpt) {
 
 		String[] usrCmd = new String[MAX_ARGUMENTS];
 		List<String> matchList = new ArrayList<String>();

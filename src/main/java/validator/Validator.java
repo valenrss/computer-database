@@ -2,12 +2,15 @@ package validator;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 
+@Component
 public class Validator {
 
-	private static Validator validatorInstance;
+
 
 	public void checkDate(Date dateIntroduced, Date dateDiscontinued) throws DateOrderException {
 
@@ -22,13 +25,6 @@ public class Validator {
 		if (name == null || name == "") {
 			throw new ComputerNameEmptyException("Name must not be empty");
 		}
-	}
-
-	public static Validator getInstance() {
-		if (validatorInstance == null) {
-			validatorInstance = new Validator();
-		}
-		return validatorInstance;
 	}
 
 }

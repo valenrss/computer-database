@@ -2,25 +2,26 @@ package service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import dao.ComputerDAOImpl;
-import dao.DaoFactory;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
 import model.Computer;
 import validator.Validator;
 
+@Service
 public class ComputerServiceImpl implements ComputerService {
 
-	private DaoFactory fact;
+	@Autowired
 	private ComputerDAOImpl comptdao;
+	@Autowired
 	private Validator validator;
-	private static ComputerServiceImpl computerServiceImpl;
 
 	private ComputerServiceImpl() {
-		fact = DaoFactory.getInstance();
-		comptdao = ComputerDAOImpl.getInstance(fact.getConnect());
-		validator = Validator.getInstance();
+		
 	}
 
 	/*
@@ -117,14 +118,6 @@ public class ComputerServiceImpl implements ComputerService {
 	public boolean deleteByCompany(Company company) {
 		return comptdao.deleteByCompany(company);
 		
-	}
-	
-	
-	public static ComputerServiceImpl getInstance() {
-		if (computerServiceImpl == null) {
-			computerServiceImpl = new ComputerServiceImpl();
-		}
-		return computerServiceImpl;
 	}
 	
 }

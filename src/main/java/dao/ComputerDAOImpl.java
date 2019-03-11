@@ -10,8 +10,11 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-public class ComputerDAOImpl implements ComputerDAO {
+@Repository
+public class ComputerDAOImpl extends Dao implements ComputerDAO {
 
 	private static final String SQL_DELETE_COMPUTER_WHERE_COMPANY_ID = "DELETE FROM `computer` WHERE `company_id` = ?";
 	private static final String SQL_DELETE_FROM_COMPANY_WHERE_ID = "DELETE FROM `company` WHERE `id` = ?";
@@ -30,14 +33,13 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
 	private static ResultSet rs;
-	private static Connection connect = null;
+	
 	private static Logger logger = LoggerFactory.getLogger(ComputerDAOImpl.class);
+	@Autowired
+	private CompanyServiceImpl cpnyService;
 
-	private static ComputerDAOImpl computerDAOImpl;
 
-	private ComputerDAOImpl(Connection conn) {
-
-		connect = conn;
+	private ComputerDAOImpl() {	
 	}
 
 	/**
@@ -51,14 +53,14 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		PreparedStatement prep;
 		try {
-			prep = connect.prepareStatement(SQL_GETLIST);
+			prep = connect().prepareStatement(SQL_GETLIST);
 			prep.executeQuery();
 			ResultSet rs = prep.getResultSet();
 
 			while (rs.next()) {
 				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
 						rs.getTimestamp("discontinued"),
-						CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
+						cpnyService.getById(rs.getInt("company_id"))));
 			}
 
 			return cpList;
@@ -79,7 +81,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	public void create(Computer comp) {
 
 		try {
-			PreparedStatement prep1 = connect.prepareStatement(SQL_CREATE);
+			PreparedStatement prep1 = connect().prepareStatement(SQL_CREATE);
 
 			prep1.setString(1, comp.getName());
 
@@ -115,7 +117,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 		try {
 
 			int success = 0;
-			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_ID);
+			PreparedStatement prep1 = connect().prepareStatement(SQL_DELETE_ID);
 			prep1.setInt(1, id);
 			success = prep1.executeUpdate();
 			if (success == 1) {
@@ -138,7 +140,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	 */
 	@Override
 	public boolean deleteByCompany(Company company) {
-		try {
+		try { Connection connect = connect();
 			int success = 0;
 			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_FROM_COMPANY_WHERE_ID);
 			PreparedStatement prep2 = connect.prepareStatement(SQL_DELETE_COMPUTER_WHERE_COMPANY_ID);
@@ -170,7 +172,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 
-			PreparedStatement prep1 = connect.prepareStatement(SQL_UPDATE);
+			PreparedStatement prep1 = connect().prepareStatement(SQL_UPDATE);
 
 			prep1.setString(1, comp.getName());
 			try {
@@ -206,7 +208,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 
-			PreparedStatement prep = connect.prepareStatement(SQL_FIND_BY_ID);
+			PreparedStatement prep = connect().prepareStatement(SQL_FIND_BY_ID);
 			prep.setInt(1, id);
 			prep.executeQuery();
 			ResultSet result = prep.getResultSet();
@@ -214,7 +216,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			if (result.first())
 				comp = new Computer(id, result.getString("name"), result.getTimestamp("introduced"),
 						result.getTimestamp("discontinued"),
-						CompanyServiceImpl.getInstance().getById(result.getInt("company_id")));
+						cpnyService.getById(result.getInt("company_id")));
 			return comp;
 
 		} catch (SQLException e) {
@@ -238,7 +240,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		try {
 
-			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
+			PreparedStatement prep1 = connect().prepareStatement(SQL_PAGE);
 
 			prep1.setInt(1, minId);
 			prep1.setInt(2, maxId);
@@ -250,7 +252,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			while (rs.next()) {
 				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
 						rs.getTimestamp("discontinued"),
-						CompanyServiceImpl.getInstance().getById(rs.getInt("company_id"))));
+						cpnyService.getById(rs.getInt("company_id"))));
 			}
 
 			return cpList;
@@ -260,13 +262,6 @@ public class ComputerDAOImpl implements ComputerDAO {
 			return cpList;
 		}
 
-	}
-
-	public static ComputerDAOImpl getInstance(Connection conn) {
-		if (computerDAOImpl == null) {
-			computerDAOImpl = new ComputerDAOImpl(conn);
-		}
-		return computerDAOImpl;
 	}
 
 	/*
@@ -281,7 +276,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 		int minId = pageNo * objCount - objCount;
 
-		try {
+		try {Connection connect = connect();
 			PreparedStatement prep1;
 
 			if (orderOption != null) {
@@ -323,7 +318,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 			while (rs.next()) {
 				cpList.add(new Computer(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("introduced"),
 						rs.getTimestamp("discontinued"),
-						CompanyDAOImpl.getInstance(connect).getById(rs.getInt("company_id"))));
+						cpnyService.getById(rs.getInt("company_id"))));
 			}
 			logger.debug(cpList.toString());
 

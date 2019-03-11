@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import service.ComputerServiceImpl;
 
 /**
@@ -17,6 +19,7 @@ import service.ComputerServiceImpl;
 public class DeleteComputerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	private ComputerServiceImpl cmptService;
 
 	/**
@@ -24,7 +27,6 @@ public class DeleteComputerServlet extends HttpServlet {
 	 */
 	public DeleteComputerServlet() {
 		super();
-		cmptService = ComputerServiceImpl.getInstance();
 	}
 
 	/**

@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -10,6 +12,7 @@ import model.Computer;
 /**
  * The Interface ComputerService.
  */
+@Service
 public interface ComputerService {
 
 	/**
