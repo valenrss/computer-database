@@ -19,8 +19,8 @@ public class ComputerDAOTests {
 	Date ts = Timestamp.valueOf("2012-01-01 00:00:00.0");
 	Date td = Timestamp.valueOf("2013-01-01 00:00:00.0");
 	Computer cp = new Computer(0, "Delll Laptop", ts, td, new Company(1,"Apple inc."));
-	DaoFactory fact = DaoFactory.getInstance();
-	ComputerDAOImpl cpmpt = ComputerDAOImpl.getInstance(fact.getConnect());
+	DaoFactory fact;
+	ComputerDAOImpl cpmpt;
 
 	@Test
 	public void createComputer() {

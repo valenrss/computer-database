@@ -20,9 +20,9 @@ public class ControllerTests {
 	@Test
 	public void inputSplitter() {
 
-		assertEquals("tes",    Controller.inputSplitter("tes t jesuis")[0]);
-		assertEquals("t",      Controller.inputSplitter("tes t jesuis")[1]);
-		assertEquals("jesuis", Controller.inputSplitter("tes t jesuis")[2]);
+		assertEquals("tes",    controller.inputSplitter("tes t jesuis")[0]);
+		assertEquals("t",      controller.inputSplitter("tes t jesuis")[1]);
+		assertEquals("jesuis", controller.inputSplitter("tes t jesuis")[2]);
 
 	}
 	

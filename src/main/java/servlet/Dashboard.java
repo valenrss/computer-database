@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import dto.CompanyDTO;
 import dto.ComputerDTO;
@@ -23,8 +25,8 @@ import service.ComputerServiceImpl;
 /**
  * Servlet implementation class ComputerServlet
  */
-@WebServlet(name = "ListComputerServlet", urlPatterns = { "/listComputerServlet" })
-public class ListComputerServlet extends HttpServlet {
+@WebServlet(name = "Dashboard", urlPatterns = { "/Dashboard" })
+public class Dashboard extends HttpServlet {
 
 	private static final int FIRST_PAGE = 1;
 	private static final int PAGE_OFFSET = 2;
@@ -43,12 +45,11 @@ public class ListComputerServlet extends HttpServlet {
 	private String nameSearch = "";
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ListComputerServlet() {
-		super();
-	}
+	@Override
+	  public void init(ServletConfig config) throws ServletException {
+	    super.init(config);
+	    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	  }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -56,8 +57,6 @@ public class ListComputerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// HttpSession session = request.getSession();
 
 		try {
 			currentPage = Integer.valueOf(request.getParameter("pageId"));
