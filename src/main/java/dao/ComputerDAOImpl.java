@@ -22,13 +22,20 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	private static final String SQL_GETLIST = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer`";
 	private static final String SQL_PAGE = "SELECT `id`,`name`,`introduced`,`discontinued`, `company_id` FROM `computer` WHERE id >= ? AND id < ?";
 	
-	private static final String SQL_PAGE_ID = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(computer.id), computer.id ASC limit ? offset ?";
+	private static final String SQL_PAGE_ID = "SELECT * "
+											+ "FROM `computer` "
+											+ "LEFT JOIN company "
+											+ "ON computer.company_id = company.id "
+											+ "WHERE computer.name LIKE ? "
+											+ "OR company.name LIKE ? "
+											+ "ORDER BY ISNULL(computer.id), computer.id "
+											+ "ASC limit ? offset ?";
 	private static final String SQL_PAGE_NAME = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(computer.name), computer.name ASC limit ? offset ?";
 	private static final String SQL_PAGE_NAME_DESC = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(computer.name), computer.name DESC limit ? offset ?";
-
 	private static final String SQL_PAGE_INTRODUCED = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(computer.introduced), computer.introduced ASC limit ? offset ?";
 	private static final String SQL_PAGE_DISCONTINUED = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(computer.discontinued), computer.discontinued ASC limit ? offset ?";
 	private static final String SQL_PAGE_COMPANY = "SELECT * FROM `computer` LEFT JOIN company ON computer.company_id = company.id WHERE computer.name LIKE ? OR company.name LIKE ? ORDER BY ISNULL(company.name), company.name ASC limit ? offset ?";
+	
 	private static final String SQL_UPDATE = "UPDATE `computer` SET `name` = ?, `introduced` = ?, `discontinued` = ?, `company_id` = ? WHERE `id` = ?";
 	private static final String SQL_DELETE_ID = "DELETE FROM `computer` WHERE `id` = ?";
 	private static final String SQL_CREATE = "INSERT INTO `computer` (`name`,`introduced`,`discontinued`, `company_id`) VALUES (?,?,?,?)";
