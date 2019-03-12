@@ -3,6 +3,8 @@ package config;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,12 +15,14 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+
 @Configuration
-@ComponentScan({"dao","service","validator","controller", "view","main","dto"})
+@ComponentScan({"dao","service","validator","controller", "view","main","dto","servlet"})
 public class SpringConfig implements WebApplicationInitializer {
 		
 	private static String configFile = "/config.properties";
 	private static HikariConfig cfg;
+	private static Logger logger  = LoggerFactory.getLogger(SpringConfig.class);
 
 	  /**
 	   * Data source.
@@ -28,11 +32,20 @@ public class SpringConfig implements WebApplicationInitializer {
 	  //private static final HikariConfig hikariConfig = new HikariConfig("/config.properties");
 	  @Bean
 	  public HikariDataSource dataSource() {
+		  
+		  try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				logger.error(e.getMessage());
+	}
 	 
 		cfg = new HikariConfig(configFile);
-	    HikariDataSource ds = new HikariDataSource(cfg);
+	    HikariDataSource dataSource = new HikariDataSource(cfg);
+	    
+	    dataSource.setLeakDetectionThreshold(60 * 1000);
+	    dataSource.setMaximumPoolSize(16);
 
-	    return ds;
+	    return dataSource;
 	}
 
 	@Override

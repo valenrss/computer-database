@@ -2,6 +2,7 @@ package dao;
 
 import model.Company;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +42,8 @@ public class CompanyDAOImpl extends Dao implements CompanyDAO {
 		List<Company> compList = new ArrayList<>();
 
 		PreparedStatement prep;
-		try {
-			prep = connect().prepareStatement(SQL_LIST_ALL);
+		try (Connection connect = connect()) {
+			prep = connect.prepareStatement(SQL_LIST_ALL);
 			prep.executeQuery();
 			ResultSet rs = prep.getResultSet();
 
@@ -69,8 +70,8 @@ public class CompanyDAOImpl extends Dao implements CompanyDAO {
 		int minId = pageNo * objCount - objCount;
 		int maxId = minId + objCount;
 
-		try {
-			PreparedStatement prep1 = connect().prepareStatement(SQL_PAGE);
+		try (Connection connect = connect()) {
+			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
 
 			prep1.setInt(1, minId);
 			prep1.setInt(2, maxId);
@@ -94,9 +95,9 @@ public class CompanyDAOImpl extends Dao implements CompanyDAO {
 
 		Company cmp;
 
-		try {
+		try (Connection connect = connect()) {
 			if (id != 0) {
-				PreparedStatement prep2 = connect().prepareStatement(SQL_GET_BY_ID);
+				PreparedStatement prep2 = connect.prepareStatement(SQL_GET_BY_ID);
 				prep2.setString(1, id + "");
 				prep2.executeQuery();
 				ResultSet rs = prep2.getResultSet();

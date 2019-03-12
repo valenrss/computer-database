@@ -52,8 +52,8 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 		List<Computer> cpList = new ArrayList<>();
 
 		PreparedStatement prep;
-		try {
-			prep = connect().prepareStatement(SQL_GETLIST);
+		try (Connection connect = connect()) {
+			prep = connect.prepareStatement(SQL_GETLIST);
 			prep.executeQuery();
 			ResultSet rs = prep.getResultSet();
 
@@ -80,8 +80,8 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	@Override
 	public void create(Computer comp) {
 
-		try {
-			PreparedStatement prep1 = connect().prepareStatement(SQL_CREATE);
+		try (Connection connect = connect()) {
+			PreparedStatement prep1 = connect.prepareStatement(SQL_CREATE);
 
 			prep1.setString(1, comp.getName());
 
@@ -114,10 +114,10 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	@Override
 	public boolean delete(int id) {
 
-		try {
+		try (Connection connect = connect()) {
 
 			int success = 0;
-			PreparedStatement prep1 = connect().prepareStatement(SQL_DELETE_ID);
+			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_ID);
 			prep1.setInt(1, id);
 			success = prep1.executeUpdate();
 			if (success == 1) {
@@ -140,7 +140,7 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	 */
 	@Override
 	public boolean deleteByCompany(Company company) {
-		try { Connection connect = connect();
+		try (Connection connect = connect()) { 
 			int success = 0;
 			PreparedStatement prep1 = connect.prepareStatement(SQL_DELETE_FROM_COMPANY_WHERE_ID);
 			PreparedStatement prep2 = connect.prepareStatement(SQL_DELETE_COMPUTER_WHERE_COMPANY_ID);
@@ -170,9 +170,9 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	@Override
 	public void update(Computer comp) {
 
-		try {
+		try (Connection connect = connect()) {
 
-			PreparedStatement prep1 = connect().prepareStatement(SQL_UPDATE);
+			PreparedStatement prep1 = connect.prepareStatement(SQL_UPDATE);
 
 			prep1.setString(1, comp.getName());
 			try {
@@ -206,9 +206,9 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 	public Computer find(int id) {
 		Computer comp = null;
 
-		try {
+		try (Connection connect = connect()) {
 
-			PreparedStatement prep = connect().prepareStatement(SQL_FIND_BY_ID);
+			PreparedStatement prep = connect.prepareStatement(SQL_FIND_BY_ID);
 			prep.setInt(1, id);
 			prep.executeQuery();
 			ResultSet result = prep.getResultSet();
@@ -238,9 +238,9 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 		int minId = pageNo * objCount - objCount;
 		int maxId = minId + objCount;
 
-		try {
+		try (Connection connect = connect()) {
 
-			PreparedStatement prep1 = connect().prepareStatement(SQL_PAGE);
+			PreparedStatement prep1 = connect.prepareStatement(SQL_PAGE);
 
 			prep1.setInt(1, minId);
 			prep1.setInt(2, maxId);
@@ -276,7 +276,7 @@ public class ComputerDAOImpl extends Dao implements ComputerDAO {
 
 		int minId = pageNo * objCount - objCount;
 
-		try {Connection connect = connect();
+		try (Connection connect = connect()) {
 			PreparedStatement prep1;
 
 			if (orderOption != null) {

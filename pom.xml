@@ -9,7 +9,6 @@
 	<name>Computer-Database Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-
 	<properties>
 		<junit.version>4.11</junit.version>
 		<commons-lang.version>2.6</commons-lang.version>
@@ -33,7 +32,7 @@
 
 	<dependencies>
 
-			<dependency>
+	<dependency>
 	    <groupId>org.springframework.integration</groupId>
 	    <artifactId>spring-integration-core</artifactId>
 		<version>${spring.version}</version>
