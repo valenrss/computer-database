@@ -17,11 +17,10 @@ import com.zaxxer.hikari.HikariDataSource;
 
 
 @Configuration
-@ComponentScan({"dao","service","validator","controller", "view","main","dto","servlet"})
+@ComponentScan({"dao","service","validator","controller", "view","main","dto","servlet","mapper"})
 public class SpringConfig implements WebApplicationInitializer {
 		
 	private static String configFile = "/config.properties";
-	private static HikariConfig cfg;
 	private static Logger logger  = LoggerFactory.getLogger(SpringConfig.class);
 
 	  /**
@@ -29,9 +28,10 @@ public class SpringConfig implements WebApplicationInitializer {
 	   *
 	   * @return the hikari data source
 	   */
-	  //private static final HikariConfig hikariConfig = new HikariConfig("/config.properties");
 	  @Bean
-	  public HikariDataSource dataSource() {
+	  public static HikariDataSource dataSource() {
+		  
+		  HikariConfig cfg;
 		  
 		  try {
 				Class.forName("com.mysql.cj.jdbc.Driver");

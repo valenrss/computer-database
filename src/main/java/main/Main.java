@@ -3,43 +3,45 @@ package main;
 import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
 
 import config.SpringConfig;
 import controller.Controller;
 
-@Component
 public class Main {
-	
-	private static Controller controller;
 
 	/**
-	 * The method that loops after every command until quit
+	 * The method that looks after every user command until quit
 	 *
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		
-		@SuppressWarnings("resource")
+		Controller controller;
+		
+		
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
 
-		String UserInput = "";
-		String[] UserCommands = { "0" };
-		Scanner sc = new Scanner(System.in);
+		String userInput = "";
+		String[] userCommands;
+		Scanner scanner = new Scanner(System.in);
 		controller = applicationContext.getBean("controller",Controller.class);
 
 		do {
-			UserInput = sc.nextLine();
+			userInput = scanner.nextLine();
 
-			UserCommands = controller.inputSplitter(UserInput);
+			userCommands = controller.inputSplitter(userInput);
 
-			controller.readCommand(UserCommands);
+			controller.readCommand(userCommands);
 
-		} while (!UserInput.equals("quit"));
+		} while (!userInput.equals("quit"));
 
-		sc.close();
+		scanner.close();
+		
+		
+		((ConfigurableApplicationContext)applicationContext).close();
 
 	}
-
+	
 }

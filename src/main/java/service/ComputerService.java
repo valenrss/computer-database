@@ -22,14 +22,6 @@ public interface ComputerService {
 	 */
 	public abstract List<Computer> getAll();
 
-	/**
-	 * List get computer pages.
-	 *
-	 * @param pageNo the page no
-	 * @param objCount the obj count
-	 * @return Computer List
-	 */
-	public abstract List<Computer> getPage(int pageNo, int objCount);
 
 	/**
 	 * Adds the computer.

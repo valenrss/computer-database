@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import dao.CompanyDAOImpl;
 import dao.ComputerDAOImpl;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
@@ -17,6 +19,8 @@ public class ComputerServiceImpl implements ComputerService {
 
 	@Autowired
 	private ComputerDAOImpl comptdao;
+	@Autowired
+	private CompanyDAOImpl cnydao;
 	@Autowired
 	private Validator validator;
 
@@ -97,16 +101,6 @@ public class ComputerServiceImpl implements ComputerService {
 		return comptdao.find(id);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see service.ComputerService#getComputerPage(int, int)
-	 */
-	@Override
-	public List<Computer> getPage(int pageNo, int objCount) {
-
-		return comptdao.getPage(pageNo, objCount);
-	}
 	
 	/**
 	 * Delete by company.
@@ -115,8 +109,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @return true, if successful
 	 */
 	@Override
+	@Transactional
 	public boolean deleteByCompany(Company company) {
-		return comptdao.deleteByCompany(company);
+		return comptdao.deleteByCompany(company) && cnydao.deleteById(company);
 		
 	}
 	

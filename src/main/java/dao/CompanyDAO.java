@@ -15,4 +15,6 @@ public interface CompanyDAO {
 
 	public Company getById(int id);
 
+	boolean deleteById(Company company);
+
 }

@@ -19,11 +19,10 @@ public class Mapper {
 	 * @return the computer DTO
 	 */
 	public ComputerDTO mapComputer(Computer comp) {
-		ComputerDTO compDTO = new ComputerDTO(Integer.toString(comp.getId()), comp.getName(),
+		return new ComputerDTO(Integer.toString(comp.getId()), comp.getName(),
 				comp.getDateIntroduced().toString(), comp.getDateDiscontinued().toString(),
 				Integer.toString(comp.getCompany().getId()), comp.getCompany().getName());
 
-		return compDTO;
 	}
 
 	/**

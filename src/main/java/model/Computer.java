@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class Computer  {
 
-	private int Id;
-	private String Name;
-	private Date DateIntroduced;
-	private Date DateDiscontinued;
-	private Company Company;
+	private int id;
+	private String name;
+	private Date dateIntroduced;
+	private Date dateDiscontinued;
+	private Company company;
 
 
 	/**
@@ -24,11 +24,11 @@ public class Computer  {
 	 */
 	public Computer(int id, String name, Date dateIntroduced, Date dateDiscontinued, Company company) {
 
-		Id = id;
-		Name = name;
-		DateIntroduced = dateIntroduced;
-		DateDiscontinued = dateDiscontinued;
-		Company = company;
+		this.id = id;
+		this.name = name;
+		this.dateIntroduced = dateIntroduced;
+		this.dateDiscontinued = dateDiscontinued;
+		this.company = company;
 
 	}
 
@@ -38,7 +38,7 @@ public class Computer  {
 	 * @return the id
 	 */
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Computer  {
 	 * @param id the new id
 	 */
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Computer  {
 	 * @return the name
 	 */
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class Computer  {
 	 * @param name the new name
 	 */
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Computer  {
 	 * @return the date introduced
 	 */
 	public Date getDateIntroduced() {
-		return DateIntroduced;
+		return dateIntroduced;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class Computer  {
 	 * @param dateIntroduced the new date introduced
 	 */
 	public void setDateIntroduced(Timestamp dateIntroduced) {
-		DateIntroduced = dateIntroduced;
+		this.dateIntroduced = dateIntroduced;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Computer  {
 	 * @return the date discontinued
 	 */
 	public Date getDateDiscontinued() {
-		return DateDiscontinued;
+		return dateDiscontinued;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Computer  {
 	 * @param dateDiscontinued the new date discontinued
 	 */
 	public void setDateDiscontinued(Timestamp dateDiscontinued) {
-		DateDiscontinued = dateDiscontinued;
+		this.dateDiscontinued = dateDiscontinued;
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class Computer  {
 	 * @return the company id
 	 */
 	public Company getCompany() {
-		return Company;
+		return company;
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class Computer  {
 	 * @param companyId the new company id
 	 */
 	public void setCompany(Company company) {
-		Company = company;
+		this.company = company;
 	}
 
 	/*
@@ -129,8 +129,8 @@ public class Computer  {
 	 */
 	@Override
 	public String toString() {
-		return "\nComputer Id : " + Id + "\nName : " + Name + "\nDate Introduced : " + DateIntroduced
-				+ "\nDate Discontinued : " + DateDiscontinued + "\nCompany Id : " + Company.getId() + "\n";
+		return "\nComputer Id : " + id + "\nName : " + name + "\nDate Introduced : " + dateIntroduced
+				+ "\nDate Discontinued : " + dateDiscontinued + "\nCompany Id : " + company.getId() + "\nCompany Name : "+ company.getName() + "\n";
 	}
 
 	/*
@@ -147,9 +147,9 @@ public class Computer  {
 			return false;
 		}
 		Computer cmpt = (Computer) o;
-		return Objects.equals(Name, cmpt.getName()) && Objects.equals(DateIntroduced, cmpt.getDateIntroduced())
-				&& Objects.equals(DateDiscontinued, cmpt.getDateDiscontinued())
-				&& Objects.equals(Company, cmpt.getCompany());
+		return Objects.equals(name, cmpt.getName()) && Objects.equals(dateIntroduced, cmpt.getDateIntroduced())
+				&& Objects.equals(dateDiscontinued, cmpt.getDateDiscontinued())
+				&& Objects.equals(company, cmpt.getCompany());
 	}
 
 	/*
@@ -159,7 +159,7 @@ public class Computer  {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(Name, DateIntroduced, DateDiscontinued, Company.getId());
+		return Objects.hash(name, dateIntroduced, dateDiscontinued, company.getId());
 	}
 
 	

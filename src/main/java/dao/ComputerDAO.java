@@ -17,14 +17,6 @@ public interface ComputerDAO {
 	 */
 	public List<Computer> getList();
 
-	/**
-	 * List get computer pages.
-	 *
-	 * @param pageNo the page no
-	 * @param objCount the obj count
-	 * @return Computer List
-	 */
-	public abstract List<Computer> getPage(int pageNo, int objCount);
 
 	/**
 	 * List get computer pages.

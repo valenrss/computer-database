@@ -22,7 +22,7 @@ public class Validator {
 	}
 
 	public void checkName(String name) throws ComputerNameEmptyException {
-		if (name == null || name == "") {
+		if (name == null || "".equals(name)) {
 			throw new ComputerNameEmptyException("Name must not be empty");
 		}
 	}

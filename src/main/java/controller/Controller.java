@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
+import dao.CompanyDAOImpl;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -28,6 +31,7 @@ public class Controller {
 	private static final int DEFAULT_COMPUTER_ID = 0;
 	private static final String UNKNOWN_INPUT = "?";
 	private static final String TIME_HOURS = " 00:00:00.0";
+	private static Logger logger  = LoggerFactory.getLogger(CompanyDAOImpl.class);
 
 	@Autowired
 	private View view;
@@ -37,10 +41,6 @@ public class Controller {
 	
 	@Autowired
 	private CompanyServiceImpl cpnyService;
-
-	public Controller() {
-		
-	}
 
 	/**
 	 * Method to process the user commands and call specific methods to execute the
@@ -150,7 +150,7 @@ public class Controller {
 	public String[] inputSplitter(String usrInpt) {
 
 		String[] usrCmd = new String[MAX_ARGUMENTS];
-		List<String> matchList = new ArrayList<String>();
+		List<String> matchList = new ArrayList<>();
 		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
 		Matcher regexMatcher = regex.matcher(usrInpt);
 
@@ -198,7 +198,6 @@ public class Controller {
 			view.company(comp);
 		}
 
-		// cnyList.stream().forEach(System.out::println);
 	}
 
 	/**
@@ -210,11 +209,11 @@ public class Controller {
 	public void pageComputers(String pageNo, String objCount) {
 		try {
 			view.computersPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
-			List<Computer> cpList = cmptService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
+			List<Computer> cpList = cmptService.getPageByName(Integer.parseInt(pageNo), Integer.parseInt(objCount),"","");
 			for (Computer comp : cpList) {
 				view.computer(comp);
 			}
-			if (cpList.size() == 0) {
+			if (cpList.isEmpty()) {
 				view.pageEmpty();
 			}
 		} catch (NumberFormatException e) {
@@ -236,7 +235,7 @@ public class Controller {
 			for (Company cny : cnyList) {
 				view.company(cny);
 			}
-			if (cnyList.size() == 0) {
+			if (cnyList.isEmpty()) {
 				view.pageEmpty();
 			}
 		} catch (NumberFormatException e) {
@@ -251,7 +250,8 @@ public class Controller {
 	 */
 	public void createComputer(String[] args) {
 		try {
-			Timestamp ts1, ts2;
+			Timestamp ts1;
+			Timestamp ts2;
 
 			if (args[3].equals(UNKNOWN_INPUT)) {
 				ts1 = null;
@@ -272,7 +272,7 @@ public class Controller {
 			try {
 				cmptService.add(cpInsert);
 			} catch (DateOrderException | ComputerNameEmptyException e) {
-				System.out.println(e.getMessage());
+				logger.error(e.getMessage());
 			}
 			view.computer(cpInsert);
 			view.computerAddSuccess();
@@ -296,7 +296,8 @@ public class Controller {
 	 */
 	public void updateComputer(String[] args) {
 		try {
-			Timestamp ts1, ts2;
+			Timestamp ts1;
+			Timestamp ts2;
 
 			if (args[3].equals(UNKNOWN_INPUT)) {
 				ts1 = null;
@@ -317,7 +318,7 @@ public class Controller {
 			try {
 				cmptService.update(cpInsert);
 			} catch (DateOrderException | ComputerNameEmptyException e) {
-				System.out.println(e.getMessage());
+				logger.error(e.getMessage());
 			}
 			view.computer(cpInsert);
 			view.computerUpdateSuccess();

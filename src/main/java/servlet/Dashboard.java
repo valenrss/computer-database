@@ -36,14 +36,16 @@ public class Dashboard extends HttpServlet {
 	private ComputerServiceImpl cmptService;
 	@Autowired
 	private CompanyServiceImpl cpnyService;
+	@Autowired
+	private Mapper mapper;
+	
+	private String sortOption = "id";
+	private String nameSearch = "";
 	private int currentPage = 1;
 	private int objPerPage = 10;
 	private int pagesCount;
-	@Autowired
-	private Mapper mapper;
-	private String sortOption = "id";
-	private String nameSearch = "";
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	private final Logger logger = LoggerFactory.getLogger(Dashboard.class);
 
 	@Override
 	  public void init(ServletConfig config) throws ServletException {
@@ -55,8 +57,11 @@ public class Dashboard extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		 
 
 		try {
 			currentPage = Integer.valueOf(request.getParameter("pageId"));

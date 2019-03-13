@@ -2,10 +2,11 @@ package model;
 
 import java.util.Objects;
 
+
 public class Company {
 
-	private int Id;
-	private String Name;
+	private int id;
+	private String name;
 
 	/**
 	 * Instantiates a new company.
@@ -57,24 +58,26 @@ public class Company {
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public int compareTo(Company company) {
 		
-		return Integer.valueOf(Id).compareTo(company.getId());
+		return Integer.valueOf(id).compareTo(company.getId());
 	}
+
+	
 
 }
