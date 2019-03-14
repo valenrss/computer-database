@@ -9,7 +9,6 @@ import org.junit.After;
 import org.junit.Test;
 
 import dao.ComputerDAOImpl;
-import dao.DaoFactory;
 import model.Company;
 import model.Computer;
 
@@ -19,7 +18,7 @@ public class ComputerDAOTests {
 	Date ts = Timestamp.valueOf("2012-01-01 00:00:00.0");
 	Date td = Timestamp.valueOf("2013-01-01 00:00:00.0");
 	Computer cp = new Computer(0, "Delll Laptop", ts, td, new Company(1,"Apple inc."));
-	DaoFactory fact;
+
 	ComputerDAOImpl cpmpt;
 
 	@Test
@@ -57,11 +56,6 @@ public class ComputerDAOTests {
 		assertEquals(4,cpmpt.find(4).getId());
 	}
 	
-	@Test
-	public void getPage() {
-		assertEquals(5,cpmpt.getPage(3,5).size());
-		
-	}
 
 
 	@After

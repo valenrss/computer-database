@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.SpringConfig;
+import config.SpringConfigCLI;
 import controller.Controller;
 
 public class Main {
@@ -21,7 +21,7 @@ public class Main {
 		Controller controller;
 		
 		
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfigCLI.class);
 
 		String userInput = "";
 		String[] userCommands;

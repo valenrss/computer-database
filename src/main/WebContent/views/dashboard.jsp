@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
@@ -125,7 +125,7 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li><a aria-label="Previous"
+				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a aria-label="Previous"
 					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}">&laquo;</a></li>
 				<li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a
 					href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}">${pageId - 2}</a></li>
@@ -139,7 +139,7 @@
 				<li
 					<c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a
 					href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}">${pageId + 2}</a></li>
-				<li><a aria-label="Next"
+				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a aria-label="Next"
 					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}">&raquo;</a></li>
 			</ul>
 
