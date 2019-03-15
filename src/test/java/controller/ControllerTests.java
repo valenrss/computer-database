@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import clicontroller.Controller;
+
 
 public class ControllerTests {
 	

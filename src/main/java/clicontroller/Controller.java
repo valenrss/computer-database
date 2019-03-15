@@ -1,4 +1,4 @@
-package controller;
+package clicontroller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

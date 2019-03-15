@@ -22,7 +22,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "dao", "service", "validator", "main", "dto", "servlet", "mapper" })
+@ComponentScan({ "dao", "service", "validator", "main", "dto", "webcontroller", "mapper" })
 public class SpringConfigWeb implements WebApplicationInitializer, WebMvcConfigurer {
 
 	private static String configFile = "/config.properties";
@@ -46,9 +46,6 @@ public class SpringConfigWeb implements WebApplicationInitializer, WebMvcConfigu
 
 		cfg = new HikariConfig(configFile);
 		HikariDataSource dataSource = new HikariDataSource(cfg);
-
-		dataSource.setLeakDetectionThreshold(60 * 1000);
-		dataSource.setMaximumPoolSize(16);
 
 		return dataSource;
 	}

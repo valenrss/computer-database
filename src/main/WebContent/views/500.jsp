@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 	<title>Computer Database</title>
@@ -18,7 +20,7 @@
 	<section id="main">
 		<div class="container">	
 			<div class="alert alert-danger">
-				Error 500: An error has occured!
+				An error has occured! (╯°□°）╯︵ ┻━┻
 				<br/>
 				${errorMessage}
 			</div>

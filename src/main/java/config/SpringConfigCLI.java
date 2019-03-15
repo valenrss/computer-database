@@ -10,7 +10,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan({ "dao", "service", "validator", "controller", "view", "main", "dto", "servlet", "mapper" })
+@ComponentScan({ "dao", "service", "validator", "clicontroller", "view", "main", "dto", "mapper" })
 public class SpringConfigCLI {
 
 	private static String configFile = "/config.properties";
@@ -34,9 +34,6 @@ public class SpringConfigCLI {
 
 		cfg = new HikariConfig(configFile);
 		HikariDataSource dataSource = new HikariDataSource(cfg);
-
-		dataSource.setLeakDetectionThreshold(60 * 1000);
-		dataSource.setMaximumPoolSize(16);
 
 		return dataSource;
 	}

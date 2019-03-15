@@ -1,9 +1,6 @@
-package servlet;
+package webcontroller;
 
-import java.io.IOException;
 import java.util.List;
-
-import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,11 +27,10 @@ public class DashboardController {
 	private Mapper mapper;
 
 	@GetMapping("/Dashboard")
-	protected ModelAndView doGet(@RequestParam(required=false , defaultValue = "1") Integer pageId, 
+	public ModelAndView doGet(@RequestParam(required=false , defaultValue = "1") Integer pageId, 
 								 @RequestParam(required=false , defaultValue = "10") Integer objPerPage,
 								 @RequestParam(required=false , defaultValue = "id") String sortOption, 
-								 @RequestParam(required=false , defaultValue = "") String search)
-			throws ServletException, IOException {
+								 @RequestParam(required=false , defaultValue = "") String search){
 
 		Integer pagesCount;
 
@@ -65,6 +61,7 @@ public class DashboardController {
 		modelAndView.addObject("pagesCount", pagesCount);
 		modelAndView.addObject("companies", cpnyList);
 		modelAndView.addObject("sortOption", sortOption);
+		modelAndView.addObject("objPerPage", objPerPage);
 		modelAndView.addObject("search", search);
 
 		return modelAndView;

@@ -108,7 +108,7 @@
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb"
 								class="cb" value="${c.id}"></td>
-							<td><a href="EditComputer?<c:out value="${c.id}" />"
+							<td><a href="EditComputer?cpEditId=<c:out value="${c.id}" />"
 								onclick=""><c:out value="${c.name}" /></a></td>
 							<td><c:out value="${c.dateIntroduced}" /></td>
 							<td><c:out value="${c.dateDiscontinued}" /></td>
@@ -126,30 +126,30 @@
 		<div class="container text-center">
 			<ul class="pagination">
 				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a aria-label="Previous"
-					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}">&laquo;</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&laquo;</a></li>
 				<li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}">${pageId - 2}</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 2}</a></li>
 				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}">${pageId - 1}</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 1}</a></li>
 				<li><a
-					href="/Computer-Database/Dashboard?pageId=${pageId}&search=${search}&sortOption=${sortOption}">${pageId}</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId}</a></li>
 				<li
 					<c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}">${pageId + 1}</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 1}</a></li>
 				<li
 					<c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}">${pageId + 2}</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 2}</a></li>
 				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a aria-label="Next"
-					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}">&raquo;</a></li>
+					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&raquo;</a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=10&search=${search}">10</a>
+					href="/Computer-Database/Dashboard?objPerPage=10&search=${search}&pageId=${pageId}&sortOption=${sortOption}">10</a>
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=50&search=${search}">50</a>
+					href="/Computer-Database/Dashboard?objPerPage=50&search=${search}&pageId=${pageId}&sortOption=${sortOption}">50</a>
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=100&search=${search}">100</a>
+					href="/Computer-Database/Dashboard?objPerPage=100&search=${search}&pageId=${pageId}&sortOption=${sortOption}">100</a>
 			</div>
 		</div>
 	</footer>
