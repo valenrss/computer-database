@@ -8,8 +8,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Computer-Database Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
 
 	<properties>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<junit.version>4.11</junit.version>
 		<commons-lang.version>2.6</commons-lang.version>
 		<com.google.guava.version>21.0</com.google.guava.version>
@@ -168,6 +170,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					
 				</configuration>
 			</plugin>
 		</plugins>

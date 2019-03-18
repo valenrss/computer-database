@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/font-awesome.css" rel="stylesheet" media="screen">
@@ -20,22 +19,19 @@
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="/Computer-Database/Dashboard"><i
-				class="fa fa-database"></i> Computer Database </a> 
-				<img src="flags/flag_en.png"/> 
-				<select class="selectpicker" style="float: right;" data-width="fit">
-				<option data-content='<img src="flags/flag_en.png"> English'>English</option>
-				<option data-content='<img src="flags/flag_fr.png"> French'>French</option>
-			</select>
+				class="fa fa-database"></i> <spring:message code="home.title" /> </a>
 		</div>
-
 	</header>
+	
+	<span style="float: right;"><spring:message code="lang" /> : <a href="?lang=en"><spring:message code="lang.english" /></a> | <a href="?lang=fr"><spring:message code="lang.french" /></a></span>
+
 
 	<section id="main">
 		<div class="container">
 			<h1 id="homeTitle">
 				<i class="fa fa-desktop "></i>
 				<c:out value="     ${cpNumber}"></c:out>
-				Computers found
+				<spring:message code="computers.found" />
 			</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
@@ -43,7 +39,7 @@
 						method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="Search by name, company"
+							class="form-control" placeholder="<spring:message code="search.hint" />"
 							value="${search}" />
 						<button type="submit" id="searchsubmit" class="btn btn-primary">
 							<i class="fa fa-search"></i>
@@ -53,10 +49,10 @@
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer"
 						href="/Computer-Database/AddComputer"><i class="fa fa-plus"></i>
-						Add Computer</a> <a class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">Edit List</a> <a
+						<spring:message code="add.computer" /></a> <a class="btn btn-default" id="editComputer" href="#"
+						onclick="$.fn.toggleEditMode();"><spring:message code="edit.list" /></a> <a
 						class="btn btn-danger" id="deleteCompany"
-						href="/Computer-Database/DeleteCompany">Delete Company</a>
+						href="/Computer-Database/DeleteCompany"><spring:message code="delete.company" /></a>
 				</div>
 			</div>
 		</div>
@@ -79,26 +75,30 @@
 								id="deleteSelected" onclick="$.fn.deleteSelected();"><i
 									class="fa fa-trash-o fa-lg"></i></a> </span></th>
 
-						<th>Computer name<a style="float: right;"
+						<th><spring:message code="computer.name" /><a style="float: right;"
 							class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=nameDesc&search=${search}">▲</a>
-							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=name&search=${search}">▼</a></th>
-
-						<th>Introduction Date<a style="float: right;"
+							href="/Computer-Database/Dashboard?sortOption=nameDesc&search=${search}">&#9660;</a>
+							<a style="float: right;"
 							class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=introdateDesc&search=${search}">▲</a>
-							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=introdate&search=${search}">▼</a></th>
-						<th>Discontinuation Date<a style="float: right;"
+							href="/Computer-Database/Dashboard?sortOption=name&search=${search}">&#9650;</a></th>
+							
+						<th><spring:message code="introduced.date" /><a style="float: right;"
 							class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=discondateDesc&search=${search}">▲</a>
-							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=discondate&search=${search}">▼</a></th>
-						<th>Company<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=companyDesc&search=${search}">▲</a>
+							href="/Computer-Database/Dashboard?sortOption=introdateDesc&search=${search}">&#9660;</a>
+							<a style="float: right;"
+							class="btn btn-default"
+							href="/Computer-Database/Dashboard?sortOption=introdate&search=${search}">&#9650;</a></th>
+						<th><spring:message code="discontinued.date" /><a style="float: right;"
+							class="btn btn-default"
+							href="/Computer-Database/Dashboard?sortOption=discondateDesc&search=${search}">&#9660;</a>
+							<a style="float: right;"
+							class="btn btn-default"
+							href="/Computer-Database/Dashboard?sortOption=discondate&search=${search}">&#9650;</a></th>
+						<th><spring:message code="company" /><a style="float: right;"
+							class="btn btn-default"
+							href="/Computer-Database/Dashboard?sortOption=companyDesc&search=${search}">&#9660;</a>
 							<a class="btn btn-default" style="float: right;"
-							href="/Computer-Database/Dashboard?sortOption=company&search=${search}">▼</a></th>
+							href="/Computer-Database/Dashboard?sortOption=company&search=${search}">&#9650;</a></th>
 
 					</tr>
 
@@ -110,8 +110,7 @@
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb"
 								class="cb" value="${c.id}"></td>
-							<td><a
-								href="EditComputer?cpEditId=<c:out value="${c.id}" />"
+							<td><a href="EditComputer?cpEditId=<c:out value="${c.id}" />"
 								onclick=""><c:out value="${c.name}" /></a></td>
 							<td><c:out value="${c.dateIntroduced}" /></td>
 							<td><c:out value="${c.dateDiscontinued}" /></td>
@@ -128,8 +127,7 @@
 	<footer class="navbar-fixed-bottom">
 		<div class="container text-center">
 			<ul class="pagination">
-				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a
-					aria-label="Previous"
+				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a aria-label="Previous"
 					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&laquo;</a></li>
 				<li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a
 					href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 2}</a></li>
@@ -143,9 +141,7 @@
 				<li
 					<c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a
 					href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 2}</a></li>
-				<li
-					<c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a
-					aria-label="Next"
+				<li <c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a aria-label="Next"
 					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&raquo;</a></li>
 			</ul>
 
@@ -157,8 +153,6 @@
 				<a type="submit" class="btn btn-default"
 					href="/Computer-Database/Dashboard?objPerPage=100&search=${search}&pageId=${pageId}&sortOption=${sortOption}">100</a>
 			</div>
-
-
 		</div>
 	</footer>
 

@@ -25,20 +25,19 @@ public class DashboardController {
 	private CompanyServiceImpl cpnyService;
 	@Autowired
 	private Mapper mapper;
-
+	
 	@GetMapping("/Dashboard")
 	public ModelAndView doGet(@RequestParam(required=false , defaultValue = "1") Integer pageId, 
 								 @RequestParam(required=false , defaultValue = "10") Integer objPerPage,
 								 @RequestParam(required=false , defaultValue = "id") String sortOption, 
 								 @RequestParam(required=false , defaultValue = "") String search){
 
-		Integer pagesCount;
-
 		List<ComputerDTO> pageC = mapper
 				.mapListComputer(cmptService.getPageByName(pageId, objPerPage, search, sortOption));
 		List<ComputerDTO> allC = mapper.mapListComputer(
 				cmptService.getPageByName(FIRST_PAGE, cmptService.getAll().size(), search, sortOption));
-		pagesCount = allC.size() / objPerPage - 1;
+		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
+		Integer pagesCount = allC.size() / objPerPage - 1;
 
 		if (pageId > pagesCount + PAGE_OFFSET) {
 			pageId = pagesCount + PAGE_OFFSET;
@@ -49,10 +48,9 @@ public class DashboardController {
 			pageC = mapper.mapListComputer(cmptService.getPageByName(pageId, objPerPage, search, sortOption));
 		}
 
-		List<CompanyDTO> cpnyList = mapper.mapListCompany(cpnyService.getAll());
 
 		ModelAndView modelAndView = new ModelAndView();
-
+ 
 		modelAndView.setViewName("dashboard");
 
 		modelAndView.addObject("computers", pageC);

@@ -1,54 +1,30 @@
 package config;
 
+import java.util.Locale;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "dao", "service", "validator", "main", "dto", "webcontroller", "mapper" })
-public class SpringConfigWeb implements WebApplicationInitializer, WebMvcConfigurer {
-
-	private static String configFile = "/config.properties";
-	private static Logger logger = LoggerFactory.getLogger(SpringConfigWeb.class);
-
-	/**
-	 * Data source.
-	 *
-	 * @return the hikari data source
-	 */
-	@Bean
-	public static HikariDataSource dataSource() {
-
-		HikariConfig cfg;
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			logger.error(e.getMessage());
-		}
-
-		cfg = new HikariConfig(configFile);
-		HikariDataSource dataSource = new HikariDataSource(cfg);
-
-		return dataSource;
-	}
+public class SpringConfigWeb extends SpringConfigCLI implements WebApplicationInitializer, WebMvcConfigurer  {
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
@@ -66,6 +42,35 @@ public class SpringConfigWeb implements WebApplicationInitializer, WebMvcConfigu
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
 	}
+	
+	@Bean
+    public ReloadableResourceBundleMessageSource messageSource(){
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:locale/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @Bean
+    public CookieLocaleResolver localeResolver(){
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.ENGLISH);
+        localeResolver.setCookieName("my-locale-cookie");
+        localeResolver.setCookieMaxAge(3600);
+        return localeResolver;
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeInterceptor(){
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        return interceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeInterceptor());
+    }
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
