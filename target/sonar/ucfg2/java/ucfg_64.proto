@@ -1,0 +1,26 @@
+
+model.Company#hashCode()I
+__unknown_file ("1*å
+1\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java9	 9(†ù
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java9 9(	
+%0int"model.Company#getId()I*
+model.Company2getId()¬ø
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java9 9((
+%1java.lang.String")model.Company#getName()Ljava/lang/String;*
+model.Company2	getName()ÿ
+’
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java9	 9()	
+%2int",java.util.Objects#hash([Ljava/lang/Object;)I*"
+java.util.Objects*
+	
+%0int*
+
+%1java.lang.String"f
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java9 9(*
+""B
+model.Company

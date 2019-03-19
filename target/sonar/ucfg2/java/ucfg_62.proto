@@ -1,0 +1,41 @@
+
+*model.Company#toString()Ljava/lang/String;
+__unknown_file ("1*—
+1\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java	 (†ù
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java ("	
+%0int"model.Company#getId()I*
+model.Company2getId()£
+†
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java	 ("
+%1java.lang.String"__concat*
+Company id : *
+	
+%0int´
+®
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java	 (/
+%2java.lang.String"__concat*
+
+%1java.lang.String*
+
+ name : ¬ø
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java2 (;
+%3java.lang.String")model.Company#getName()Ljava/lang/String;*
+model.Company2	getName()∑
+¥
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java	 (;
+%4java.lang.String"__concat*
+
+%2java.lang.String*
+
+%3java.lang.String"x
+\
+R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.java (<
+
+%4java.lang.StringB
+model.Company

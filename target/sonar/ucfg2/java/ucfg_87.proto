@@ -1,0 +1,24 @@
+
+4service.CompanyServiceImpl#getById(I)Lmodel/Company;
+__unknown_file ("1*”
+1i
+_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java5	 5(º
+·
+i
+_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java5	 5(
+%0dao.CompanyDAOImpl"__id***(
+service.CompanyServiceImpl"
+cnydaoáÞ
+i
+_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java5	 5(
+%1model.Company",dao.CompanyDAOImpl#getById(I)Lmodel/Company;*
+
+%0dao.CompanyDAOImpl*
+""2
+getById(I)"‚
+i
+_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java5 5(
+
+%1model.Company:
+""B
+service.CompanyServiceImpl

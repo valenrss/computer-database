@@ -1,0 +1,140 @@
+
++model.Computer#toString()Ljava/lang/String;
+__unknown_file ("1*¿
+1_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ(§
+°
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ( 
+%0java.lang.String"__concat*
+\nComputer Id : *
+""Ø
+¨
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ(.
+%1java.lang.String"__concat*
+
+%0java.lang.String*
+	\nName : †
+ù
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ1 Ñ(5
+%2java.lang.String"__id**
+model.Computer"
+name∫
+∑
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ(5
+%3java.lang.String"__concat*
+
+%1java.lang.String*
+
+%2java.lang.String∫
+∑
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ(N
+%4java.lang.String"__concat*
+
+%3java.lang.String*
+\nDate Introduced : ®
+•
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑQ Ñ(_
+%5java.util.Date"__id*&*$
+model.Computer"
+dateIntroduced∏
+µ
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ñ(_
+%6java.lang.String"__concat*
+
+%4java.lang.String*
+
+%5java.util.Dateº
+π
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(
+%7java.lang.String"__concat*
+
+%6java.lang.String*
+\nDate Discontinued : ™
+ß
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÖ! Ö(1
+%8java.util.Date"__id*(*&
+model.Computer"
+dateDiscontinued∏
+µ
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(1
+%9java.lang.String"__concat*
+
+%7java.lang.String*
+
+%8java.util.Date∂
+≥
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(E
+%10java.lang.String"__concat*
+
+%9java.lang.String*
+\nCompany Id : °
+û
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÖH Ö(O
+%11model.Company"__id**
+model.Computer"	
+company©¶
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÖH Ö(W
+
+%12int"model.Company#getId()I*
+
+%11model.Company2getId()∞
+≠
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(W
+%13java.lang.String"__concat*
+
+%10java.lang.String*
+
+
+%12intπ
+∂
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(m
+%14java.lang.String"__concat*
+
+%13java.lang.String*
+\nCompany Name : °
+û
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÖo Ö(v
+%15model.Company"__id**
+model.Computer"	
+companyÃ…
+`
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÖo Ö(Ä
+%16java.lang.String")model.Company#getName()Ljava/lang/String;*
+
+%15model.Company2	getName()æ
+ª
+`
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(Ä
+%17java.lang.String"__concat*
+
+%14java.lang.String*
+
+%16java.lang.String´
+®
+`
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ	 Ö(á
+%18java.lang.String"__concat*
+
+%17java.lang.String*
+\n"}
+`
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaÑ Ö(à
+
+%18java.lang.StringB
+model.Computer

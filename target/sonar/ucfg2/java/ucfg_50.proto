@@ -1,0 +1,99 @@
+
+9dto.Mapper#mapComputer(Lmodel/Computer;)Ldto/ComputerDTO;
+__unknown_file ("1*á
+1Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java ( ¥¢
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java* (6	
+%0int"model.Computer#getId()I*
+
+compmodel.Computer2getId()Ë
+È
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (7
+%1java.lang.String"/java.lang.Integer#toString(I)Ljava/lang/String;*"
+java.lang.Integer*
+	
+%0intÇÄ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java9 (G
+%2java.lang.String"*model.Computer#getName()Ljava/lang/String;*
+
+compmodel.Computer2	getName()×Ô
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (
+%3java.util.Date"2model.Computer#getDateIntroduced()Ljava/util/Date;*
+
+compmodel.Computer2getDateIntroduced()ÇÄ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java ('
+%4java.lang.String"+java.util.Date#toString()Ljava/lang/String;*
+
+%3java.util.Date2
+toString()ÛØ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java) (C
+%5java.util.Date"4model.Computer#getDateDiscontinued()Ljava/util/Date;*
+
+compmodel.Computer2getDateDiscontinued()ÇÄ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java) (N
+%6java.lang.String"+java.util.Date#toString()Ljava/lang/String;*
+
+%5java.util.Date2
+toString()ÇÄ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (&
+%7model.Company"*model.Computer#getCompany()Lmodel/Company;*
+
+compmodel.Computer2getCompany()¡ž
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (.	
+%8int"model.Company#getId()I*
+
+%7model.Company2getId()Ë
+È
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (/
+%9java.lang.String"/java.lang.Integer#toString(I)Ljava/lang/String;*"
+java.lang.Integer*
+	
+%8intÈÅ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java1 (B
+%10model.Company"*model.Computer#getCompany()Lmodel/Company;*
+
+compmodel.Computer2getCompany()ÅÂ
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java1 (L
+%11java.lang.String")model.Company#getName()Ljava/lang/String;*
+
+%10model.Company2	getName()‡„
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (
+%12dto.ComputerDTO"dto.ComputerDTO¤
+¡
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java	 (M
+%13"…dto.ComputerDTO#<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V*
+
+%12dto.ComputerDTO*
+
+%1java.lang.String*
+
+%2java.lang.String*
+
+%4java.lang.String*
+
+%6java.lang.String*
+
+%9java.lang.String*
+
+%11java.lang.String"u
+Y
+O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java (N
+
+%12dto.ComputerDTO:
+compmodel.ComputerB
+
+dto.Mapper

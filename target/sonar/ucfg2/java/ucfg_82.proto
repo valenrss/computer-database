@@ -1,0 +1,147 @@
+
+*model.Computer#equals(Ljava/lang/Object;)Z
+__unknown_file ("paramAnnotations*›
+2_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaò ò(°
+û
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaò ò(
+%10model.Company"__id**
+model.Computer"	
+companyŒÀ
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaò ò(0
+%11model.Company"*model.Computer#getCompany()Lmodel/Company;*
+
+cmptmodel.Computer2getCompany()¸
+˘
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaò ò(1
+%12boolean"?java.util.Objects#equals(Ljava/lang/Object;Ljava/lang/Object;)Z*"
+java.util.Objects*
+
+%10model.Company*
+
+%11model.Company*
+1*˚
+4_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaó ó(™
+ß
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaó ó(&
+%7java.util.Date"__id*(*&
+model.Computer"
+dateDiscontinued·ﬁ
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaó( ó(B
+%8java.util.Date"4model.Computer#getDateDiscontinued()Ljava/util/Date;*
+
+cmptmodel.Computer2getDateDiscontinued()˚
+¯
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaó ó(C
+%9boolean"?java.util.Objects#equals(Ljava/lang/Object;Ljava/lang/Object;)Z*"
+java.util.Objects*
+
+%7java.util.Date*
+
+%8java.util.Date*
+2
+1*¯
+6_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ1 ñ(8®
+•
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ@ ñ(N
+%4java.util.Date"__id*&*$
+model.Computer"
+dateIntroduced›⁄
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañP ñ(h
+%5java.util.Date"2model.Computer#getDateIntroduced()Ljava/util/Date;*
+
+cmptmodel.Computer2getDateIntroduced()˚
+¯
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ1 ñ(i
+%6boolean"?java.util.Objects#equals(Ljava/lang/Object;Ljava/lang/Object;)Z*"
+java.util.Objects*
+
+%4java.util.Date*
+
+%5java.util.Date*	
+2
+4
+1*Ö
+7_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaï ï(õ
+ò
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaï ï(
+cmptmodel.Computer"__id*
+
+ojava.lang.Object†
+ù
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ ñ(
+%1java.lang.String"__id**
+model.Computer"
+nameÕ 
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ ñ(,
+%2java.lang.String"*model.Computer#getName()Ljava/lang/String;*
+
+cmptmodel.Computer2	getName()ˇ
+¸
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ	 ñ(-
+%3boolean"?java.util.Objects#equals(Ljava/lang/Object;Ljava/lang/Object;)Z*"
+java.util.Objects*
+
+%1java.lang.String*
+
+%2java.lang.String*
+2
+4
+6
+1*œ
+8_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaì
+ ì("i
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaì ì(
+""*Ω
+paramAnnotations_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaé é( ß
+§
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaç ç(
+
+%0"
+__annotate*
+java.lang.Override*
+
+ojava.lang.Objectë
+é
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaé é(
+ojava.lang.Object"__annotation*
+
+%0*
+
+7
+8
+10*–
+10_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaë
+ ë("i
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javaë ë(
+""*œ
+1_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ ò(2"i
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javañ ò(2
+"":
+ojava.lang.ObjectB
+model.Computer
