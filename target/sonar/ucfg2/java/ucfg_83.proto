@@ -1,52 +1,16 @@
 
-model.Computer#hashCode()I
-__unknown_file ("1*•
-
-1_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢	 ¢(†
-ù
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢ ¢(
-%0java.lang.String"__id**
-model.Computer"
-name®
+4model.Computer#getDateDiscontinued()Ljava/util/Date;
+__unknown_file ("1*Ü
+1]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javab	 b(®
 •
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢ ¢(*
-%1java.util.Date"__id*&*$
-model.Computer"
-dateIntroduced™
-ß
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢, ¢(<
-%2java.util.Date"__id*(*&
+]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javab	 b(
+%0java.util.Date"__id*(*&
 model.Computer"
-dateDiscontinued†
-ù
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢> ¢(E
-%3model.Company"__id**
-model.Computer"	
-companyß§
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢> ¢(M	
-%4int"model.Company#getId()I*
-
-%3model.Company2getId()ã
-à
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢	 ¢(N	
-%5int",java.util.Objects#hash([Ljava/lang/Object;)I*"
-java.util.Objects*
-
-%0java.lang.String*
+dateDiscontinued"w
+]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javab b(
 
-%1java.util.Date*
-
-%2java.util.Date*
-	
-%4int"i
-_
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java¢ ¢(O
-""B
+%0java.util.DateB
 model.Computer

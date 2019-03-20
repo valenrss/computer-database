@@ -4,13 +4,34 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "computer")
 public class Computer  {
 
+	
+	@Id 
 	private int id;
+	@Column
 	private String name;
+	@Column(name="introduced")
 	private Date dateIntroduced;
+	@Column(name="discontinued")
 	private Date dateDiscontinued;
+	@OneToOne
+	@JoinColumn(name = "company_id") 
 	private Company company;
+	
+	public Computer() {
+		
+	}
 
 
 	/**

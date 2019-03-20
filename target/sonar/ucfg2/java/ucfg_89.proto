@@ -1,22 +1,52 @@
 
-4service.ComputerServiceImpl#getAll()Ljava/util/List;
-__unknown_file ("1*ó
-1j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.java'	 '(ø
-º
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.java'	 '(
-%0dao.ComputerDAOImpl"__id*-*+
-service.ComputerServiceImpl"
+model.Computer#hashCode()I
+__unknown_file ("1*•
 
-comptdao‹Ÿ
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.java'	 '(
-%1java.util.List"-dao.ComputerDAOImpl#getList()Ljava/util/List;*
-
-%0dao.ComputerDAOImpl2	getList()"Ñ
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.java' '(
+1_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java•	 •(†
+ù
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java• •(
+%0java.lang.String"__id**
+model.Computer"
+name®
+•
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java• •(*
+%1java.util.Date"__id*&*$
+model.Computer"
+dateIntroduced™
+ß
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java•, •(<
+%2java.util.Date"__id*(*&
+model.Computer"
+dateDiscontinued†
+ù
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java•> •(E
+%3model.Company"__id**
+model.Computer"	
+companyß§
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java•> •(M	
+%4int"model.Company#getId()I*
+
+%3model.Company2getId()ã
+à
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java•	 •(N	
+%5int",java.util.Objects#hash([Ljava/lang/Object;)I*"
+java.util.Objects*
+
+%0java.lang.String*
 
-%1java.util.ListB
-service.ComputerServiceImpl
+%1java.util.Date*
+
+%2java.util.Date*
+	
+%4int"i
+_
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java• •(O
+""B
+model.Computer

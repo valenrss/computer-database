@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="/Computer-Database/Dashboard"><i
+			<a class="navbar-brand" href="/Computer-Database/"><i
 				class="fa fa-database"></i> <spring:message code="home.title" /> </a>
 		</div>
 
@@ -35,7 +35,7 @@
 			</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
-					<form id="searchForm" action="/Computer-Database/Dashboard"
+					<form id="searchForm" action="/Computer-Database/"
 						method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="search"
@@ -79,25 +79,25 @@
 
 						<th><spring:message code="computer.name" /><a
 							style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=nameDesc&search=${search}">&#9660;</a>
+							href="/Computer-Database/?sortOption=nameDesc&search=${search}">&#9660;</a>
 							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=name&search=${search}">&#9650;</a></th>
+							href="/Computer-Database/?sortOption=name&search=${search}">&#9650;</a></th>
 
 						<th><spring:message code="introduced.date" /><a
 							style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=introdateDesc&search=${search}">&#9660;</a>
+							href="/Computer-Database/?sortOption=introdateDesc&search=${search}">&#9660;</a>
 							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=introdate&search=${search}">&#9650;</a></th>
+							href="/Computer-Database/?sortOption=introdate&search=${search}">&#9650;</a></th>
 						<th><spring:message code="discontinued.date" /><a
 							style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=discondateDesc&search=${search}">&#9660;</a>
+							href="/Computer-Database/?sortOption=discondateDesc&search=${search}">&#9660;</a>
 							<a style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=discondate&search=${search}">&#9650;</a></th>
+							href="/Computer-Database/?sortOption=discondate&search=${search}">&#9650;</a></th>
 						<th><spring:message code="company" /><a
 							style="float: right;" class="btn btn-default"
-							href="/Computer-Database/Dashboard?sortOption=companyDesc&search=${search}">&#9660;</a>
+							href="/Computer-Database/?sortOption=companyDesc&search=${search}">&#9660;</a>
 							<a class="btn btn-default" style="float: right;"
-							href="/Computer-Database/Dashboard?sortOption=company&search=${search}">&#9650;</a></th>
+							href="/Computer-Database/?sortOption=company&search=${search}">&#9650;</a></th>
 
 					</tr>
 
@@ -134,32 +134,32 @@
 			<ul class="pagination">
 				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a
 					aria-label="Previous"
-					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&laquo;</a></li>
+					href="/Computer-Database/?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&laquo;</a></li>
 				<li <c:if test="${pageId < 3}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 2}</a></li>
+					href="/Computer-Database/?pageId=${pageId - 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 2}</a></li>
 				<li <c:if test="${pageId < 2}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 1}</a></li>
+					href="/Computer-Database/?pageId=${pageId - 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId - 1}</a></li>
 				<li><a
-					href="/Computer-Database/Dashboard?pageId=${pageId}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId}</a></li>
+					href="/Computer-Database/?pageId=${pageId}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId}</a></li>
 				<li
 					<c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 1}</a></li>
+					href="/Computer-Database/?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 1}</a></li>
 				<li
 					<c:if test="${pageId - 1 >= pagesCount}">style="visibility: hidden;" </c:if>><a
-					href="/Computer-Database/Dashboard?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 2}</a></li>
+					href="/Computer-Database/?pageId=${pageId + 2}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">${pageId + 2}</a></li>
 				<li
 					<c:if test="${pageId - 2 >= pagesCount}">style="visibility: hidden;" </c:if>><a
 					aria-label="Next"
-					href="/Computer-Database/Dashboard?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&raquo;</a></li>
+					href="/Computer-Database/?pageId=${pageId + 1}&search=${search}&sortOption=${sortOption}&objPerPage=${objPerPage}">&raquo;</a></li>
 			</ul>
 
 			<div class="btn-group btn-group-sm pull-right" role="group">
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=10&search=${search}&pageId=${pageId}&sortOption=${sortOption}">10</a>
+					href="/Computer-Database/?objPerPage=10&search=${search}&pageId=${pageId}&sortOption=${sortOption}">10</a>
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=50&search=${search}&pageId=${pageId}&sortOption=${sortOption}">50</a>
+					href="/Computer-Database/?objPerPage=50&search=${search}&pageId=${pageId}&sortOption=${sortOption}">50</a>
 				<a type="submit" class="btn btn-default"
-					href="/Computer-Database/Dashboard?objPerPage=100&search=${search}&pageId=${pageId}&sortOption=${sortOption}">100</a>
+					href="/Computer-Database/?objPerPage=100&search=${search}&pageId=${pageId}&sortOption=${sortOption}">100</a>
 			</div>
 		</div>
 	</footer>

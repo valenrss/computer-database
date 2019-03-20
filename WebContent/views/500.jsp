@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="/Computer-Database/Dashboard"><i class = "fa fa-database"></i> <spring:message code="home.title" /></a>
+			<a class="navbar-brand" href="/Computer-Database/"><i class = "fa fa-database"></i> <spring:message code="home.title" /></a>
 		</div>
 	</header>
 

@@ -24,7 +24,7 @@ public class ComputerServiceImpl implements ComputerService {
 	@Autowired
 	private Validator validator;
 
-	private ComputerServiceImpl() {
+	public ComputerServiceImpl() {
 		
 	}
 

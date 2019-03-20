@@ -28,9 +28,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 	 *
 	 * @param conn the Connection
 	 */
-	private CompanyDAOImpl() {
-		
-	}
 	
 	@Autowired
     public void setDataSource(HikariDataSource dataSource) {

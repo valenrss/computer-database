@@ -1,40 +1,46 @@
 
-.dao.CompanyDAOImpl#getPage(II)Ljava/util/List;
-__unknown_file ("1*·	
-1a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java= =(»
-≈
-a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java@	 @(0
-%0*org.springframework.jdbc.core.JdbcTemplate"__id*(*&
-dao.CompanyDAOImpl"
-jdbcTemplateå
-â
-a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java@ @($
-%1java.lang.String"__id*
-""π
-∂
-a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java@% @(5
-%2mapper.CompanyRowMapper"__id*,**
-dao.CompanyDAOImpl"
-companyRowMapperÂ‚
-a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java@	 @(B
-%3java.util.List"êorg.springframework.jdbc.core.JdbcTemplate#query(Ljava/lang/String;Lorg/springframework/jdbc/core/RowMapper;[Ljava/lang/Object;)Ljava/util/List;*2
-0
-%0*org.springframework.jdbc.core.JdbcTemplate*
-
-%1java.lang.String*
-
-%2mapper.CompanyRowMapper*
-""*
-""2Uquery(Ljava/lang/String;Lorg/springframework/jdbc/core/RowMapper;[Ljava/lang/Object;)"{
-a
-W/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dao/CompanyDAOImpl.java@ @(C
-
-%3java.util.List:
-"":
-""B
-dao.CompanyDAOImpl
+hconfig.SpringConfigWeb#viewResolver()Lorg/springframework/web/servlet/view/InternalResourceViewResolver;
+__unknown_file ("1*∂
+1e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaO. O(PˆÛ
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaO2 O(NG
+%0Aorg.springframework.web.servlet.view.InternalResourceViewResolver"Aorg.springframework.web.servlet.view.InternalResourceViewResolverà
+Ö
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaO. O(P
+%1"Korg.springframework.web.servlet.view.InternalResourceViewResolver#<init>()V*I
+G
+%0Aorg.springframework.web.servlet.view.InternalResourceViewResolveré
+ã
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaO O(QQ
+viewResolverAorg.springframework.web.servlet.view.InternalResourceViewResolver"__id*I
+G
+%0Aorg.springframework.web.servlet.view.InternalResourceViewResolver–Õ
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaP P(+
+
+%2void"Zorg.springframework.web.servlet.view.UrlBasedViewResolver#setViewClass(Ljava/lang/Class;)V*S
+Q
+viewResolverAorg.springframework.web.servlet.view.InternalResourceViewResolver*
+""2setViewClass(Ljava/lang/Class;)—Œ
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaQ Q(#
+
+%3void"Xorg.springframework.web.servlet.view.UrlBasedViewResolver#setPrefix(Ljava/lang/String;)V*S
+Q
+viewResolverAorg.springframework.web.servlet.view.InternalResourceViewResolver*	
+/views/2setPrefix(Ljava/lang/String;)ŒÀ
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaR R( 
+
+%4void"Xorg.springframework.web.servlet.view.UrlBasedViewResolver#setSuffix(Ljava/lang/String;)V*S
+Q
+viewResolverAorg.springframework.web.servlet.view.InternalResourceViewResolver*
+.jsp2setSuffix(Ljava/lang/String;)"º
+e
+[/home/excilys/eclipse-workspace/Computer-Database/src/main/java/config/SpringConfigWeb.javaS S(S
+Q
+viewResolverAorg.springframework.web.servlet.view.InternalResourceViewResolverB
+config.SpringConfigWeb

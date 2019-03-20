@@ -1,16 +1,9 @@
 
-4model.Computer#getDateDiscontinued()Ljava/util/Date;
-__unknown_file ("1*†
+model.Computer#getId()I
+__unknown_file ("1*Ë
 1]
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java_	 _(¨
-¥
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java,	 ,("g
 ]
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java_	 _(
-%0java.util.Date"__id*(*&
-model.Computer"
-dateDiscontinued"w
-]
-S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java_ _(
-
-%0java.util.DateB
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.java, ,(
+""B
 model.Computer

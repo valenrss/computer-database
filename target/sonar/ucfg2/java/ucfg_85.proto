@@ -1,21 +1,16 @@
 
-3service.CompanyServiceImpl#getAll()Ljava/util/List;
-__unknown_file ("1*ç
-1i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (∫
-∑
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (
-%0dao.CompanyDAOImpl"__id***(
-service.CompanyServiceImpl"
-cnydaoŸ÷
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (
-%1java.util.List",dao.CompanyDAOImpl#getList()Ljava/util/List;*
-
-%0dao.CompanyDAOImpl2	getList()"É
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java   (
-
-%1java.util.ListB
-service.CompanyServiceImpl
+*model.Computer#getCompany()Lmodel/Company;
+__unknown_file ("1*˚
+1]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javat	 t(û
+õ
+]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javat	 t(
+%0model.Company"__id**
+model.Computer"	
+company"v
+]
+S/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Computer.javat t(
+
+%0model.CompanyB
+model.Computer
