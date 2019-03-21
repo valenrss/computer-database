@@ -116,8 +116,8 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
-	public Integer getCount() {
-		return comptdao.getCount();
+	public Long getCount(String name) {
+		return comptdao.getCount(name);
 	}
 	
 }

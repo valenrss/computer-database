@@ -66,13 +66,13 @@ public interface ComputerDAO {
 	 * @param company the company
 	 * @return true, if successful
 	 */
-	boolean deleteByCompany(Company company);
+	public boolean deleteByCompany(Company company);
 
 	/**
 	 * Get computer count
 	 *
 	 * @return computer count
 	 */
-	Integer getCount();
+	public Long getCount(String name);
 
 }

@@ -49,9 +49,10 @@ public class ComputerController {
 								@RequestParam(required = false, defaultValue = "") String search) {
 
 		List<ComputerDTO> computersPage = mapper.mapListComputer(computerService.getPageByName(pageId, objPerPage, search, sortOption));
-		List<ComputerDTO> allComputers = mapper.mapListComputer(computerService.getPageByName(FIRST_PAGE, computerService.getAll().size(), search, sortOption));
 		List<CompanyDTO> companiesList = mapper.mapListCompany(companyService.getAll());
-		Integer pagesCount = allComputers.size() / objPerPage - 1;
+		int computerCount = computerService.getCount(search).intValue();
+		
+		Integer pagesCount = computerCount / objPerPage - 1;
 
 		if (pageId > pagesCount + PAGE_OFFSET) {
 			pageId = pagesCount + PAGE_OFFSET;
@@ -67,7 +68,7 @@ public class ComputerController {
 		modelAndView.setViewName("dashboard");
 
 		modelAndView.addObject("computers", computersPage);
-		modelAndView.addObject("cpNumber", allComputers.size());
+		modelAndView.addObject("cpNumber", computerCount);
 		modelAndView.addObject("pageId", pageId);
 		modelAndView.addObject("pagesCount", pagesCount);
 		modelAndView.addObject("companies", companiesList);

@@ -66,7 +66,7 @@ public interface ComputerService {
 	 * @param name the name
 	 * @return researched comptuers
 	 */
-	List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption);
+	public List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption);
 
 	/**
 	 * Delete by company.
@@ -74,9 +74,9 @@ public interface ComputerService {
 	 * @param company the company
 	 * @return true, if successful
 	 */
-	boolean deleteByCompany(Company company);
+	public boolean deleteByCompany(Company company);
 
 
-	Integer getCount();
+	public Long getCount(String name);
 
 }
