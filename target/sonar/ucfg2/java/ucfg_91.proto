@@ -1,21 +1,0 @@
-
-3service.CompanyServiceImpl#getAll()Ljava/util/List;
-__unknown_file ("1*ç
-1i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (∫
-∑
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (
-%0dao.CompanyDAOImpl"__id***(
-service.CompanyServiceImpl"
-cnydaoŸ÷
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java 	  (
-%1java.util.List",dao.CompanyDAOImpl#getList()Ljava/util/List;*
-
-%0dao.CompanyDAOImpl2	getList()"É
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java   (
-
-%1java.util.ListB
-service.CompanyServiceImpl

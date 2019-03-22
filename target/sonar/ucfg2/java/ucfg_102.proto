@@ -1,23 +1,0 @@
-
-9service.ComputerServiceImpl#getCount()Ljava/lang/Integer;
-__unknown_file ("1*¢
-1j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.javax	 x(¿
-¼
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.javax	 x(
-%0dao.ComputerDAOImpl"__id*-*+
-service.ComputerServiceImpl"
-
-comptdaoäá
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.javax	 x(
-%1java.lang.Integer"1dao.ComputerDAOImpl#getCount()Ljava/lang/Integer;*
-
-%0dao.ComputerDAOImpl2
-getCount()"‡
-j
-`/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/ComputerServiceImpl.javax x(
-
-%1java.lang.IntegerB
-service.ComputerServiceImpl

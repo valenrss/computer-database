@@ -1,28 +1,0 @@
-
-)model.Company#compareTo(Lmodel/Company;)I
-__unknown_file ("1*¬
-1\
-R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.javaN	 N(Ê
-Ç
-\
-R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.javaN	 N(
-%0java.lang.Integer"/java.lang.Integer#valueOf(I)Ljava/lang/Integer;*"
-java.lang.Integer*
-""©¦
-\
-R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.javaN' N(6	
-%1int"model.Company#getId()I*
-
-companymodel.Company2getId()çä
-\
-R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.javaN	 N(7	
-%2int"1java.lang.Integer#compareTo(Ljava/lang/Integer;)I*
-
-%0java.lang.Integer*
-	
-%1int2compareTo(Ljava/lang/Integer;)"f
-\
-R/home/excilys/eclipse-workspace/Computer-Database/src/main/java/model/Company.javaN N(8
-"":
-companymodel.CompanyB
-model.Company

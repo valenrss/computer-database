@@ -1,25 +1,0 @@
-
-6service.CompanyServiceImpl#getPage(II)Ljava/util/List;
-__unknown_file ("1*¡
-1i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java+	 +(º
-·
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java+	 +(
-%0dao.CompanyDAOImpl"__id***(
-service.CompanyServiceImpl"
-cnydaoíê
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java+	 +()
-%1java.util.List".dao.CompanyDAOImpl#getPage(II)Ljava/util/List;*
-
-%0dao.CompanyDAOImpl*
-""*
-""2getPage(II)"ƒ
-i
-_/home/excilys/eclipse-workspace/Computer-Database/src/main/java/service/CompanyServiceImpl.java+ +(*
-
-%1java.util.List:
-"":
-""B
-service.CompanyServiceImpl

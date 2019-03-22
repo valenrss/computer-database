@@ -1,42 +1,0 @@
-
-6dto.Mapper#mapCompany(Lmodel/Company;)Ldto/CompanyDTO;
-__unknown_file ("1*Ö	
-1Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[ [(¢ü
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[) [(4	
-%0int"model.Company#getId()I*
-
-cnymodel.Company2getId()À
-»
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[ [(5
-%1java.lang.String"/java.lang.Integer#toString(I)Ljava/lang/String;*"
-java.lang.Integer*
-	
-%0intƒ¡
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[7 [(D
-%2java.lang.String")model.Company#getName()Ljava/lang/String;*
-
-cnymodel.Company2	getName()ÑÅ
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[ [(
-%3dto.CompanyDTO"dto.CompanyDTOÓ
-Î
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[	 [(E
-%4"<dto.CompanyDTO#<init>(Ljava/lang/String;Ljava/lang/String;)V*
-
-%3dto.CompanyDTO*
-
-%1java.lang.String*
-
-%2java.lang.String"s
-Y
-O/home/excilys/eclipse-workspace/Computer-Database/src/main/java/dto/Mapper.java[ [(F
-
-%3dto.CompanyDTO:
-cnymodel.CompanyB
-
-dto.Mapper
