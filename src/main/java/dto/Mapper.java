@@ -19,8 +19,22 @@ public class Mapper {
 	 * @return the computer DTO
 	 */
 	public ComputerDTO mapComputer(Computer comp) {
+		
+		String dateIntroduced;
+		try {
+			dateIntroduced = comp.getDateIntroduced().toString();
+		} catch (NullPointerException e) {
+			dateIntroduced = "-";
+		}
+		String dateDiscontinued;
+		try {
+			dateDiscontinued = comp.getDateDiscontinued().toString();
+		} catch (NullPointerException e) {
+			dateDiscontinued = "-";
+		}
+		
 		return new ComputerDTO(Integer.toString(comp.getId()), comp.getName(),
-				comp.getDateIntroduced().toString(), comp.getDateDiscontinued().toString(),
+				dateIntroduced, dateDiscontinued,
 				Integer.toString(comp.getCompany().getId()), comp.getCompany().getName());
 
 	}

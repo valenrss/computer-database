@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dto.ComputerDTO;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -20,7 +21,7 @@ public interface ComputerService {
 	 *
 	 * @return all computers
 	 */
-	public abstract List<Computer> getAll();
+	public abstract List<ComputerDTO> getAll();
 
 
 	/**
@@ -55,7 +56,7 @@ public interface ComputerService {
 	 * @param id the id
 	 * @return the computer
 	 */
-	public abstract Computer detail(int id);
+	public abstract ComputerDTO detail(int id);
 	
 
 	/**
@@ -66,7 +67,7 @@ public interface ComputerService {
 	 * @param name the name
 	 * @return researched comptuers
 	 */
-	public List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption);
+	public List<ComputerDTO> getPageByName(int pageNo, int objCount, String name, String orderOption);
 
 	/**
 	 * Delete by company.

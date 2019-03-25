@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.CompanyDAOImpl;
+import dto.CompanyDTO;
+import dto.Mapper;
 import model.Company;
 
 @Service
@@ -13,6 +15,8 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Autowired
 	private CompanyDAOImpl cnydao;
+	@Autowired
+	private Mapper mapper;
 
 	/**
 	 * Instantiates a new company service impl.
@@ -27,9 +31,9 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getAllCompanies()
 	 */
 	@Override
-	public List<Company> getAll() {
+	public List<CompanyDTO> getAll() {
 
-		return cnydao.getList();
+		return mapper.mapListCompany(cnydao.getList());
 	}
 
 	/*
@@ -38,9 +42,9 @@ public class CompanyServiceImpl implements CompanyService {
 	 * @see service.CompanyService#getPage()
 	 */
 	@Override
-	public List<Company> getPage(int pageNo, int objCount) {
+	public List<CompanyDTO> getPage(int pageNo, int objCount) {
 
-		return cnydao.getPage(pageNo, objCount);
+		return mapper.mapListCompany(cnydao.getPage(pageNo, objCount));
 	}
 
 	/*

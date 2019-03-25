@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dto.CompanyDTO;
 import model.Company;
 
 @Service
@@ -17,7 +18,7 @@ public interface CompanyService {
 	 * @return all companies
 	 * @throws SQLException the SQL exception
 	 */
-	public abstract List<Company> getAll();
+	public abstract List<CompanyDTO> getAll();
 
 	/**
 	 * Gets the page.
@@ -27,7 +28,7 @@ public interface CompanyService {
 	 * @return the page
 	 * @throws SQLException the SQL exception
 	 */
-	public List<Company> getPage(int pageNo, int objCount);
+	public List<CompanyDTO> getPage(int pageNo, int objCount);
 
 	/**
 	 * Gets the by id.

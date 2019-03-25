@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import model.Company;
+import dto.CompanyDTO;
 import service.CompanyServiceImpl;
 
 @Controller
@@ -28,7 +28,7 @@ public class CompanyController {
 
 		ModelAndView modelAndView = new ModelAndView();
 
-		List<Company> cpnyList = companyService.getAll();
+		List<CompanyDTO> cpnyList = companyService.getAll();
 
 		modelAndView.setViewName("addComputer");
 		modelAndView.addObject("companies", cpnyList);

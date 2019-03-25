@@ -50,10 +50,10 @@
 								<select class="form-control" id="companyId" name="companyid">
 									<c:forEach items="${companies}" var="c">
 										<c:choose>
-											<c:when test="${c.id == cpEdit.company.id}">
-												<option value="${c.id = cpEdit.company.id}"
+											<c:when test="${c.id == cpEdit.companyId}">
+												<option value="${c.id = cpEdit.companyId}"
 													selected="selected"><c:out
-														value="${c.name = cpEdit.company.name}" /></option>
+														value="${c.name = cpEdit.companyName}" /></option>
 											</c:when>
 											<c:otherwise>
 												<option value="${c.id}"><c:out value="${c.name}" /></option>

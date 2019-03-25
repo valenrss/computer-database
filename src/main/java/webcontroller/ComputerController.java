@@ -14,10 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dto.CompanyDTO;
 import dto.ComputerDTO;
-import dto.Mapper;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
-import model.Company;
 import model.Computer;
 import service.CompanyServiceImpl;
 import service.ComputerServiceImpl;
@@ -31,14 +29,12 @@ public class ComputerController {
 
 	private ComputerServiceImpl computerService;
 	private CompanyServiceImpl companyService;
-	private Mapper mapper;
 
 	@Autowired
-	public ComputerController(ComputerServiceImpl cmptService, CompanyServiceImpl cpnyService,Mapper mapper) {
+	public ComputerController(ComputerServiceImpl cmptService, CompanyServiceImpl cpnyService) {
 
 		computerService = cmptService;
 		companyService = cpnyService;
-		this.mapper = mapper;
 
 	}
 	
@@ -48,19 +44,19 @@ public class ComputerController {
 								@RequestParam(required = false, defaultValue = "id") String sortOption, 
 								@RequestParam(required = false, defaultValue = "") String search) {
 
-		List<ComputerDTO> computersPage = mapper.mapListComputer(computerService.getPageByName(pageId, objPerPage, search, sortOption));
-		List<CompanyDTO> companiesList = mapper.mapListCompany(companyService.getAll());
+		List<ComputerDTO> computersPage = computerService.getPageByName(pageId, objPerPage, search, sortOption);
+		List<CompanyDTO> companiesList = companyService.getAll();
 		int computerCount = computerService.getCount(search).intValue();
 		
 		Integer pagesCount = computerCount / objPerPage - 1;
 
 		if (pageId > pagesCount + PAGE_OFFSET) {
 			pageId = pagesCount + PAGE_OFFSET;
-			computersPage = mapper.mapListComputer(computerService.getPageByName(pageId, objPerPage, search, sortOption));
+			computersPage = computerService.getPageByName(pageId, objPerPage, search, sortOption);
 		}
 		if (pageId < FIRST_PAGE) {
 			pageId = FIRST_PAGE;
-			computersPage = mapper.mapListComputer(computerService.getPageByName(pageId, objPerPage, search, sortOption));
+			computersPage = computerService.getPageByName(pageId, objPerPage, search, sortOption);
 		}
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -120,7 +116,7 @@ public class ComputerController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("editComputer");
 
-		List<Company> cpnyList = companyService.getAll();
+		List<CompanyDTO> cpnyList = companyService.getAll();
 		modelAndView.addObject("companies", cpnyList);
 		modelAndView.addObject("cpEditId", cpEditId);
 		modelAndView.addObject("cpEdit", computerService.detail(cpEditId));

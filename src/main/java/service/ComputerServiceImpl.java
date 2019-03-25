@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dao.CompanyDAOImpl;
 import dao.ComputerDAOImpl;
+import dto.ComputerDTO;
+import dto.Mapper;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -23,6 +25,8 @@ public class ComputerServiceImpl implements ComputerService {
 	private CompanyDAOImpl cnydao;
 	@Autowired
 	private Validator validator;
+	@Autowired
+	private Mapper mapper;
 
 	public ComputerServiceImpl() {
 		
@@ -34,9 +38,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getAll() {
+	public List<ComputerDTO> getAll() {
 
-		return comptdao.getList();
+		return mapper.mapListComputer(comptdao.getList());
 	}
 
 	/*
@@ -45,9 +49,9 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#getAllComputers()
 	 */
 	@Override
-	public List<Computer> getPageByName(int pageNo, int objCount, String name, String orderOption) {
+	public List<ComputerDTO> getPageByName(int pageNo, int objCount, String name, String orderOption) {
 
-		return comptdao.getPageByName(pageNo, objCount, name, orderOption);
+		return mapper.mapListComputer(comptdao.getPageByName(pageNo, objCount, name, orderOption));
 	}
 
 	/*
@@ -97,8 +101,8 @@ public class ComputerServiceImpl implements ComputerService {
 	 * @see service.ComputerService#detailComputer(int)
 	 */
 	@Override
-	public Computer detail(int id) {
-		return comptdao.find(id);
+	public ComputerDTO detail(int id) {
+		return mapper.mapComputer(comptdao.find(id));
 	}
 
 	

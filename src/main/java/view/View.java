@@ -4,7 +4,8 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Component;
 
-import model.Company;
+import dto.CompanyDTO;
+import dto.ComputerDTO;
 import model.Computer;
 
 @Component
@@ -23,10 +24,10 @@ public class View {
 	/**
 	 * Computer.
 	 *
-	 * @param cp the cp
+	 * @param comp the cp
 	 */
-	public void computer(Computer cp) {
-		System.out.println(cp);
+	public void computer(ComputerDTO comp) {
+		System.out.println(comp);
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class View {
 	 *
 	 * @param comp the comp
 	 */
-	public void company(Company comp) {
+	public void company(CompanyDTO comp) {
 		System.out.println(comp);
 
 	}
@@ -236,6 +237,11 @@ public class View {
 
 	public void companyDeleteFail(String string) {
 		System.out.println("Could not find company ID " + string);
+		
+	}
+
+	public void computer(Computer cpInsert) {
+		System.out.println(cpInsert);
 		
 	}
 

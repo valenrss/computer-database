@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dao.CompanyDAOImpl;
+import dto.CompanyDTO;
+import dto.ComputerDTO;
 import exception.ComputerNameEmptyException;
 import exception.DateOrderException;
 import model.Company;
@@ -177,10 +179,10 @@ public class Controller {
 	 */
 	public void listComputers() {
 		view.computersListHeader();
-		List<Computer> cpList;
+		List<ComputerDTO> cpList;
 
 		cpList = cmptService.getAll();
-		for (Computer comp : cpList) {
+		for (ComputerDTO comp : cpList) {
 			view.computer(comp);
 		}
 
@@ -191,10 +193,10 @@ public class Controller {
 	 */
 	public void listCompanies() {
 		view.companiesListHeader();
-		List<Company> cnyList;
+		List<CompanyDTO> cnyList;
 
 		cnyList = cpnyService.getAll();
-		for (Company comp : cnyList) {
+		for (CompanyDTO comp : cnyList) {
 			view.company(comp);
 		}
 
@@ -209,8 +211,8 @@ public class Controller {
 	public void pageComputers(String pageNo, String objCount) {
 		try {
 			view.computersPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
-			List<Computer> cpList = cmptService.getPageByName(Integer.parseInt(pageNo), Integer.parseInt(objCount),"","");
-			for (Computer comp : cpList) {
+			List<ComputerDTO> cpList = cmptService.getPageByName(Integer.parseInt(pageNo), Integer.parseInt(objCount),"","");
+			for (ComputerDTO comp : cpList) {
 				view.computer(comp);
 			}
 			if (cpList.isEmpty()) {
@@ -231,8 +233,8 @@ public class Controller {
 	public void pageCompanies(String pageNo, String objCount) {
 		try {
 			view.companyPageHeader(Integer.parseInt(pageNo), Integer.parseInt(objCount));
-			List<Company> cnyList = cpnyService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
-			for (Company cny : cnyList) {
+			List<CompanyDTO> cnyList = cpnyService.getPage(Integer.parseInt(pageNo), Integer.parseInt(objCount));
+			for (CompanyDTO cny : cnyList) {
 				view.company(cny);
 			}
 			if (cnyList.isEmpty()) {
@@ -385,7 +387,7 @@ public class Controller {
 	 */
 	public void detailComputer(String[] args) {
 		try {
-			Computer compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
+			ComputerDTO compIdSearch = cmptService.detail(Integer.parseInt(args[2]));
 			if (compIdSearch != null) {
 				view.computer(compIdSearch);
 			} else {
